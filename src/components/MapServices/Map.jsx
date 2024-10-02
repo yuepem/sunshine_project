@@ -1,5 +1,5 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import React, {useEffect} from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 
@@ -12,10 +12,19 @@ Icon.Default.mergeOptions({
 });
 
 const MapLeaflet = ({latitude, longitude}) => {
-  const position = [latitude, longitude]; // London coordinates
+  const position = [latitude, longitude]; 
+
+  // handle map updates
+  const MapUpdater = ({ center }) => {
+    const map = useMap();
+    useEffect(() => {
+      map.setView(center, map.getZoom());
+    }, [map, center]);
+    return null;
+  };
 
   return (
-    <MapContainer center={position} zoom={21} style={{ height: '100%', width: '100%' }}>
+    <MapContainer center={position} zoom={17} style={{ height: '100%', width: '100%' }}>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -25,6 +34,7 @@ const MapLeaflet = ({latitude, longitude}) => {
           Here is a popup to show something after click
         </Popup>
       </Marker>
+      <MapUpdater center={position}  />
     </MapContainer>
   );
 };
