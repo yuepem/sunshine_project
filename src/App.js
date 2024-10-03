@@ -4,7 +4,7 @@ import GeocodeComponent from './components/MapServices/Nominatim';
 // import MapLeaflet from './components/MapServices/Map';
 import LocationComponent from './components/MapServices/GetLocation';
 // import SunScene from './components/MapServices/SunScene';
-import GLTFViewer from './components/MapServices/3Dmodel';
+// import GLTFViewer from './components/MapServices/3Dmodel';
 
 
 function App() {
