@@ -3,8 +3,7 @@ import SunCalcComponent from './components/SunCalc';
 import GeocodeComponent from './components/MapServices/Nominatim';
 // import MapLeaflet from './components/MapServices/Map';
 import LocationComponent from './components/MapServices/GetLocation';
-// import SunScene from './components/MapServices/SunScene';
-// import GLTFViewer from './components/MapServices/3Dmodel';
+
 
 
 function App() {
@@ -28,11 +27,6 @@ function App() {
       </div>
       <GeocodeComponent latitude={latitude} longitude={longitude} />
       <SunCalcComponent latitude={latitude} longitude={longitude} />
-      {/* <MapLeaflet /> */}
-      {/* <SunScene latitude={latitude} longitude={longitude} /> */}
-      {/* <div >
-        <GLTFViewer modelPath="./assets/scene.gltf" />
-      </div> */}
     </div>
   );
 }
