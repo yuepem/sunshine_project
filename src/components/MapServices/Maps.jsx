@@ -11,7 +11,7 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const MapLeaflet = ({latitude, longitude}) => {
+const MapsLeaflet = ({latitude, longitude}) => {
   const position = [latitude, longitude]; 
 
   // handle map updates
@@ -39,4 +39,4 @@ const MapLeaflet = ({latitude, longitude}) => {
   );
 };
 
-export default MapLeaflet;
+export default MapsLeaflet;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const GeocodeComponent = ({ latitude, longitude }) => {
+const AddressService = ({ latitude, longitude }) => {
   const [address, setAddress] = useState('');
  
 
@@ -32,4 +32,4 @@ const GeocodeComponent = ({ latitude, longitude }) => {
   );
 };
 
-export default GeocodeComponent;
+export default AddressService;

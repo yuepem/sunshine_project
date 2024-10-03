@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import SunCalcComponent from './components/SunCalc';
-import GeocodeComponent from './components/MapServices/Nominatim';
-// import MapLeaflet from './components/MapServices/Map';
-import LocationComponent from './components/MapServices/GetLocation';
-
+import AddressService from './components/MapServices/AddressService';
+import GetLocation from './components/MapServices/GetLocation';
 
 
 function App() {
@@ -17,7 +15,7 @@ function App() {
   return (
     <div className="p-8 m-5 mx-auto max-w-7xl">
       <h1 className='text-2xl font-bold text-green-900'> Suncalc & Nominatim Input and Data</h1>
-      <LocationComponent positionHandler={positionHandler} />
+      <GetLocation positionHandler={positionHandler} />
       <div>
         {latitude && longitude ? (
           <p>Latitude: {latitude}, Longitude: {longitude}</p>
@@ -25,7 +23,7 @@ function App() {
           <p>Getting location...</p>
         )}
       </div>
-      <GeocodeComponent latitude={latitude} longitude={longitude} />
+      <AddressService latitude={latitude} longitude={longitude} />
       <SunCalcComponent latitude={latitude} longitude={longitude} />
     </div>
   );

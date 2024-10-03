@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SunCalc from "suncalc";
 // import Divider from '@mui/material/Divider';
-import MapLeaflet from "./MapServices/Map";
+import MapLeaflet from "./MapServices/Maps";
 import Button from "@mui/material/Button";
 
 const SunCalcComponent = ({ latitude, longitude }) => {

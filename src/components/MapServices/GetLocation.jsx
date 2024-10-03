@@ -13,7 +13,7 @@ const cityCoordinates = {
 
 const Cities = Object.keys(cityCoordinates);
 
-function LocationComponent({ positionHandler }) {
+function GetLocation({ positionHandler }) {
 
   const handleCityClick = (city) => {
     const coordinates = cityCoordinates[city];
@@ -53,4 +53,4 @@ function LocationComponent({ positionHandler }) {
   );
 }
 
-export default LocationComponent;
+export default GetLocation;
