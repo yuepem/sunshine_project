@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 const SunCalcComponent = ({ latitude, longitude }) => {
   const [data, setData] = useState(null);
   const [date] = useState(new Date());
+  const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
   useEffect(() => {
     // Calculate sun data
@@ -18,6 +19,21 @@ const SunCalcComponent = ({ latitude, longitude }) => {
       sunPosition,
     });
   }, [date, latitude, longitude]);
+
+  useEffect(() => {
+    if (data && data.sunTimes) {
+      setToBeHighlighted(true);
+      const timer = setTimeout(() => {
+        setToBeHighlighted(null);
+      }, 1500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [data]);
+
+  const highlightClass = toBeHighlighted
+    ? 'animate-[blink_1s_ease-in-out_infinite]'
+    : '';
 
   if (!data) {
     return <div>Loading...</div>;
@@ -66,7 +82,8 @@ const SunCalcComponent = ({ latitude, longitude }) => {
         <ul className="grid grid-cols-4 my-2">
           {Object.entries(data.sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
-              {key}: {formatTime(value)}
+              {key}:{" "}
+              <span className={`transition-colors ${highlightClass}`}>{formatTime(value)} </span>
             </li>
           ))}
         </ul>
