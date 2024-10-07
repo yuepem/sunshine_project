@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import SunCalcComponent from './components/SunCalc';
 import AddressService from './components/MapServices/AddressService';
 import GetLocation from './components/MapServices/GetLocation';
-import HouseModel from './components/3D_Model/HouseModel';
+
+import GoogleM from './components/3D_Model/GoogleM';
+
 
 
 function App() {
@@ -13,11 +15,24 @@ function App() {
     setLatitude(position.latitude);
     setLongitude(position.longitude);
   }
+
+  // For the 3D model
+
+  const args = {
+    turbidity: 8,
+    rayleigh: 6,
+    mieCoefficient: 0.005,
+    mieDirectionalG: 0.8,
+    sunPosition: [1, 0, 0]
+  }
+
   return (
     <div className="p-8 m-5 mx-auto max-w-7xl">
-      <div>
-        <h1 className='text-2xl font-bold text-green-900'>3D House Model</h1>
-        <HouseModel />
+      <div className="h-[700px]">
+        <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
+
+        <GoogleM {...args} />
+
       </div>
       <h1 className='text-2xl font-bold text-green-900'> Suncalc & Nominatim Input and Data</h1>
       <GetLocation positionHandler={positionHandler} />

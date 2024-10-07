@@ -9,6 +9,7 @@ const cityCoordinates = {
   "Tokyo": { latitude: 35.6895, longitude: 139.6917 },
   "Taipei": { latitude: 25.0330, longitude: 121.5654 },
   "Sydney": { latitude: -33.8688, longitude: 151.2093 },
+  "Santiago": { latitude: -33.4489, longitude: -70.6693 },
 };
 
 const Cities = Object.keys(cityCoordinates);
