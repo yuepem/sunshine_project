@@ -3,7 +3,7 @@ import SunCalcComponent from './components/SunCalc';
 import AddressService from './components/MapServices/AddressService';
 import GetLocation from './components/MapServices/GetLocation';
 
-import GoogleM from './components/3D_Model/GoogleM';
+import ModelComponent from './components/3D_Model/ModelComponent';
 
 
 
@@ -18,7 +18,7 @@ function App() {
 
   // For the 3D model
 
-  const args = {
+  const skyConfig = {
     turbidity: 8,
     rayleigh: 6,
     mieCoefficient: 0.005,
@@ -31,7 +31,7 @@ function App() {
       <div className="h-[700px]">
         <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
 
-        <GoogleM {...args} />
+        <ModelComponent {...skyConfig} />
 
       </div>
       <h1 className='text-2xl font-bold text-green-900'> Suncalc & Nominatim Input and Data</h1>
