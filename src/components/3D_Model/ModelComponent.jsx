@@ -1,13 +1,10 @@
 import React from "react";
 import { Canvas } from "@react-three/fiber";
-// eslint-disable-next-line
 import { OrbitControls } from "@react-three/drei";
 import SkyScene from "./components/Sky";
 import Ground from "./components/Ground";
 import Coordinates from "./components/Coordinates";
 import Compass from "./components/Compass";
-
-
 
 
 const ModelComponent = (skyConfig) => {

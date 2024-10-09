@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import SunCalcComponent from './components/SunCalc';
 import AddressService from './components/MapServices/AddressService';
 import GetLocation from './components/MapServices/GetLocation';
-
 import ModelComponent from './components/3D_Model/ModelComponent';
 
 
@@ -17,9 +16,8 @@ function App() {
   }
 
   // For the 3D model
-
   const skyConfig = {
-    distance:1000,
+    distance: 1000,
     turbidity: 8,
     rayleigh: 6,
     mieCoefficient: 0.005,
@@ -31,9 +29,7 @@ function App() {
     <div className="p-8 m-5 mx-auto max-w-7xl">
       <div className="h-[700px]">
         <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
-
         <ModelComponent {...skyConfig} />
-
       </div>
       <h1 className='text-2xl font-bold text-green-900'> Suncalc & Nominatim Input and Data</h1>
       <GetLocation positionHandler={positionHandler} />

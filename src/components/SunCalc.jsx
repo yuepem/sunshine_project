@@ -93,6 +93,10 @@ const SunCalcComponent = ({ latitude, longitude }) => {
         <p>
           Altitude: {radiansToDegrees(data.sunPosition.altitude).toFixed(2)}°
         </p>
+        <p>Azimuth: {data.sunPosition.azimuth}</p>
+        <p>
+          Altitude: {data.sunPosition.altitude}
+        </p>
       </div>
       {/* <Divider className="py-3" /> */}
       <div>
