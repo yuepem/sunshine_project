@@ -1,5 +1,7 @@
 module.exports = {
   // ... existing configuration ...
+  
+  devtool: false,
   module: {
     rules: [
       // ... existing rules ...
@@ -10,9 +12,11 @@ module.exports = {
         resolve: {
           fullySpecified: false,
         },
+        exclude: /node_modules\/@mediapipe\/tasks-vision/, // Exclude the problematic module
       },
     ],
   },
+  // eslint-disable-next-line
   ignoreWarnings: [
     (warning) =>
       warning.module &&

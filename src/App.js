@@ -19,6 +19,7 @@ function App() {
   // For the 3D model
 
   const skyConfig = {
+    distance:1000,
     turbidity: 8,
     rayleigh: 6,
     mieCoefficient: 0.005,
