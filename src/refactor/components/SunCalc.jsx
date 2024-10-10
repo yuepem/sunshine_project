@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from "react";
-import SunCalc from "suncalc";
-// import Divider from '@mui/material/Divider';
 import MapLeaflet from "./MapServices/Maps";
 import Button from "@mui/material/Button";
 
-const SunCalcComponent = ({ latitude, longitude }) => {
+// Read {date, latitude, longitude} from inputStore
+import useInputStore from "../../stores/inputStore";
+// Need Function {calculateSunData, formatTime, radiansToDegrees} from sunSalcStore
+import useSunCalcStore from "../../stores/sunSalcStore";
+
+const SunCalcComponent = () => {
+  // data from Stores
+  const { date, latitude, longitude } = useInputStore();
+  const {
+    sunTimes,
+    sunPosition,
+    calculateSunData,
+    formatTime,
+    radiansToDegrees,
+  } = useSunCalcStore();
+
+  // useState
   const [data, setData] = useState(null);
-  const [date] = useState(new Date());
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
+  // call calculateSunData when the data change
   useEffect(() => {
     // Calculate sun data
-    const sunTimes = SunCalc.getTimes(date, latitude, longitude);
-    const sunPosition = SunCalc.getPosition(date, latitude, longitude);
-
-    setData({
-      sunTimes,
-      sunPosition,
-    });
+    calculateSunData({ date, latitude, longitude });
+    // set data
+    setData({ sunTimes, sunPosition });
   }, [date, latitude, longitude]);
 
   useEffect(() => {
-    if (data && data.sunTimes) {
+    if (data) {
       setToBeHighlighted(true);
       const timer = setTimeout(() => {
         setToBeHighlighted(null);
@@ -32,16 +42,12 @@ const SunCalcComponent = ({ latitude, longitude }) => {
   }, [data]);
 
   const highlightClass = toBeHighlighted
-    ? 'animate-[blink_1s_ease-in-out_infinite]'
-    : '';
+    ? "animate-[blink_1s_ease-in-out_infinite]"
+    : "";
 
   if (!data) {
     return <div>Loading...</div>;
   }
-
-  const formatTime = (date) =>
-    date ? date.toLocaleTimeString("en-US", { hour12: false }) : "N/A";
-  const radiansToDegrees = (rad) => (rad * 180) / Math.PI;
 
   return (
     <div className="mx-auto max-w-7xl">
@@ -56,20 +62,28 @@ const SunCalcComponent = ({ latitude, longitude }) => {
           {Object.entries(data.sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
               {key}:{" "}
-              <span className={`transition-colors ${highlightClass}`}>{formatTime(value)} </span>
+              <span className={`transition-colors ${highlightClass}`}>
+                {formatTime(value)}{" "}
+              </span>
             </li>
           ))}
         </ul>
 
         <h2 className="text-xl font-semibold text-green-900">Sun Position</h2>
-        <p>Azimuth: {radiansToDegrees(data.sunPosition.azimuth).toFixed(2)}°</p>
         <p>
-          Altitude: {radiansToDegrees(data.sunPosition.altitude).toFixed(2)}°
+          Azimuth:{" "}
+          <span className={`transition-colors ${highlightClass}`}>
+            {radiansToDegrees(data.sunPosition.azimuth).toFixed(2)}°
+          </span>
+        </p>
+        <p>
+          Altitude:{" "}
+          <span className={`transition-colors ${highlightClass}`}>
+            {radiansToDegrees(data.sunPosition.altitude).toFixed(2)}°
+          </span>
         </p>
         <p>Azimuth: {data.sunPosition.azimuth}</p>
-        <p>
-          Altitude: {data.sunPosition.altitude}
-        </p>
+        <p>Altitude: {data.sunPosition.altitude}</p>
       </div>
       {/* <Divider className="py-3" /> */}
       <div>

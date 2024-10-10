@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 const useInputStore = create((set, get) => ({
-    date: new Date(),
+    date: new Date('2022-01-01' ),
     latitude: 59.36769,
     longitude: 17.82157,
     address: 'Stockholm, Sweden',
@@ -9,9 +9,11 @@ const useInputStore = create((set, get) => ({
     error: null,
 
     setDate: (date) => set({ date }),
+    setLatitude: (latitude) => set({ latitude }),
+    setLongitude: (longitude) => set({ longitude }),
+    setAddress: (address) => set({ address }),
 
-    setLocation: (latitude, longitude) => {
-        set({ latitude, longitude });
+    getAddress: () => {
         get().fetchAddress();
     },
 
@@ -22,10 +24,9 @@ const useInputStore = create((set, get) => ({
             longitude: 17.82157,
             address: 'Stockholm, Sweden',
         });
-        
+
     },
 
-    setAddress: (address) => set({ address }),
 
     setIsLoading: (isLoading) => set({ isLoading }),
 
@@ -58,4 +59,4 @@ const useInputStore = create((set, get) => ({
     },
 }))
 
-export default useInputStore
+export default useInputStore;

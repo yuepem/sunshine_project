@@ -1,15 +1,17 @@
 import { create } from 'zustand'
 import SunCalc from 'suncalc'
-import useInputStore from './inputStore';
+
 
 const useSunCalcStore = create((set, get) => ({
   sunTimes: null,
   sunPosition: null,
 
 
-  calculateSunData: () => {
+  calculateSunData: ({date, latitude, longitude }) => {
     
-    const {date, latitude, longitude } = useInputStore.getState();
+    if (!date || !latitude || !longitude) {
+      return "Missing data: date, latitude, or longitude";
+    }
     const sunTimes = SunCalc.getTimes(date, latitude, longitude);
     const sunPosition = SunCalc.getPosition(date, latitude, longitude);
 
