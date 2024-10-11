@@ -3,6 +3,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { Icon } from 'leaflet';
 
+import  useInputStore  from '../../stores/inputStore';
+
 // Fix for default marker icon
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -11,7 +13,8 @@ Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const MapsLeaflet = ({latitude, longitude}) => {
+const MapsLeaflet = () => {
+  const { latitude, longitude } = useInputStore();
   const position = [latitude, longitude]; 
 
   // handle map updates

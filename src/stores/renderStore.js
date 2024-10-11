@@ -3,9 +3,9 @@ import { create } from 'zustand'
 
 const useRenderStore = create((set, get) => ({
     sunCoordinates: {
-        x: 1,
-        y: 0,
-        z: 0
+        x: 0.3070297253484737 ,
+        y: 0.7065064962706789,
+        z: 0.7703367325528687
     },
 
     skyConfig: {
@@ -26,6 +26,7 @@ const useRenderStore = create((set, get) => ({
         const z = Math.cos(altitude);
 
         set({ sunCoordinates: { x, y, z } });
+        
     },
 
 }))

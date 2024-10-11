@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import SkyScene from "./components/Sky";
@@ -6,10 +6,31 @@ import Ground from "./components/Ground";
 import Coordinates from "./components/Coordinates";
 import Compass from "./components/Compass";
 
+import useInputStore from "../../stores/inputStore";
+import useRenderStore from "../../stores/renderStore";
+import useSunCalcStore from "../../stores/sunSalcStore";
 
-const ModelComponent = (skyConfig) => {
-  const {distance, turbidity, rayleigh, mieCoefficient, mieDirectionalG, sunPosition } =
-    skyConfig;
+const ModelComponent = () => {
+  const { date } = useInputStore();
+  const { sunPosition, calculateSunData } = useSunCalcStore();
+  const { skyConfig, sunCoordinates } = useRenderStore();
+
+  const {
+    distance,
+    turbidity,
+    rayleigh,
+    mieCoefficient,
+    mieDirectionalG,
+  } = skyConfig;
+
+  const { x, y, z } = sunCoordinates;
+
+  useEffect(() => {
+    calculateSunData(date, sunPosition);
+  },[date, sunPosition]);
+
+  
+
   return (
     <Canvas camera={{ position: [-5, 0.7, 4] }}>
       {/* Sky Component with passed arguments */}
@@ -19,12 +40,13 @@ const ModelComponent = (skyConfig) => {
         rayleigh={rayleigh}
         mieCoefficient={mieCoefficient}
         mieDirectionalG={mieDirectionalG}
-        sunPosition={sunPosition}
+        sunPosition={[x, y, z]}
+        
       />
       <Ground />
       <Coordinates />
       <Compass />
-  
+
       <OrbitControls
         enableRotate={true} // Allow rotation
         enablePan={true} // Allow panning

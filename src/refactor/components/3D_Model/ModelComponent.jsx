@@ -6,10 +6,12 @@ import Ground from "./components/Ground";
 import Coordinates from "./components/Coordinates";
 import Compass from "./components/Compass";
 
+import useInputStore from "../../../stores/inputStore";
 import useRenderStore from "../../../stores/renderStore";
 import useSunCalcStore from "../../../stores/sunSalcStore";
 
 const ModelComponent = () => {
+  const { date } = useInputStore();
   const { sunPosition, calculateSunData } = useSunCalcStore();
   const { skyConfig, sunCoordinates } = useRenderStore();
 
@@ -21,9 +23,13 @@ const ModelComponent = () => {
     mieDirectionalG,
   } = skyConfig;
 
+  const { x, y, z } = sunCoordinates;
+
   useEffect(() => {
-    calculateSunData(sunPosition);
-  },[sunPosition]);
+    calculateSunData(date, sunPosition);
+  },[date, sunPosition]);
+
+  
 
   return (
     <Canvas camera={{ position: [-5, 0.7, 4] }}>
@@ -34,7 +40,8 @@ const ModelComponent = () => {
         rayleigh={rayleigh}
         mieCoefficient={mieCoefficient}
         mieDirectionalG={mieDirectionalG}
-        sunPosition={sunCoordinates}
+        sunPosition={[x, y, z]}
+        
       />
       <Ground />
       <Coordinates />

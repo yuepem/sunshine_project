@@ -1,6 +1,6 @@
 import { Billboard, Text } from "@react-three/drei";
 
-export default function App() {
+export default function Compass() {
   return (
     <>
       <fog attach="fog" args={["#202025", 0, 80]} />

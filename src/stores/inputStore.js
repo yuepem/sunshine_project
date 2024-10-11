@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 const useInputStore = create((set, get) => ({
-    date: new Date('2022-01-01' ),
+    date: new Date( ),
     latitude: 59.36769,
     longitude: 17.82157,
     address: 'Stockholm, Sweden',
     isLoading: false,
     error: null,
-
+    
     setDate: (date) => set({ date }),
     setLatitude: (latitude) => set({ latitude }),
     setLongitude: (longitude) => set({ longitude }),
@@ -57,6 +57,27 @@ const useInputStore = create((set, get) => ({
             setIsLoading(false);
         }
     },
+
+     toDMS () {
+        const { latitude, longitude } = get();
+        let latDirection = latitude >= 0 ? 'N' : 'S';
+        let lonDirection = longitude >= 0 ? 'E' : 'W';
+      
+        let latDegrees = Math.floor(Math.abs(latitude));
+        let latMinutes = Math.floor((Math.abs(latitude) - latDegrees) * 60);
+        let latSeconds = Math.round((((Math.abs(latitude) - latDegrees) * 60) - latMinutes) * 60);
+      
+        let lonDegrees = Math.floor(Math.abs(longitude));
+        let lonMinutes = Math.floor((Math.abs(longitude) - lonDegrees) * 60);
+        let lonSeconds = Math.round((((Math.abs(longitude) - lonDegrees)   
+       * 60) - lonMinutes) * 60);
+      
+        let latDMS = `${latDegrees}° ${latMinutes}' ${latSeconds}" ${latDirection}`;
+        let lonDMS = `${lonDegrees}° ${lonMinutes}' ${lonSeconds}" ${lonDirection}`;
+      
+        return { latitude: latDMS, longitude: lonDMS };
+      }
+      
 }))
 
 export default useInputStore;

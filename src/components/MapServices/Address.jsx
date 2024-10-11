@@ -1,5 +1,5 @@
 import React from "react";
-import useInputStore from "../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 const Address = () => {
   const { address, toDMS } = useInputStore();
 

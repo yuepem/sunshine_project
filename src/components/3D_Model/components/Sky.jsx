@@ -10,7 +10,7 @@ const SkyScene = ({
 }) => {
   return (
     <Sky
-    distance={distance}
+      distance={distance}
       turbidity={turbidity}
       rayleigh={rayleigh}
       mieCoefficient={mieCoefficient}
