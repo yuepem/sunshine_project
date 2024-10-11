@@ -53,8 +53,11 @@ const SunData = () => {
           {Object.entries(sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
               {key}:{" "}
-              <span className={`transition-colors ${highlightClass}`}>
+              {/* <span className={`transition-colors ${highlightClass}`}>
                 {formatTime(value)}{" "}
+              </span> */}
+              <span className={`transition-colors ${highlightClass}`}>
+                {value.toString()}{" "}
               </span>
             </li>
           ))}
