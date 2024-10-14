@@ -1,10 +1,12 @@
 import { create } from 'zustand'
+import getTimeZone  from '../helperFunctions/time'
 
 const useInputStore = create((set, get) => ({
     date: new Date( ),
     latitude: 59.36769,
     longitude: 17.82157,
     address: 'Stockholm, Sweden',
+    timeZone: 'Europe/Stockholm',
     isLoading: false,
     error: null,
     
@@ -12,9 +14,14 @@ const useInputStore = create((set, get) => ({
     setLatitude: (latitude) => set({ latitude }),
     setLongitude: (longitude) => set({ longitude }),
     setAddress: (address) => set({ address }),
+    setTimeZone: (timeZone) => set({timeZone}),
 
     getAddress: () => {
         get().fetchAddress();
+    },
+
+    getTimeZoneCode: () => {
+        get().timeZoneCode();
     },
 
     resetToDefaults: () => {
@@ -25,6 +32,30 @@ const useInputStore = create((set, get) => ({
             address: 'Stockholm, Sweden',
         });
 
+    },
+
+    timeZoneCode: async () => {
+        const { latitude, longitude, setTimeZone, setIsLoading, setError } = get();
+        setIsLoading(true);
+        setError(null);
+
+        try {
+            const timeZone = await getTimeZone(latitude, longitude);
+            setTimeZone(timeZone);
+            /* Full API response: {
+                "dstOffset": 3600,
+                "rawOffset": 3600,
+                "status": "OK",
+                "timeZoneId": "Europe/Stockholm", // this is what I need
+                "timeZoneName": "Central European Summer Time"
+              } */
+            //  console.log(timeZone)
+        } catch (error) {
+            console.error('Error:', error);
+            setError(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     },
 
 

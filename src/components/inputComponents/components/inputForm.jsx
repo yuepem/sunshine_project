@@ -10,11 +10,13 @@ const InputForm = () => {
     setLatitude,
     setLongitude,
     getAddress,
+    getTimeZoneCode,
   } = useInputStore();
 
   useEffect(() => {
     // Convert latitude & longitude to address
     getAddress();
+    getTimeZoneCode();
   }, [date, latitude, longitude]);
 
   return (

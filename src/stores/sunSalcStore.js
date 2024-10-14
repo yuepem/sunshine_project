@@ -20,6 +20,17 @@ const useSunCalcStore = create((set, get) => ({
 
   formatTime: (date) => date ? date.toLocaleTimeString("en-US", { hour12: false }) : "N/A",
 
+  formatTimeZone: (date, timeZone) => date ? date.toLocaleString('en-US', { 
+    day: "2-digit",
+    month: "short", 
+    year: "numeric", 
+    hour: "numeric", 
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false, 
+    timeZoneName: 'long',  
+    timeZone: timeZone }) : "N/A",
+
   radiansToDegrees: (rad) => (rad * 180) / Math.PI,
 }));
 

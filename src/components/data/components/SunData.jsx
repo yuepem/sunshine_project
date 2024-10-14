@@ -3,7 +3,7 @@ import useInputStore from "../../../stores/inputStore";
 import useSunCalcStore from "../../../stores/sunSalcStore";
 
 const SunData = () => {
-  const { date, latitude, longitude } = useInputStore();
+  const { date, latitude, longitude, timeZone } = useInputStore();
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
   const {
@@ -11,6 +11,7 @@ const SunData = () => {
     sunPosition,
     calculateSunData,
     formatTime,
+    formatTimeZone,
     radiansToDegrees,
   } = useSunCalcStore();
 
@@ -42,10 +43,20 @@ const SunData = () => {
     <>
       <div>
         <h1 className="text-xl font-semibold text-green-900">Time</h1>
-        <p className="my-2">
-          Local-Time: {date.toLocaleTimeString("en-US", { hour12: false })}
+        <p className="my-2 text-orange-700">
+          {/* Local-Time: {date.toString("en-US", { hour12: false })} */}
+          Local-Time: {date.toLocaleTimeString("en-US", { 
+            day: "2-digit",
+            month: "short", 
+            year: "numeric", 
+            hour: "numeric", 
+            minute: "2-digit",
+            second: "2-digit",
+            hour12: false, 
+            timeZoneName: 'long', 
+           })}
         </p>
-        <p>Target Time: city</p>
+        <p className="my-2 text-blue-700">Target Time: {formatTimeZone(date, timeZone)}</p>
       </div>
       <div>
         <h1 className="text-xl font-semibold text-green-900">Sun times in "city"</h1>
@@ -53,12 +64,12 @@ const SunData = () => {
           {Object.entries(sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
               {key}:{" "}
-              {/* <span className={`transition-colors ${highlightClass}`}>
-                {formatTime(value)}{" "}
-              </span> */}
               <span className={`transition-colors ${highlightClass}`}>
-                {value.toString()}{" "}
+                {formatTime(value)}{" "}
               </span>
+              {/* <span className={`transition-colors ${highlightClass}`}>
+                {value.toString()}{" "}
+              </span> */}
             </li>
           ))}
         </ul>
