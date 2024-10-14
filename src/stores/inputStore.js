@@ -6,6 +6,7 @@ const useInputStore = create((set, get) => ({
     latitude: 59.36769,
     longitude: 17.82157,
     address: 'Stockholm, Sweden',
+    city:'Stockholm',
     timeZone: 'Europe/Stockholm',
     isLoading: false,
     error: null,
@@ -14,6 +15,7 @@ const useInputStore = create((set, get) => ({
     setLatitude: (latitude) => set({ latitude }),
     setLongitude: (longitude) => set({ longitude }),
     setAddress: (address) => set({ address }),
+    setCity: (city) => set({city}),
     setTimeZone: (timeZone) => set({timeZone}),
 
     getAddress: () => {
@@ -64,7 +66,7 @@ const useInputStore = create((set, get) => ({
     setError: (error) => set({ error }),
 
     fetchAddress: async () => {
-        const { latitude, longitude, setAddress, setIsLoading, setError } = get();
+        const { latitude, longitude, setAddress,setCity, setIsLoading, setError } = get();
         setIsLoading(true);
         setError(null);
 
@@ -81,6 +83,7 @@ const useInputStore = create((set, get) => ({
                 .join(', ');
 
             setAddress(simplifiedAddress);
+            setCity(city);
         } catch (error) {
             console.error('Error:', error);
             setError(error.message);

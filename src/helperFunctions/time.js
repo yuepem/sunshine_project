@@ -42,15 +42,3 @@ export default async function getTimeZone(latitude, longitude) {
 
 
 // Time Format Helper
-export function timeDisplayFormat(date,timeZone) {
-    const options = {
-        day: "2-digit",
-        month: "short", 
-        year: "numeric", 
-        hour: "numeric", 
-        minute: "2-digit",
-        hour12: false, 
-        timeZone: timeZone
-    };
-    return date.toLocaleString('en-GB', options);
-}

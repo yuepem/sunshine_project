@@ -3,7 +3,7 @@ import useInputStore from "../../../stores/inputStore";
 import useSunCalcStore from "../../../stores/sunSalcStore";
 
 const SunData = () => {
-  const { date, latitude, longitude, timeZone } = useInputStore();
+  const { date, latitude, longitude, timeZone, city } = useInputStore();
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
   const {
@@ -43,39 +43,38 @@ const SunData = () => {
     <>
       <div>
         <h1 className="text-xl font-semibold text-green-900">Time</h1>
-        <p className="my-2 text-orange-700">
+        <p className="my-2 ">
           {/* Local-Time: {date.toString("en-US", { hour12: false })} */}
-          Local-Time: {date.toLocaleTimeString("en-US", { 
+          <span className="font-semibold text-blue-500">local</span> Time: {date.toLocaleTimeString("en-US", { 
             day: "2-digit",
             month: "short", 
-            year: "numeric", 
             hour: "numeric", 
             minute: "2-digit",
             second: "2-digit",
             hour12: false, 
-            timeZoneName: 'long', 
+            timeZoneName: 'short', 
            })}
         </p>
-        <p className="my-2 text-blue-700">Target Time: {formatTimeZone(date, timeZone)}</p>
+        <p className="my-2 "><span className="font-semibold text-blue-500">{city}</span> Time: {formatTimeZone(date, timeZone)} <span>({timeZone})</span></p>
       </div>
       <div>
-        <h1 className="text-xl font-semibold text-green-900">Sun times in "city"</h1>
+        <h1 className="text-xl font-semibold text-green-900">Sun times in {city}</h1>
         <ul className="grid grid-cols-4 my-2">
           {Object.entries(sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
               {key}:{" "}
               <span className={`transition-colors ${highlightClass}`}>
-                {formatTime(value)}{" "}
+                {formatTime(value, timeZone)}{" "}
               </span>
               {/* <span className={`transition-colors ${highlightClass}`}>
-                {value.toString()}{" "}
+                {value.toString()}
               </span> */}
             </li>
           ))}
         </ul>
       </div>
       <div>
-        <h1 className="text-xl font-semibold text-green-900">Sun position in "city"</h1>
+        <h1 className="text-xl font-semibold text-green-900">Sun position in {city}</h1>
         <ul className="grid grid-cols-4 my-2">
           {Object.entries(sunPosition).map(([key, value]) => (
             <li key={key} className="my-2">
