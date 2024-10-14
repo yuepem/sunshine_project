@@ -12,7 +12,8 @@ const SunData = () => {
     calculateSunData,
     formatTime,
     formatTimeZone,
-    radiansToDegrees,
+    radiansToDegreesForAzimuth,
+    radiansToDegreesForAltitude
   } = useSunCalcStore();
 
   useEffect(() => {
@@ -45,15 +46,15 @@ const SunData = () => {
         <h1 className="text-xl font-semibold text-green-900">Time</h1>
         <p className="my-2 ">
           {/* Local-Time: {date.toString("en-US", { hour12: false })} */}
-          <span className="font-semibold text-blue-500">local</span> Time: {date.toLocaleTimeString("en-US", { 
+          <span className="font-semibold text-blue-500">local</span> Time: {date.toLocaleTimeString("en-US", {
             day: "2-digit",
-            month: "short", 
-            hour: "numeric", 
+            month: "short",
+            hour: "numeric",
             minute: "2-digit",
             second: "2-digit",
-            hour12: false, 
-            timeZoneName: 'short', 
-           })}
+            hour12: false,
+            timeZoneName: 'short',
+          })}
         </p>
         <p className="my-2 "><span className="font-semibold text-blue-500">{city}</span> Time: {formatTimeZone(date, timeZone)} <span>({timeZone})</span></p>
       </div>
@@ -66,16 +67,23 @@ const SunData = () => {
               <span className={`transition-colors ${highlightClass}`}>
                 {formatTime(value, timeZone)}{" "}
               </span>
-              {/* <span className={`transition-colors ${highlightClass}`}>
-                {value.toString()}
-              </span> */}
             </li>
           ))}
         </ul>
       </div>
       <div>
         <h1 className="text-xl font-semibold text-green-900">Sun position in {city}</h1>
-        <ul className="grid grid-cols-4 my-2">
+        <div className="grid grid-cols-4 my-2">
+          <p>Azimuth:
+            <span className={`transition-colors ${highlightClass}`} >{radiansToDegreesForAzimuth(sunPosition.azimuth).toFixed(2)}°  </span>
+            <span>{sunPosition.azimuth}.toFixed(2)</span>
+          </p>
+          <p>Altitude:
+            <span className={`transition-colors ${highlightClass}`}> {radiansToDegreesForAltitude(sunPosition.altitude).toFixed(2)}°</span>
+            <span>{(sunPosition.altitude).toFixed(2)}</span>
+          </p>
+        </div>
+        {/* <ul className="grid grid-cols-4 my-2">
           {Object.entries(sunPosition).map(([key, value]) => (
             <li key={key} className="my-2">
               {key}:{" "}
@@ -85,7 +93,7 @@ const SunData = () => {
               <span> ({value}) </span>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </>
   );
