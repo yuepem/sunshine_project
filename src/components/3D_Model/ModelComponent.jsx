@@ -13,7 +13,7 @@ import useSunCalcStore from "../../stores/sunSalcStore";
 const ModelComponent = () => {
   const { date } = useInputStore();
   const { sunPosition, calculateSunData } = useSunCalcStore();
-  const { skyConfig, sunCoordinates } = useRenderStore();
+  const { skyConfig, sunCoordinates, convertSunCoordinates } = useRenderStore();
 
   const {
     distance,
@@ -27,6 +27,8 @@ const ModelComponent = () => {
 
   useEffect(() => {
     calculateSunData(date, sunPosition);
+    convertSunCoordinates(sunPosition)
+    console.log({x,y,z})
   },[date, sunPosition]);
 
   

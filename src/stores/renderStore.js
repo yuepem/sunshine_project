@@ -3,10 +3,11 @@ import { create } from 'zustand'
 
 const useRenderStore = create((set, get) => ({
     sunCoordinates: {
-        x: 0.3070297253484737 ,
-        y: 0.7065064962706789,
-        z: 0.7703367325528687
+        x: 1,
+        y: 0,
+        z: 0
     },
+
 
     skyConfig: {
         distance: 1000,
@@ -18,7 +19,7 @@ const useRenderStore = create((set, get) => ({
 
 
 
-    setSunCoordinates: ({sunPosition}) => {
+    convertSunCoordinates: (sunPosition) => {
         
         const { azimuth, altitude } = sunPosition;
         const x = Math.sin(azimuth) * Math.cos(altitude);

@@ -5,7 +5,7 @@ import SunCalc from 'suncalc'
 
 const useSunCalcStore = create((set, get) => ({
   sunTimes: null,
-  sunPosition: null,
+  sunPosition: {azimuth: 0.5, altitude: 0.5},
 
 
   calculateSunData: ({date, latitude, longitude }) => {
