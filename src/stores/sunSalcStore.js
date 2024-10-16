@@ -35,8 +35,9 @@ const useSunCalcStore = create((set, get) => ({
     hour12: false, 
     timeZoneName: 'short',  
     timeZone: timeZone }) : "N/A",
-
-  radiansToDegreesForAzimuth: (rad) => (rad * 180) / Math.PI + 180,
+  
+  // take East as 0 degrees(+90), (+180)if take North as 0 degree.
+  radiansToDegreesForAzimuth: (rad) => (rad * 180) / Math.PI +180, 
   radiansToDegreesForAltitude: (rad) => (rad * 180) / Math.PI,
 
 }));
