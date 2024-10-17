@@ -6,6 +6,9 @@ import Ground from "./components/Ground";
 import Coordinates from "./components/Coordinates";
 import Compass from "./components/Compass";
 
+// Test component 
+import { Sky } from './components/testingComponents/SkyTest'
+
 import useInputStore from "../../stores/inputStore";
 import useRenderStore from "../../stores/renderStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
@@ -24,6 +27,7 @@ const ModelComponent = () => {
   } = skyConfig;
 
   const { x, y, z } = sunCoordinates;
+  const {altitude, azimuth} = sunPosition;
 
   useEffect(() => {
     calculateSunData(date, sunPosition);
@@ -36,7 +40,7 @@ const ModelComponent = () => {
   return (
     <Canvas camera={{ position: [-5, 0.7, 4] }}>
       {/* Sky Component with passed arguments */}
-      <SkyScene
+      {/* <SkyScene
         distance={distance}
         turbidity={turbidity}
         rayleigh={rayleigh}
@@ -44,7 +48,11 @@ const ModelComponent = () => {
         mieDirectionalG={mieDirectionalG}
         sunPosition={[x, y, z]}
         
-      />
+      /> */}
+      
+      <Sky altitude={altitude} azimuth={azimuth} />
+
+
       <Ground />
       <Coordinates />
       <Compass />
