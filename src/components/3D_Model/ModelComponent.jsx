@@ -28,7 +28,6 @@ const ModelComponent = () => {
   useEffect(() => {
     calculateSunData(date, sunPosition);
     convertSunCoordinates(sunPosition)
-    console.log({x,y,z})
   },[date, sunPosition]);
 
   
@@ -46,7 +45,7 @@ const ModelComponent = () => {
         
       />
       <Ground />
-      <Coordinates />
+      <Coordinates position={sunCoordinates} />
       <Compass />
 
       <OrbitControls
