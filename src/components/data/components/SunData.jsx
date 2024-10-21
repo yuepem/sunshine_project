@@ -77,10 +77,14 @@ const SunData = () => {
           <p>Azimuth:
             <span className={`transition-colors ${highlightClass}`} >{radiansToDegreesForAzimuth(sunPosition.azimuth).toFixed(2)}°  </span>
             <span>({(sunPosition.azimuth).toFixed(2)})</span>
+            <br />
+            <span>{sunPosition.azimuth} </span>
           </p>
           <p>Altitude:
             <span className={`transition-colors ${highlightClass}`}> {radiansToDegreesForAltitude(sunPosition.altitude).toFixed(2)}°</span>
             <span>({(sunPosition.altitude).toFixed(2)})</span>
+            <br />
+            <span>{sunPosition.altitude} </span>
           </p>
         </div>
         {/* <ul className="grid grid-cols-4 my-2">

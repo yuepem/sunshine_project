@@ -8,6 +8,7 @@ import Compass from "./components/Compass";
 
 // Test component 
 import { Sky } from './components/testingComponents/SkyTest'
+import  Sphere  from './components/testingComponents/Sphere'
 
 import useInputStore from "../../stores/inputStore";
 import useRenderStore from "../../stores/renderStore";
@@ -26,13 +27,11 @@ const ModelComponent = () => {
     mieDirectionalG,
   } = skyConfig;
 
-  const { x, y, z } = sunCoordinates;
   const {altitude, azimuth} = sunPosition;
 
   useEffect(() => {
     calculateSunData(date, sunPosition);
     convertSunCoordinates(sunPosition)
-    console.log({x,y,z})
   },[date, sunPosition]);
 
   
@@ -50,11 +49,11 @@ const ModelComponent = () => {
         
       /> */}
       
-      <Sky altitude={altitude} azimuth={azimuth} />
+      {/* <Sky altitude={altitude} azimuth={azimuth} /> */}
 
-
+      <Sphere position={sunCoordinates} />
       <Ground />
-      <Coordinates />
+      <Coordinates position={sunCoordinates} />
       <Compass />
 
       <OrbitControls
