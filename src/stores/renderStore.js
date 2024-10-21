@@ -17,17 +17,23 @@ const useRenderStore = create((set, get) => ({
         mieDirectionalG: 0.8,
     },
 
-
+   clearFloat: (value) => {
+        const rounded = Math.round(value * 10000000) / 10000000;
+        return Math.abs(rounded) < 0.0000001 ? 0 : rounded;
+    },
 
     convertSunCoordinates: (sunPosition) => {
-        
+        const { clearFloat } = get()
         const { azimuth, altitude } = sunPosition;
-        const x = Math.sin(azimuth) * Math.cos(altitude);
-        const y = Math.cos(altitude) * Math.cos(azimuth);
-        const z = Math.cos(altitude);
-
+    
+        // Adjust azimuth to match your radiansToDegreesForAzimuth function
+        const adjustedAzimuth = azimuth - Math.PI; // Subtract 180 degrees (in radians)
+    
+        const x = clearFloat(Math.cos(altitude) * Math.sin(adjustedAzimuth)) * 20;
+        const y = clearFloat(Math.sin(altitude)) * 20;
+        const z = clearFloat(-Math.cos(altitude) * Math.cos(adjustedAzimuth)) * 20;
+    
         set({ sunCoordinates: { x, y, z } });
-        
     },
 
 }))
