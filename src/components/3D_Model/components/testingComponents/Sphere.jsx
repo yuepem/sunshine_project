@@ -1,32 +1,18 @@
-import React, { useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+// Sphere.js
+import React from 'react';
+import * as THREE from 'three';
+
+function Sphere({position}) {
+  const geometry = new THREE.SphereGeometry(1, 32, 15);
+  const material = new THREE.MeshBasicMaterial({ color: 0xffff00 });
+  const sphere = new THREE.Mesh(geometry, material);
 
 
-
-const SphereModel = ({ position, args, color}) =>{
-    const ref= useRef();
-
-    useFrame((state, delta) => {
-        // ref.current.rotation.x += Math.PI / 2
-        ref.current.rotation.y += delta 
-    })
-    return (
-        <mesh ref={ref} position={position}>
-          <sphereGeometry  args={args}/>
-          <meshStandardMaterial color={color} wireframe />
-        </mesh>
-    )
-}
-
-const Sphere = () => {
   return (
-    <div className="max-w-7xl, h-1/2">
-      <Canvas>
-        <directionalLight position={[0, 0, 2]} intensity={1} />
-        <SphereModel position={[0, 0, 0]} args={[3, 30, 20]} color="#08C2FF"   />
-      </Canvas>
-    </div>
+    <mesh position={[position.x, position.y, position.z]}>
+      <primitive object={sphere} />
+    </mesh>
   );
-};
+}
 
 export default Sphere;

@@ -1,9 +1,10 @@
 import { Segments, Segment } from "@react-three/drei";
 
 export default function Coordinates({position}) {
+
   return (
     <>
-      <Segments lineWidth={2}>
+      <Segments lineWidth={2} >
         {/* X Axis */}
         <Segment start={[0, 0, 0]} end={[1, 0, 0]} color="yellow" />
         {/* Z Axis */}
