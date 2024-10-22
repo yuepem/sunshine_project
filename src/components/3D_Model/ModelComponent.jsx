@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+
+// Components
 import SkyScene from "./components/Sky";
 import Ground from "./components/Ground";
 import Coordinates from "./components/Coordinates";
 import Compass from "./components/Compass";
+import Sphere from "./components/Sphere";
 
-// Test component
-
-import Sphere from "./components/testingComponents/Sphere";
-
+// Stores 
 import useInputStore from "../../stores/inputStore";
 import useRenderStore from "../../stores/renderStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
