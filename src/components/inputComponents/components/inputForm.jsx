@@ -13,11 +13,12 @@ const InputForm = () => {
     getTimeZoneCode,
   } = useInputStore();
 
+  // They are should be called when location is changed, date doesn't matter.
   useEffect(() => {
     // Convert latitude & longitude to address
     getAddress();
     getTimeZoneCode();
-  }, [date, latitude, longitude]);
+  }, [latitude, longitude]);
 
   return (
     <div className="my-2">

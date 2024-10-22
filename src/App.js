@@ -2,7 +2,7 @@ import ModelComponent from './components/3D_Model/ModelComponent';
 import InputComponent from './components/inputComponents/InputComponent';
 import Address from './components/MapServices/Address';
 import SunCalcComponent from './components/data/SunCalc';
-import TestSky from './components/3D_Model/components/testingComponents/TestComponent'
+
 
 function App() {
   return (
@@ -10,7 +10,6 @@ function App() {
       <div className="h-[700px]">
         <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
         <ModelComponent />
-        {/* <TestSky /> */}
       </div>
       <h1 className='text-xl font-bold text-green-900 mt-12'> Input Area</h1>
       <InputComponent />

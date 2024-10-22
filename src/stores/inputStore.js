@@ -18,10 +18,12 @@ const useInputStore = create((set, get) => ({
     setCity: (city) => set({city}),
     setTimeZone: (timeZone) => set({timeZone}),
 
+    // It is called in InputForm
     getAddress: () => {
         get().fetchAddress();
     },
 
+    // It is called in InputForm
     getTimeZoneCode: () => {
         get().timeZoneCode();
     },
