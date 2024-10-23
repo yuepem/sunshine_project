@@ -3,8 +3,8 @@ import CityList from "./CityList";
 
 function GetLocation() {
   return (
-    <div className="flex justify-between my-6">
-      <LocationButton />
+    <div className="flex flex-col justify-between my-6 p-2">
+      {/* <LocationButton /> */}
       <CityList />
     </div>
   );

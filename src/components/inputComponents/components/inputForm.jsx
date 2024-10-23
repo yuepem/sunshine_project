@@ -22,7 +22,7 @@ const InputForm = () => {
 
   return (
     <div className="my-2">
-      <label>
+      {/* <label>
         Date:{" "}
         <input
           type="date"
@@ -45,7 +45,7 @@ const InputForm = () => {
           value={longitude}
           onChange={(e) => setLongitude(parseFloat(e.target.value))}
         />
-      </label>
+      </label> */}
     </div>
   );
 };

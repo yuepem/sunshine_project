@@ -4,7 +4,7 @@ import GetLocation from "./components/GetLocation";
 
 export default function InputComponent() {
   return (
-    <div className="my-2">
+    <div className="px-4 mx-auto max-w-7xl ">
       <InputForm />
       <GetLocation />
     </div>

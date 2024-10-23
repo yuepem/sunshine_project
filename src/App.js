@@ -6,15 +6,20 @@ import SunCalcComponent from './components/data/SunCalc';
 
 function App() {
   return (
-    <div className="p-8 m-5 mx-auto max-w-7xl">
-      <div className="h-[700px]">
-        <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
-        <ModelComponent />
+    <div className="bg-teal-800">
+      <div className="w-full bg-slate-900 opacity-80  backdrop-blur-sm sticky top-0 z-10">
+
+        <InputComponent />
       </div>
-      <h1 className='text-xl font-bold text-green-900 mt-12'> Input Area</h1>
-      <InputComponent />
-      <Address />
-      <SunCalcComponent />
+
+        <ModelComponent />
+
+      <div className="p-4 mx-auto max-w-7xl ">
+
+        <h1 className='text-xl font-bold text-green-900 mt-12'> Input Area</h1>
+        <Address />
+        <SunCalcComponent />
+      </div>
     </div>
   );
 }
