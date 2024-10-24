@@ -1,4 +1,4 @@
-import LocationButton from "./LocationButton";
+import LocationButton from "../../MapServices/LocationButton";
 import CityList from "./CityList";
 
 function GetLocation() {

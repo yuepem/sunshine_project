@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
-import { House } from 'lucide-react'
+
 
 // Components
 import SkyScene from "./components/Sky";
@@ -17,7 +17,7 @@ import useSunCalcStore from "../../stores/sunSalcStore";
 
 
 const ModelComponent = () => {
-  const { date, address } = useInputStore();
+  const { date } = useInputStore();
   const { sunPosition, calculateSunData } = useSunCalcStore();
   const { skyConfig, sunCoordinates, convertSunCoordinates } = useRenderStore();
 
@@ -33,13 +33,8 @@ const ModelComponent = () => {
 
   return (
     <div className="p-4 mx-auto max-w-7xl ">
-      {/* <h1 className="text-2xl  font-semibold text-white pb-3">{city ? city : address}</h1> */}
-      <h1 className="text-xl font-semibold text-white pb-3  "> 
-        <span className="mx-3 inline-block ">
-          <House size={25} className="test-center"/>
-        </span>
-         { address}
-      </h1>
+      
+      
       <div className="h-[700px] rounded-xl overflow-hidden">
         <Canvas camera={{ position: [-5, 0.7, 4] }}>
           {/* Sky Component with passed arguments */}

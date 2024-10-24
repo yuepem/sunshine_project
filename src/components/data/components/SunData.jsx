@@ -12,8 +12,6 @@ const SunData = () => {
     calculateSunData,
     formatTime,
     formatTimeZone,
-    radiansToDegreesForAzimuth,
-    radiansToDegreesForAltitude
   } = useSunCalcStore();
 
   useEffect(() => {
@@ -46,20 +44,26 @@ const SunData = () => {
         <h1 className="text-xl font-semibold text-green-900">Time</h1>
         <p className="my-2 ">
           {/* Local-Time: {date.toString("en-US", { hour12: false })} */}
-          <span className="font-semibold text-blue-500">local</span> Time: {date.toLocaleTimeString("en-US", {
+          <span className="font-semibold text-blue-500">local</span> Time:{" "}
+          {date.toLocaleTimeString("en-US", {
             day: "2-digit",
             month: "short",
             hour: "numeric",
             minute: "2-digit",
             second: "2-digit",
             hour12: false,
-            timeZoneName: 'short',
+            timeZoneName: "short",
           })}
         </p>
-        <p className="my-2 "><span className="font-semibold text-blue-500">{city}</span> Time: {formatTimeZone(date, timeZone)} <span>({timeZone})</span></p>
+        <p className="my-2 ">
+          <span className="font-semibold text-blue-500">{city}</span> Time:{" "}
+          {formatTimeZone(date, timeZone)} <span>({timeZone})</span>
+        </p>
       </div>
       <div>
-        <h1 className="text-xl font-semibold text-green-900">Sun times in {city}</h1>
+        <h1 className="text-xl font-semibold text-green-900">
+          Sun times in {city}
+        </h1>
         <ul className="grid grid-cols-4 my-2">
           {Object.entries(sunTimes).map(([key, value]) => (
             <li key={key} className="my-2">
@@ -71,7 +75,7 @@ const SunData = () => {
           ))}
         </ul>
       </div>
-      <div>
+      {/*  <div>
         <h1 className="text-xl font-semibold text-green-900">Sun position in {city}</h1>
         <div className="grid grid-cols-4 my-2">
           <p>Azimuth:
@@ -83,18 +87,7 @@ const SunData = () => {
             <span>({(sunPosition.altitude).toFixed(6)})</span>
           </p>
         </div>
-        {/* <ul className="grid grid-cols-4 my-2">
-          {Object.entries(sunPosition).map(([key, value]) => (
-            <li key={key} className="my-2">
-              {key}:{" "}
-              <span className={`transition-colors ${highlightClass}`}>
-                {radiansToDegrees(value).toFixed(2)}°{" "}
-              </span>
-              <span> ({value}) </span>
-            </li>
-          ))}
-        </ul> */}
-      </div>
+      </div> */}
     </>
   );
 };

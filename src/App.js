@@ -8,16 +8,11 @@ function App() {
   return (
     <div className="bg-teal-800">
       <div className="w-full bg-slate-900 opacity-80  backdrop-blur-sm sticky top-0 z-10">
-
         <InputComponent />
       </div>
-
-        <ModelComponent />
-
+      <Address />
+      <ModelComponent />
       <div className="p-4 mx-auto max-w-7xl ">
-
-        <h1 className='text-xl font-bold text-green-900 mt-12'> Input Area</h1>
-        <Address />
         <SunCalcComponent />
       </div>
     </div>
