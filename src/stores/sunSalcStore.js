@@ -20,21 +20,15 @@ const useSunCalcStore = create((set, get) => ({
     set({ sunTimes, sunPosition });
   },
 
- 
-  formatTime: (date, timeZone) => { 
-    if (!date) return "N/A";
-    return moment(date).tz(timeZone).format('HH:mm:ss'); // Format using Moment.js
-  },
+ // this is a simple version for sun's data 
+ // Format using Moment.js
 
-  formatTimeZone: (date, timeZone) => date ? date.toLocaleString('en-US', { 
-    day: "2-digit",
-    month: "short", 
-    hour: "numeric", 
-    minute: "2-digit",
-    second: "2-digit",
-    hour12: false, 
-    timeZoneName: 'short',  
-    timeZone: timeZone }) : "N/A",
+
+  // this is a complicated version for current time
+  formatTimeZone: (date, timeZone) => { 
+    if (!date) return "N/A";
+    return moment(date).tz(timeZone).format('dddd, DD MMMM YYYY HH:mm:ss z'); 
+  },
   
   // take East as 0 degrees(+90), (+180)if take North as 0 degree.
   radiansToDegreesForAzimuth: (rad) => (rad * 180) / Math.PI +180, 

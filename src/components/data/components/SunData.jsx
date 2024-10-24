@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import useInputStore from "../../../stores/inputStore";
 import useSunCalcStore from "../../../stores/sunSalcStore";
+import useTimeStore from "../../../stores/timeStore";
 
 const SunData = () => {
   const { date, latitude, longitude, timeZone, city } = useInputStore();
@@ -10,9 +11,9 @@ const SunData = () => {
     sunTimes,
     sunPosition,
     calculateSunData,
-    formatTime,
-    formatTimeZone,
   } = useSunCalcStore();
+  
+  const { formatTime } = useTimeStore();
 
   useEffect(() => {
     // Calculate sun data
@@ -39,27 +40,23 @@ const SunData = () => {
   }
 
   return (
-    <>
-      <div>
-        <h1 className="text-xl font-semibold text-green-900">Time</h1>
-        <p className="my-2 ">
-          {/* Local-Time: {date.toString("en-US", { hour12: false })} */}
-          <span className="font-semibold text-blue-500">local</span> Time:{" "}
-          {date.toLocaleTimeString("en-US", {
-            day: "2-digit",
-            month: "short",
-            hour: "numeric",
-            minute: "2-digit",
-            second: "2-digit",
-            hour12: false,
-            timeZoneName: "short",
-          })}
-        </p>
-        <p className="my-2 ">
-          <span className="font-semibold text-blue-500">{city}</span> Time:{" "}
-          {formatTimeZone(date, timeZone)} <span>({timeZone})</span>
-        </p>
+    <div className="">
+      <h1 className="text-xl font-semibold text-green-900 p-4">Sun's Data</h1>
+      {/* Refactor component */}
+      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 mb-36 justify-items-stretch h-60 bg-blue-200 p-4">
+        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex flex-col justify-center items-center">
+          1
+          
+        </div>
+        
+        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex justify-center items-center">
+          1
+        </div>
+        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex justify-center items-center">
+          1
+        </div>
       </div>
+      
       <div>
         <h1 className="text-xl font-semibold text-green-900">
           Sun times in {city}
@@ -75,20 +72,7 @@ const SunData = () => {
           ))}
         </ul>
       </div>
-      {/*  <div>
-        <h1 className="text-xl font-semibold text-green-900">Sun position in {city}</h1>
-        <div className="grid grid-cols-4 my-2">
-          <p>Azimuth:
-            <span className={`transition-colors ${highlightClass}`} >{radiansToDegreesForAzimuth(sunPosition.azimuth).toFixed(2)}°  </span>
-            <span>({(sunPosition.azimuth).toFixed(6)})</span>
-          </p>
-          <p>Altitude:
-            <span className={`transition-colors ${highlightClass}`}> {radiansToDegreesForAltitude(sunPosition.altitude).toFixed(2)}°</span>
-            <span>({(sunPosition.altitude).toFixed(6)})</span>
-          </p>
-        </div>
-      </div> */}
-    </>
+    </div>
   );
 };
 

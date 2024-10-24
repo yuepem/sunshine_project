@@ -1,4 +1,5 @@
 import useInputStore from "../../../stores/inputStore";
+import useTimeStore from "../../../stores/timeStore";
 import { useRef, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight, Sun, Moon } from "lucide-react";
 
@@ -94,16 +95,15 @@ const Cities = Object.keys(cityCoordinates);
 
 function CityList() {
   const { setLatitude, setLongitude } = useInputStore();
+  const { currentTime,  startUpdateTime, stopUpdateTime } =
+    useTimeStore();
   const scrollContainerRef = useRef(null);
-  const [currentTime, setCurrentTime] = useState(new Date());
+  
 
   useEffect(() => {
-    const timer = setInterval(()=> {
-      setCurrentTime(new Date());
-    }, 60000) // 60000 milliseconds = 1 minute
-
-    return () => clearInterval(timer)
-  }, [])
+    startUpdateTime();
+    return () => stopUpdateTime();
+  }, []);
 
 
   const localTime = (city) => {
