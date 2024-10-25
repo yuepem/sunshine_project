@@ -2,7 +2,7 @@ import ModelComponent from './components/3D_Model/ModelComponent';
 import InputComponent from './components/inputComponents/InputComponent';
 import Address from './components/MapServices/Address';
 import SunCalcComponent from './components/data/SunCalc';
-import TestSky from './components/3D_Model/components/testingComponents/TestComponent'
+
 
 function App() {
   return (
