@@ -1,7 +1,6 @@
 import React from "react";
-import Button from "@mui/material/Button";
 import { MapPin } from "lucide-react";
-import useInputStore from "../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 
 function LocationButton() {
   const { setLatitude, setLongitude } = useInputStore();
@@ -18,16 +17,15 @@ function LocationButton() {
 
   return (
     <div>
-      <Button
-        variant="contained"
+      <button
+        variant="outlined"
         size="small"
-        color="success"
-        className="py-5"
+        color="white"
         onClick={handleGetLocation}
+        className="w-8 h-8 rounded-md flex items-center justify-center bg-slate-800/40 hover:bg-slate-800/60"
       >
-        <MapPin size={18} className="mr-2" />
-        Me
-      </Button>
+        <MapPin size={20} color="white"/>
+      </button>
     </div>
   );
 }

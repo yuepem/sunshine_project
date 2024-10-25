@@ -1,21 +1,21 @@
-import ModelComponent from './components/3D_Model/ModelComponent';
+import CityHeader from './components/HomePage/CityHeader';
+import SunSimulator from './components/HomePage/SunSimulator';
 import InputComponent from './components/inputComponents/InputComponent';
-import Address from './components/MapServices/Address';
+
+
 import SunCalcComponent from './components/data/SunCalc';
+
 
 
 function App() {
   return (
-    <div className="p-8 m-5 mx-auto max-w-7xl">
-      <div className="h-[700px]">
-        <h1 className='text-2xl font-bold text-green-900'>3D Model</h1>
-        <ModelComponent />
-        {/* <TestSky /> */}
-      </div>
-      <h1 className='text-xl font-bold text-green-900 mt-12'> Input Area</h1>
+    <div className="bg-teal-800">
+      <CityHeader />
+      <SunSimulator />
       <InputComponent />
-      <Address />
-      <SunCalcComponent />
+      <div className="p-4 mx-auto max-w-7xl ">
+        <SunCalcComponent />
+      </div>
     </div>
   );
 }
