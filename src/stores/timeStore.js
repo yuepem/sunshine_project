@@ -38,13 +38,17 @@ const useTimeStore = create((set, get) => ({
     formatTimeZone: (date, timeZone) => {
         if (!date) return "N/A";
         const momentDate = moment(date).tz(timeZone).format('dddd, DD MMMM YYYY');
+        const momentDateWithDay = moment(date).tz(timeZone).format('DD MMMM YYYY');
         const momentTime = moment(date).tz(timeZone).format('HH:mm:ss');
         const momentZone = moment(date).tz(timeZone).format('z');
         const momentFullDate = moment(date).tz(timeZone).format('YYYY MM DD dddd hh:mm:ss A z');
+        const momentMonth = moment(date).tz(timeZone).format('MMMM');
 
         return {
             fullDate: momentFullDate,
-            date: momentDate,
+            month : momentMonth,
+            dateA: momentDate,
+            dateB: momentDateWithDay,
             time: momentTime,
             zone: momentZone
         }

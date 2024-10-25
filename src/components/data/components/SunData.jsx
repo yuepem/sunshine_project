@@ -7,12 +7,8 @@ const SunData = () => {
   const { date, latitude, longitude, timeZone, city } = useInputStore();
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
-  const {
-    sunTimes,
-    sunPosition,
-    calculateSunData,
-  } = useSunCalcStore();
-  
+  const { sunTimes, sunPosition, calculateSunData } = useSunCalcStore();
+
   const { formatTime } = useTimeStore();
 
   useEffect(() => {
@@ -36,41 +32,56 @@ const SunData = () => {
     : "";
 
   if (!sunTimes || !sunPosition) {
+    return (
+      <div className="flex justify-center items-center h-60">
+        <p className="text-lg text-slate-600">Loading sun data...</p>
+      </div>
+    );
+  }
+
+  const sunTimesData = {
+    sunrise: formatTime(sunTimes.sunrise, timeZone),
+    sunriseEnd: formatTime(sunTimes.sunriseEnd, timeZone),
+    sunsetStart: formatTime(sunTimes.sunsetStart, timeZone),
+    sunset: formatTime(sunTimes.sunset, timeZone),
+    solarNoon: formatTime(sunTimes.solarNoon, timeZone),
+    goldenHour: formatTime(sunTimes.goldenHour, timeZone),
+    goldenHourEnd: formatTime(sunTimes.goldenHourEnd, timeZone),
+  };
+
+  if (!sunTimes || !sunPosition) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="">
+    <div className="container mx-auto px-4">
       <h1 className="text-xl font-semibold text-green-900 p-4">Sun's Data</h1>
-      {/* Refactor component */}
-      <div className="grid grid-cols-2  md:grid-cols-3 lg:grid-cols-4 gap-4 mb-36 justify-items-stretch h-60 bg-blue-200 p-4">
-        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex flex-col justify-center items-center">
-          1
-          
-        </div>
-        
-        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex justify-center items-center">
-          1
-        </div>
-        <div className=" text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex justify-center items-center">
-          1
-        </div>
-      </div>
-      
-      <div>
-        <h1 className="text-xl font-semibold text-green-900">
-          Sun times in {city}
-        </h1>
-        <ul className="grid grid-cols-4 my-2">
+      {/* Selected sun times */}
+      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {Object.entries(sunTimesData).map(([key, value]) => (
+          <li
+            key={key}
+            className="text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex flex-col justify-center items-center"
+          >
+            <span className="font-medium capitalize">{key}: </span>
+            <span>{value}</span>
+          </li>
+        ))}
+      </ul>
+
+      {/* Sun Times Display */}
+      <div className="mt-8">
+        {/* All sun times
+        <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
           {Object.entries(sunTimes).map(([key, value]) => (
-            <li key={key} className="my-2">
-              {key}:{" "}
+            <li key={key} className="p-2 bg-slate-50 rounded-lg">
+              <span className="font-medium capitalize">{key}: </span>
               <span className={`transition-colors ${highlightClass}`}>
-                {formatTime(value, timeZone)}{" "}
+                {formatTime(value, timeZone)}
               </span>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

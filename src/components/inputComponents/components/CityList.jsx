@@ -1,6 +1,6 @@
 import useInputStore from "../../../stores/inputStore";
 import useTimeStore from "../../../stores/timeStore";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Sun, Moon } from "lucide-react";
 
 const cityCoordinates = {

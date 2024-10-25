@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import getTimeZone  from '../helperFunctions/time'
+import getTimeZone  from '../helperFunctions/timeZone'
 
 const useInputStore = create((set, get) => ({
     date: new Date( ),
@@ -33,7 +33,6 @@ const useInputStore = create((set, get) => ({
             date: new Date(),
             latitude: 59.36769,
             longitude: 17.82157,
-            address: 'Stockholm, Sweden',
         });
 
     },
@@ -80,12 +79,12 @@ const useInputStore = create((set, get) => ({
 
             const { city, town, village, state, country, postcode, road, house_number } = data.address;
             const locality = city || town || village || '';
-            const simplifiedAddress = [road, house_number, postcode, locality, state, country]
+            const simplifiedAddress = [road, house_number, postcode, city, state, country]
                 .filter(Boolean)
                 .join(', ');
 
             setAddress(simplifiedAddress);
-            setCity(city);
+            setCity(locality);
         } catch (error) {
             console.error('Error:', error);
             setError(error.message);

@@ -1,23 +1,14 @@
 import { useEffect } from "react";
-import LocationButton from "./LocationButton";
 import useInputStore from "../../stores/inputStore";
-import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
-import { House } from "lucide-react";
+import { House, CalendarFold } from "lucide-react";
 const Address = () => {
-  const { address, city, timeZone, toDMS } = useInputStore();
-  const {
-    sunPosition,
-    radiansToDegreesForAzimuth,
-    radiansToDegreesForAltitude,
-  } = useSunCalcStore();
+  const { address, city, timeZone } = useInputStore();
+
   const { currentTime, formatTimeZone, startUpdateTime, stopUpdateTime } =
     useTimeStore();
 
-  const latDMS = toDMS().latitude;
-  const lonDMS = toDMS().longitude;
-
-  const { date, time, zone } = formatTimeZone(currentTime, timeZone);
+  const { dateA, time, zone } = formatTimeZone(currentTime, timeZone);
 
   useEffect(() => {
     startUpdateTime();
@@ -25,50 +16,25 @@ const Address = () => {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 ">
+    <div className="">
+      <div className="flex flex-col  gap-1 ">
         {/* Address Title */}
-        <h1 className="flex items-center text-xs sm:text-sm font-semibold text-white rounded-lg backdrop-blur-sm bg-slate-800/30 py-7 px-3 hover:bg-slate-800/60">
-          <House className="mr-3" size={25} />
+        <div className="flex items-center px-3 text-xs text-white sm:text-base">
+          <House className="mr-3" size={18} />
           <span className="pr-3">{address}</span>
-          <LocationButton />
-        </h1>
+        </div>
 
         {/* Time */}
-        <div className="flex flex-row items-center justify-between sm:justify-start gap-4">
-          <div className="p-3 rounded-lg backdrop-blur-sm bg-slate-800/30 text-white text-xs hover:bg-slate-800/60">
-            <div className="space-y-1">
-              <p className="text-white">{city ? city : "Local Time"} </p>
-              <div className="space-x-3 ">
-                <span className="text-slate-300 text-xs">
-                  {zone ? zone : ""}
-                </span>
-                <span className="text-white text-base font-semibold">{time}</span>
-              </div>
-              <p className="text-slate-300">{date}</p>
-            </div>
-          </div>
-
-          {/* Sun Position Info */}
-          <div className="p-3 rounded-lg backdrop-blur-sm bg-slate-800/30 text-white text-xs hover:bg-slate-800/60">
-            <div className="space-y-2">
-              <p className="text-slate-300">
-                {latDMS} {lonDMS}
-              </p>
-              <p className="text-slate-300">
-                Azimuth:{" "}
-                <span className="ml-2">
-                  {radiansToDegreesForAzimuth(sunPosition.azimuth).toFixed(2)}°
-                </span>
-              </p>
-              <p className="text-slate-300">
-                Altitude:{" "}
-                <span className="ml-2">
-                  {radiansToDegreesForAltitude(sunPosition.altitude).toFixed(2)}
-                  °
-                </span>
-              </p>
-            </div>
+        <div className="flex items-center px-3 text-white text-xs ">
+          <CalendarFold className="mr-3" size={18} />
+          <div className="space-x-2 ">
+            <span className="text-white text-base font-semibold">
+              {city ? city : "Local"}{" "}
+              <span className="text-slate-300 text-xs">Now</span>
+            </span>
+            <span className="text-white text-base font-semibold">{time}</span>
+            <span className="text-slate-300 text-xs">{zone}</span>
+            <span className="text-slate-300">{dateA}</span>
           </div>
         </div>
       </div>

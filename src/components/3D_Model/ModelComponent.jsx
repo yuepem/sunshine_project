@@ -32,10 +32,10 @@ const ModelComponent = () => {
   }, [date, sunPosition]);
 
   return (
-    <div className="p-4 mx-auto max-w-7xl ">
+    <div className="py-5 ">
       
       
-      <div className="h-[700px] rounded-xl overflow-hidden">
+      <div className="h-[600px] rounded-xl overflow-hidden">
         <Canvas camera={{ position: [-5, 0.7, 4] }}>
           {/* Sky Component with passed arguments */}
           <SkyScene
