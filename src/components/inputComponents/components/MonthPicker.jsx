@@ -1,14 +1,24 @@
 import useInputStore from "../../../stores/inputStore";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 
-const MonthSelector = () => {
+const MonthPicker = () => {
   const { date, setDate } = useInputStore();
   const [isDragging, setIsDragging] = useState(false);
   const sliderRef = useRef(null);
 
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const currentMonth = months[date.getMonth()];
@@ -21,6 +31,7 @@ const MonthSelector = () => {
     return Math.floor(percentage * 12);
   };
 
+  // Handle click on month button
   const handleMonthSelect = (monthIndex) => {
     const newDate = new Date(date);
     newDate.setMonth(monthIndex);
@@ -54,60 +65,49 @@ const MonthSelector = () => {
   };
 
   // Calculate progress width
-  const progress = ((date.getMonth()) / 11) * 100;
+  const progress = (date.getMonth() / 11) * 100;
 
   // Add and remove event listeners
   React.useEffect(() => {
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('mouseup', handleMouseUp);
-    
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseup", handleMouseUp);
+
     return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('mouseup', handleMouseUp);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isDragging]);
 
   return (
-    <div className="my-2 py-4">
-      <div className="w-full bg-blue-50 p-4 rounded-lg select-none">
-        <div className="text-sm font-medium mb-4">Monthly</div>
-        
+    <div className="my-2 py-4 ">
+      <div className="w-full bg-blue-50 px-8 py-4 rounded-lg select-none ">
+        <div className="text-sm font-medium  ">Monthly</div>
+
         {/* Slider Track */}
-        <div className="relative w-full h-16 mb-4">
-          <div 
+        <div className="relative w-full h-14 ">
+          <div
             ref={sliderRef}
-            className="absolute w-full h-2 bg-gray-200 rounded-full top-8 cursor-pointer"
+            className="absolute w-full h-2  bg-gray-200 rounded-full top-6 cursor-pointer"
             onClick={handleTimelineClick}
           >
             {/* Progress bar */}
-            <div 
+            <div
               className="absolute h-full bg-teal-800 rounded-full"
               style={{ width: `${progress}%` }}
             />
-            
+
             {/* Current month indicator */}
-            <div 
-              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-8 h-8 
-                bg-teal-800 rounded-full flex items-center justify-center 
-                text-white text-xs font-bold shadow-lg cursor-grab
-                ${isDragging ? 'cursor-grabbing' : ''}`}
-              style={{ left: `${progress}%` }}
+            <div
+              //! translate-x-1/2 has issues
+              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-12 h-6 
+                bg-teal-800  flex items-center justify-center 
+                text-white text-xs font-semibold shadow-lg cursor-grab
+                ${isDragging ? "cursor-grabbing" : ""}`}
+              style={{ left: `${progress}% `, borderRadius: "50%" }}
               onMouseDown={handleMouseDown}
             >
-              NOW
+              {currentMonth.substring(0, 3)}
             </div>
-          </div>
-
-          {/* Month marks */}
-          <div className="absolute w-full flex justify-between top-12 px-2">
-            {months.map((month) => (
-              <div 
-                key={month}
-                className="flex flex-col items-center"
-              >
-                <div className="text-xs text-gray-600">{month.substring(0, 3)}</div>
-              </div>
-            ))}
           </div>
         </div>
 
@@ -120,9 +120,10 @@ const MonthSelector = () => {
                 key={month}
                 onClick={() => handleMonthSelect(months.indexOf(month))}
                 className={`px-auto py-2 text-xs rounded-lg whitespace-nowrap transition-colors 
-                  ${isSelected
-                    ? "bg-teal-800 text-white"
-                    : "bg-white hover:bg-gray-50 text-gray-600"
+                  ${
+                    isSelected
+                      ? "bg-teal-800 text-white"
+                      : "bg-white hover:bg-gray-50 text-gray-600"
                   }`}
               >
                 {month}
@@ -135,4 +136,4 @@ const MonthSelector = () => {
   );
 };
 
-export default MonthSelector;
+export default MonthPicker;

@@ -6,6 +6,16 @@ import SunCalc from 'suncalc'
 const useSunCalcStore = create((set, get) => ({
   sunTimes: null,
   sunPosition: {azimuth: 0.5, altitude: 0.5},
+ /*  sunData: {
+    sunrise: null,
+    sunriseEnd: null,
+    sunsetStart: null,
+    sunset: null,
+    solarNoon: null,
+    goldenHour: null,
+    goldenHourEnd: null,
+  }, */
+  
 
 
   calculateSunData: ({date, latitude, longitude }) => {

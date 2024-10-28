@@ -1,6 +1,4 @@
 import  useInputStore  from '../../../stores/inputStore';
-
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Play } from 'lucide-react';
 
@@ -111,7 +109,7 @@ const TimeSlider = () => {
   const progress = (currentTime / (24 * 60)) * 100;
 
   return (
-    <div className="w-full p-4 bg-white rounded-lg select-none">
+    <div className="w-full p-4 my-2 py-4 bg-white rounded-lg select-none">
       <div className="relative w-full h-16">
         {/* Time track */}
         <div 

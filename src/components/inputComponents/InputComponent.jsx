@@ -1,13 +1,15 @@
 import { useEffect } from "react";
 import  useInputStore  from "../../stores/inputStore.js";
-import MonthSelector from "./components/MonthSelector";
+// import MonthSelector from "./components/MonthSelector";
 import TimeSelector from "./components/TimeSelector";
 import MonthPicker from "./components/MonthPicker";
+import DayPicker from "./components/DayPicker";
+import DateTimePicker from "./components/Testing/Version4.jsx";
 
 
 
 export default function InputComponent() {
-  const {date, getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const {getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
 
   
   useEffect(() => {
@@ -24,10 +26,14 @@ export default function InputComponent() {
   }, [latitude, longitude]);
   return (
     <div className="px-4 mx-auto max-w-7xl bg-teal-600 rounded-lg ">
-      <MonthSelector />
-      <div className="div">
+      {/* <MonthSelector /> */}
+      <div className="my-2 py-4">
         <TimeSelector />
         <MonthPicker />
+        <DayPicker />
+      </div>
+      <div>
+      <DateTimePicker />
       </div>
     </div>
   );
