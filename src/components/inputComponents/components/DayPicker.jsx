@@ -12,13 +12,25 @@ const DayPicker = () => {
     setDate(newDate.toDate());
   };
 
+
   return (
-    <div className="w-full bg-blue-50 rounded-lg">
+    <div className="w-full rounded-lg">
       <LocalizationProvider dateAdapter={AdapterDayjs} >
         <DateCalendar
           value={dayjs(date)}
           onChange={handleDateChange}
+     
           displayWeekNumber
+          views={['month', 'day']}
+          sx={{
+            '& .MuiPickersDay-root': { color: 'white' }, // Day elements
+            '& .MuiPickersCalendarHeader-label': { color: 'white' }, // Month label
+            '& .MuiTypography-root': { color: 'white' }, // Week number
+            '& .MuiSvgIcon-root': { color: 'white' }, // Week number
+            // '& .Mui-DaySelected': { backgroundColor: '#26a69a' }, // Selected day
+            '& .Mui-selected': { backgroundColor: '#26a69a' }, // Selected day
+            
+          }} 
         />
       </LocalizationProvider>
     </div>

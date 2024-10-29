@@ -12,7 +12,9 @@ function App() {
     <div className="bg-teal-800">
       <CityHeader />
       <SunSimulator />
+      
       <InputComponent />
+      
       <div className="p-4 mx-auto max-w-7xl ">
         <SunCalcComponent />
       </div>

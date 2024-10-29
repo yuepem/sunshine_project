@@ -1,21 +1,18 @@
 import { useEffect } from "react";
-import  useInputStore  from "../../stores/inputStore.js";
-// import MonthSelector from "./components/MonthSelector";
-import TimeSelector from "./components/TimeSelector";
+import useInputStore from "../../stores/inputStore.js";
+
+// import TimeSelector from "./components/TimeSelector";
+import TimeSelect2 from "./components/TimeSelect2";
 import MonthPicker from "./components/MonthPicker";
-import DayPicker from "./components/DayPicker";
-import DateTimePicker from "./components/Testing/Version4.jsx";
-
-
+import DateTimePicker from "./components/Testing/TimeControl.jsx";
 
 export default function InputComponent() {
-  const {getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const { getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
 
-  
   useEffect(() => {
     //get time zone code when date and location is changed
-    // ! deleted "date" from dependency array, because the time picker automatically run, that would call timeZone API too many. 
-    // ! if there is an balance between time picker and time zone API, it can be added back. 
+    // ! deleted "date" from dependency array, because the time picker automatically run, that would call timeZone API too many.
+    // ! if there is an balance between time picker and time zone API, it can be added back.
     // date is import is because the Summer time and Winter time will be different.
     getTimeZoneCode();
   }, [latitude, longitude]);
@@ -26,14 +23,14 @@ export default function InputComponent() {
   }, [latitude, longitude]);
   return (
     <div className="px-4 mx-auto max-w-7xl bg-teal-600 rounded-lg ">
-      {/* <MonthSelector /> */}
+
       <div className="my-2 py-4">
-        <TimeSelector />
+        {/* <TimeSelector /> */}
+        <TimeSelect2 />
         <MonthPicker />
-        <DayPicker />
       </div>
       <div>
-      <DateTimePicker />
+        <DateTimePicker />
       </div>
     </div>
   );
