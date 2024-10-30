@@ -1,13 +1,35 @@
-import React, { useState } from 'react';
-import { Sun, Moon, Sunrise, Sunset, Calendar as CalendarIcon, Clock as ClockIcon } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+
+import useInputStore from '../../../../stores/inputStore';
+import useSunCalcStore from '../../../../stores/sunSalcStore';
+import useTimeStore from '../../../../stores/timeStore';
+
 import DayPicker from '../DayPicker';
+import TimeSlider from '../TimeSelect2';
+
+import { Sun, Moon, Sunrise, Sunset, Calendar as CalendarIcon, Clock as ClockIcon } from 'lucide-react';
 
 const DateTimePicker = () => {
+  const { date, setDate, latitude, longitude } = useInputStore();
+  const { sunTimes, calculateSunData } = useSunCalcStore();
+  const { timeZone, formatTime } = useTimeStore();
+
   const [currentTime, setCurrentTime] = useState('16:54');
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [hidden, setHidden] = useState(true);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [timeSpeed, setTimeSpeed] = useState('1x');
+
+  useEffect(() => {
+    // Calculate sun data
+    calculateSunData({ date, latitude, longitude });
+  }, [date, latitude, longitude]);
+ 
+  
+  // const sunTimesData = {
+  //   sunrise: formatTime(sunTimes.sunrise, timeZone),
+  //   sunset: formatTime(sunTimes.sunset, timeZone),
+  //   solarNoon: formatTime(sunTimes.solarNoon, timeZone),
+    
+  // };
 
   const sunEvents = [
     { time: '06:32', type: 'sunrise', label: 'Sunrise', icon: Sunrise, color: 'from-orange-400 to-yellow-400' },
@@ -33,6 +55,10 @@ const DateTimePicker = () => {
       year: 'numeric'
     });
   };
+
+  if (!sunTimes ) {
+    return <div>Loading...</div>;
+  }
 
   
   // Main view
@@ -108,84 +134,12 @@ const DateTimePicker = () => {
         })}
       </div>
 
-      {/* Timeline Slider with Day/Night Indication */}
-      <div className="relative mb-4">
-        {/* Day/Night Background */}
-        <div className="absolute inset-0 rounded-full overflow-hidden">
-          <div className="h-full bg-slate-700/30" /> {/* Night color */}
-          <div 
-            className="absolute top-0 h-full bg-gradient-to-r from-yellow-400/20 to-yellow-400/20"
-            style={{ 
-              left: `${sunrisePos}%`, 
-              width: `${sunsetPos - sunrisePos}%` 
-            }}
-          /> {/* Day color */}
-        </div>
 
-        {/* Timeline */}
-        <div className="relative h-2">
-          <div 
-            className="absolute h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
-            style={{ width: `${getProgress(currentTime)}%` }}
-          />
-          
-          {/* Time markers */}
-          {[...Array(25)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute top-0 w-px h-${i % 6 === 0 ? '3' : '2'} bg-slate-600`}
-              style={{ left: `${(i / 24) * 100}%` }}
-            />
-          ))}
-
-          {/* Current time handle */}
-          <div
-            className="absolute top-1/2 -translate-y-1/2 -ml-3"
-            style={{ left: `${getProgress(currentTime)}%` }}
-          >
-            <div className="w-6 h-6 rounded-full bg-gradient-to-b from-teal-400 to-teal-500 shadow-lg cursor-grab 
-              hover:scale-110 transition-transform">
-              <div className="absolute inset-1 bg-white rounded-full" />
-            </div>
-          </div>
-        </div>
-
-        {/* Time labels */}
-        <div className="flex justify-between mt-2 px-1 text-xs text-slate-500">
-          {['00:00', '06:00', '12:00', '18:00', '24:00'].map((time) => (
-            <span key={time}>{time}</span>
-          ))}
-        </div>
-      </div>
+      {/* Timeline Slider */}
+      <TimeSlider />
 
       {/* Playback Controls */}
-      <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-        <button 
-          onClick={() => setIsPlaying(!isPlaying)}
-          className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors w-full sm:w-auto
-            ${isPlaying 
-              ? 'bg-teal-500/20 text-teal-400' 
-              : 'bg-slate-700/50 text-slate-300 hover:bg-slate-700'}`}
-        >
-          {isPlaying ? 'Pause' : 'Play'}
-        </button>
-        
-        <div className="flex bg-slate-800/50 rounded-lg p-1 w-full sm:w-auto">
-          {['0.5x', '1x', '5x', '10x'].map((speed) => (
-            <button
-              key={speed}
-              onClick={() => setTimeSpeed(speed)}
-              className={`px-3 py-1.5 text-xs rounded-md transition-all flex-1 sm:flex-none ${
-                timeSpeed === speed
-                  ? 'bg-teal-500 text-white'
-                  : 'text-slate-400 hover:bg-slate-700/50'
-              }`}
-            >
-              {speed}
-            </button>
-          ))}
-        </div>
-      </div>
+      
     </div>
   );
 };

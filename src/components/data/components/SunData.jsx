@@ -4,7 +4,7 @@ import useSunCalcStore from "../../../stores/sunSalcStore";
 import useTimeStore from "../../../stores/timeStore";
 
 const SunData = () => {
-  const { date, latitude, longitude, timeZone, city } = useInputStore();
+  const { date, latitude, longitude, timeZone } = useInputStore();
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
 
   const { sunTimes, sunPosition, calculateSunData } = useSunCalcStore();

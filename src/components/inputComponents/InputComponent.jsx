@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import useInputStore from "../../stores/inputStore.js";
 
 // import TimeSelector from "./components/TimeSelector";
-import TimeSelect2 from "./components/TimeSelect2";
-import MonthPicker from "./components/MonthPicker";
+
+
 import DateTimePicker from "./components/Testing/TimeControl.jsx";
 
 export default function InputComponent() {
@@ -26,8 +26,8 @@ export default function InputComponent() {
 
       <div className="my-2 py-4">
         {/* <TimeSelector /> */}
-        <TimeSelect2 />
-        <MonthPicker />
+       
+    
       </div>
       <div>
         <DateTimePicker />
