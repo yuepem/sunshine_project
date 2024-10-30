@@ -1,7 +1,7 @@
 import CityHeader from './components/HomePage/CityHeader';
 
 import SunSimulator from './components/HomePage/SunSimulator';
-import InputComponent from './components/inputComponents/InputComponent';
+// import InputComponent from './components/inputComponents/InputComponent';
 import SunCalcComponent from './components/data/SunCalc';
 
 
@@ -11,7 +11,8 @@ import TimeProgress from './refactor/Second/TimeProgress';
 import LocationInput from './refactor/Second/LocationInput';
 // Main
 import MainCom from './refactor/Main/MianCom';
-
+//input
+import InputComponent from './components/inputComponents/InputComponent';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
 
       {/* <SunSimulator /> */}
       <InputComponent />
+
       <div className="p-4 mx-auto max-w-7xl ">
         {/* <SunCalcComponent /> */}
       </div>

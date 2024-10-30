@@ -1,16 +1,15 @@
 import { useEffect } from "react";
 import useInputStore from "../../stores/inputStore.js";
-// import useSunCalcStore from "../../stores/sunSalcStore.js";
-import DateTimePicker from "./components/TimeControl.jsx";
+import DateTimePicker from "./TimeControl.jsx";
 
 export default function InputComponent() {
-  const {date, getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const { getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
 
 
   useEffect(() => {
     //get time zone code when date and location is changed
-    // ! deleted "date" from dependency array, because the time picker automatically run, that would call timeZone API too many.
-    // ! if there is an balance between time picker and time zone API, it can be added back.
+    // todo deleted "date" from dependency array, because the time picker automatically run, that would call timeZone API too many.
+    // todo if there is an balance between time picker and time zone API, it can be added back.
     // date is import is because the Summer time and Winter time will be different.
     getTimeZoneCode();
   }, [latitude, longitude]);
