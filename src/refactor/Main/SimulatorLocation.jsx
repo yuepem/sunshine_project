@@ -1,7 +1,14 @@
-import React from 'react';
+import useInputStore from '../../stores/inputStore';
 import { Home, Map } from 'lucide-react';
 
+
 const LocationInfo = () => {
+
+  const {  address, toDMS } = useInputStore();
+ 
+  const latDMS = toDMS().latitude;
+  const lonDMS = toDMS().longitude;
+
   return (
     <div className="bg-slate-800/30 rounded-xl p-4">
       <div className="space-y-3">
@@ -13,13 +20,13 @@ const LocationInfo = () => {
         
         {/* Address */}
         <div className="text-slate-100">
-          Gustav Adolfs Torg, 103 21, Stockholm, Sweden
+          {address}
         </div>
         
         {/* Coordinates */}
         <div className="flex items-center space-x-2 text-sm text-slate-400">
           <Map className="w-4 h-4" />
-          <span>59° 19' 45" N 18° 4' 7" E</span>
+          <span>{latDMS},  {lonDMS}</span>
         </div>
       </div>
     </div>

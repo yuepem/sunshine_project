@@ -6,7 +6,7 @@ const SunSimulator = () => {
     return (
         <div className="bg-teal-600 px-4 p-6 mx-auto max-w-7xl rounded-lg">
             <Address />
-            <ModelComponent />
+            {/* <ModelComponent /> */}
             <SelectedInfo />
         </div>
     )

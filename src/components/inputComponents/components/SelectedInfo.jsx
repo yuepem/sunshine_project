@@ -3,10 +3,9 @@ import useSunCalcStore from "../../../stores/sunSalcStore";
 import useTimeStore from "../../../stores/timeStore";
 
 const SelectedInfo = () => {
-  const { date, timeZone } = useInputStore();
+  const { date, timeZone, city, address, toDMS } = useInputStore();
   const { formatTimeZone } = useTimeStore();
 
-  const { city, address, toDMS } = useInputStore();
   const { dateB, time } = formatTimeZone(date, timeZone);
   const {
     sunPosition,

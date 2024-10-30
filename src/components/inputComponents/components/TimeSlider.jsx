@@ -97,8 +97,8 @@ const TimeSlider = () => {
   const progress = (currentTime / (24 * 60)) * 100;
 
   return (
-    <div className="w-full p-4 my-2  bg-slate-800/50 rounded-lg select-none">
-      <div className="relative w-full h-16 ">
+    <div className="w-full px-2 py-4 mb-4  bg-slate-800/50 rounded-lg select-none">
+      <div className="relative w-full h-16 mb-4 ">
         {/* Time track */}
         <div
           ref={sliderRef}
@@ -135,7 +135,7 @@ const TimeSlider = () => {
           ))}
         </div>
 
-        <div className="absolute w-full flex justify-between  top-6  mt-2 px-1 text-xs text-white">
+        <div className="absolute w-full flex justify-between  top-6  mt-3 px-1 text-xs text-white">
           {[
             "00:00",
             "03:00",
@@ -154,7 +154,7 @@ const TimeSlider = () => {
 
 
       {/* Playback Controls */}
-      <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+      <div className="flex flex-col sm:flex-row justify-center items-center space-y-3 sm:space-y-0 sm:space-x-4">
         {/* Controls button */}
         <button
           onClick={togglePlay}

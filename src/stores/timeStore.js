@@ -31,15 +31,17 @@ const useTimeStore = create((set, get) => ({
     // Format using Moment.js
     formatTime: (date, timeZone) => {
         if (!date) return "N/A";
-        return moment(date).tz(timeZone).format('HH:mm:ss');
+        return moment(date).tz(timeZone).format('HH:mm');
     },
+   
 
     // this is a complicated version for current time
     formatTimeZone: (date, timeZone) => {
         if (!date) return "N/A";
-        const momentDate = moment(date).tz(timeZone).format('dddd, DD MMMM YYYY');
+        const momentDate = moment(date).tz(timeZone).format('ddd, DD MMM YYYY');
         const momentDateWithDay = moment(date).tz(timeZone).format('DD MMMM YYYY');
         const momentTime = moment(date).tz(timeZone).format('HH:mm:ss');
+        const momentHM = moment(date).tz(timeZone).format('HH:mm');
         const momentZone = moment(date).tz(timeZone).format('z');
         const momentFullDate = moment(date).tz(timeZone).format('YYYY MM DD dddd hh:mm:ss A z');
         const momentMonth = moment(date).tz(timeZone).format('MMMM');
@@ -50,6 +52,7 @@ const useTimeStore = create((set, get) => ({
             dateA: momentDate,
             dateB: momentDateWithDay,
             time: momentTime,
+            timeHM: momentHM,
             zone: momentZone
         }
 

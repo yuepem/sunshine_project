@@ -1,13 +1,11 @@
 import { useEffect } from "react";
 import useInputStore from "../../stores/inputStore.js";
-
-// import TimeSelector from "./components/TimeSelector";
-
-
-import DateTimePicker from "./components/Testing/TimeControl.jsx";
+import useSunCalcStore from "../../stores/sunSalcStore.js";
+import DateTimePicker from "./components/TimeControl.jsx";
 
 export default function InputComponent() {
-  const { getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const {date, getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const { calculateSunData } = useSunCalcStore();
 
   useEffect(() => {
     //get time zone code when date and location is changed
@@ -21,17 +19,14 @@ export default function InputComponent() {
     // Convert latitude & longitude to address, when latitude & longitude is changed
     getAddress();
   }, [latitude, longitude]);
+
+  // useEffect(() => {
+  //   calculateSunData(date, latitude, longitude);
+  // }, [date, latitude, longitude]);
+  
   return (
     <div className="px-4 mx-auto max-w-7xl bg-teal-600 rounded-lg ">
-
-      <div className="my-2 py-4">
-        {/* <TimeSelector /> */}
-       
-    
-      </div>
-      <div>
-        <DateTimePicker />
-      </div>
+      <DateTimePicker />
     </div>
   );
 }
