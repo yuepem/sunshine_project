@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import moment from "moment-timezone";
 
 const TimeSlider = () => {
-  const { date, setDate, timeZone } = useInputStore();
+  const { date, setDate, timeZone, resetToDefaults } = useInputStore();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [timeSpeed, setTimeSpeed] = useState(1);
@@ -25,7 +25,6 @@ const TimeSlider = () => {
     if (isPlaying) {
       clearInterval(intervalRef.current);
     } else {
-
       const playSpeed = 100 / timeSpeed;
 
       intervalRef.current = setInterval(() => {
@@ -41,6 +40,10 @@ const TimeSlider = () => {
       }, playSpeed);
     }
     setIsPlaying(!isPlaying);
+  };
+
+  const handleReset = () => {
+    resetToDefaults();
   };
 
   // Update date when currentTime changes during play or drag
@@ -136,19 +139,11 @@ const TimeSlider = () => {
   };
 
   return (
-    <div className='mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg'>
+    <div className="mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
       <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
         {/* Time Display */}
-        <div className="flex justify-between items-center mb-6">
-          <div className="text-3xl font-bold text-white font-mono tracking-wider">
-            {formatDisplayTime(currentTime)}
-          </div>
-          <div className="text-slate-400 text-sm">
-            {moment(date).tz(timeZone).format("MMM D, YYYY")}
-          </div>
-        </div>
 
-        <div className="relative w-full h-16 mb-6">
+        <div className="relative w-full h-16 ">
           {/* Time track with improved styling */}
           <div
             ref={sliderRef}
@@ -219,10 +214,11 @@ const TimeSlider = () => {
         </div>
 
         {/* Enhanced playback controls */}
-        <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
-          <button
-            onClick={togglePlay}
-            className={`px-6 py-2.5 rounded-lg text-sm font-medium
+        <div className="flex flex-row justify-around items-center">
+          <div className="flex space-x-4">
+            <button
+              onClick={togglePlay}
+              className={`px-4 py-2 rounded-lg text-xs font-medium
                      transition-all duration-300 ease-out transform
                      hover:scale-105 active:scale-95
                      ${
@@ -230,11 +226,20 @@ const TimeSlider = () => {
                          ? "bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
                          : "bg-teal-500 text-white hover:bg-teal-400"
                      }`}
-          >
-            {isPlaying ? "Pause" : "Play"}
-          </button>
+            >
+              {isPlaying ? "Pause" : "Play"}
+            </button>
+            <button
+              onClick={handleReset}
+              className="px-4 py-2 rounded-lg text-xs font-medium
+                     transition-all duration-300 ease-out transform
+                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30 "
+            >
+              Reset
+            </button>
+          </div>
 
-          <div className="flex bg-slate-700/30 rounded-lg p-1">
+          <div className="flex bg-slate-700/30 rounded-lg ">
             {[1, 5, 10, 20].map((speed) => (
               <button
                 key={speed}

@@ -79,7 +79,7 @@ const useInputStore = create((set, get) => ({
 
             const { city, town, village, state, country, postcode, road, house_number } = data.address;
             const locality = city || town || village || '';
-            const simplifiedAddress = [road, house_number, postcode, city, state, country]
+            const simplifiedAddress = [road, house_number, postcode, city,  country]
                 .filter(Boolean)
                 .join(', ');
 
