@@ -6,7 +6,7 @@ const TimeSlider = () => {
   const { date, setDate, timeZone } = useInputStore();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [timeSpeed, setTimeSpeed] = useState("1x");
+  const [timeSpeed, setTimeSpeed] = useState(1);
   const intervalRef = useRef(null);
   const sliderRef = useRef(null);
 
@@ -25,6 +25,9 @@ const TimeSlider = () => {
     if (isPlaying) {
       clearInterval(intervalRef.current);
     } else {
+
+      const playSpeed = 100 / timeSpeed;
+
       intervalRef.current = setInterval(() => {
         setCurrentTime((prev) => {
           const nextTime = prev + 1;
@@ -35,7 +38,7 @@ const TimeSlider = () => {
           }
           return nextTime;
         });
-      }, 50);
+      }, playSpeed);
     }
     setIsPlaying(!isPlaying);
   };
@@ -133,92 +136,93 @@ const TimeSlider = () => {
   };
 
   return (
-    <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
-      {/* Time Display */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="text-3xl font-bold text-white font-mono tracking-wider">
-          {formatDisplayTime(currentTime)}
+    <div className='mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg'>
+      <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
+        {/* Time Display */}
+        <div className="flex justify-between items-center mb-6">
+          <div className="text-3xl font-bold text-white font-mono tracking-wider">
+            {formatDisplayTime(currentTime)}
+          </div>
+          <div className="text-slate-400 text-sm">
+            {moment(date).tz(timeZone).format("MMM D, YYYY")}
+          </div>
         </div>
-        <div className="text-slate-400 text-sm">
-          {moment(date).tz(timeZone).format("MMM D, YYYY")}
-        </div>
-      </div>
 
-      <div className="relative w-full h-16 mb-6">
-        {/* Time track with improved styling */}
-        <div
-          ref={sliderRef}
-          className="absolute w-full h-1.5 bg-slate-700 rounded-full top-4 cursor-pointer
+        <div className="relative w-full h-16 mb-6">
+          {/* Time track with improved styling */}
+          <div
+            ref={sliderRef}
+            className="absolute w-full h-1.5 bg-slate-700 rounded-full top-4 cursor-pointer
                      transition-all duration-300 ease-out hover:h-2"
-          onClick={handleTimelineClick}
-        >
-          {/* Gradient progress bar with animation */}
-          <div
-            className="absolute h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full
+            onClick={handleTimelineClick}
+          >
+            {/* Gradient progress bar with animation */}
+            <div
+              className="absolute h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full
                        transition-all duration-300 ease-out"
-            style={{ width: `${progress}%` }}
-          ></div>
+              style={{ width: `${progress}%` }}
+            ></div>
 
-          {/* Enhanced time indicator */}
-          <div
-            className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 
+            {/* Enhanced time indicator */}
+            <div
+              className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 
                        w-5 h-5 bg-white rounded-full flex items-center justify-center 
                        shadow-lg cursor-grab transition-transform duration-150
                        hover:scale-110 active:scale-95
                        ${isDragging ? "cursor-grabbing scale-95" : ""}
                        before:content-[''] before:absolute before:w-3 before:h-3 
                        before:bg-teal-500 before:rounded-full`}
-            style={{ left: `${progress}%` }}
-            onMouseDown={handleMouseDown}
-          ></div>
-        </div>
+              style={{ left: `${progress}%` }}
+              onMouseDown={handleMouseDown}
+            ></div>
+          </div>
 
-        {/* Improved time marks */}
-        <div className="absolute w-full flex justify-between top-4 px-2">
-          {[...Array(25)].map((_, i) => (
-            <div
-              key={i}
-              className={`absolute top-0 w-px transition-all duration-200
+          {/* Improved time marks */}
+          <div className="absolute w-full flex justify-between top-4 px-2">
+            {[...Array(25)].map((_, i) => (
+              <div
+                key={i}
+                className={`absolute top-0 w-px transition-all duration-200
                 ${i % 3 === 0 ? "h-3 bg-slate-500" : "h-1.5 bg-slate-600"}`}
-              style={{
-                left: `${(i / 24) * 100}%`,
-                opacity: Math.abs((progress / 100) * 24 - i) < 4 ? 1 : 0.5,
-              }}
-            />
-          ))}
+                style={{
+                  left: `${(i / 24) * 100}%`,
+                  opacity: Math.abs((progress / 100) * 24 - i) < 4 ? 1 : 0.5,
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Enhanced time labels */}
+          <div className="absolute w-full flex justify-between top-8 px-1 text-xs">
+            {[
+              "00:00",
+              "03:00",
+              "06:00",
+              "09:00",
+              "12:00",
+              "15:00",
+              "18:00",
+              "21:00",
+              "24:00",
+            ].map((time, index) => (
+              <span
+                key={time}
+                className="text-slate-400 transition-all duration-200"
+                style={{
+                  opacity: Math.abs((progress / 100) * 8 - index) < 2 ? 1 : 0.5,
+                }}
+              >
+                {time}
+              </span>
+            ))}
+          </div>
         </div>
 
-        {/* Enhanced time labels */}
-        <div className="absolute w-full flex justify-between top-8 px-1 text-xs">
-          {[
-            "00:00",
-            "03:00",
-            "06:00",
-            "09:00",
-            "12:00",
-            "15:00",
-            "18:00",
-            "21:00",
-            "24:00",
-          ].map((time, index) => (
-            <span
-              key={time}
-              className="text-slate-400 transition-all duration-200"
-              style={{
-                opacity: Math.abs((progress / 100) * 8 - index) < 2 ? 1 : 0.5,
-              }}
-            >
-              {time}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* Enhanced playback controls */}
-      <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
-        <button
-          onClick={togglePlay}
-          className={`px-6 py-2.5 rounded-lg text-sm font-medium
+        {/* Enhanced playback controls */}
+        <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
+          <button
+            onClick={togglePlay}
+            className={`px-6 py-2.5 rounded-lg text-sm font-medium
                      transition-all duration-300 ease-out transform
                      hover:scale-105 active:scale-95
                      ${
@@ -226,25 +230,26 @@ const TimeSlider = () => {
                          ? "bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
                          : "bg-teal-500 text-white hover:bg-teal-400"
                      }`}
-        >
-          {isPlaying ? "Pause" : "Play"}
-        </button>
+          >
+            {isPlaying ? "Pause" : "Play"}
+          </button>
 
-        <div className="flex bg-slate-700/30 rounded-lg p-1">
-          {["0.5x", "1x", "5x", "10x"].map((speed) => (
-            <button
-              key={speed}
-              onClick={() => setTimeSpeed(speed)}
-              className={`px-4 py-2 text-xs rounded-md transition-all duration-200
+          <div className="flex bg-slate-700/30 rounded-lg p-1">
+            {[1, 5, 10, 20].map((speed) => (
+              <button
+                key={speed}
+                onClick={() => setTimeSpeed(speed)}
+                className={`px-4 py-2 text-xs rounded-md transition-all duration-200
                          ${
                            timeSpeed === speed
                              ? "bg-teal-500 text-white shadow-lg"
                              : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
                          }`}
-            >
-              {speed}
-            </button>
-          ))}
+              >
+                {speed}x
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </div>

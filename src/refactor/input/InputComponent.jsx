@@ -5,7 +5,7 @@ import TimeControl from "./TimeControl";
 import Maps from "./Maps";
 
 export default function InputComponent() {
-  const { getAddress, getTimeZoneCode, latitude, longitude } = useInputStore();
+  const { getTimeZoneCode, latitude, longitude } = useInputStore();
 
   useEffect(() => {
     //get time zone code when date and location is changed
@@ -15,21 +15,20 @@ export default function InputComponent() {
     getTimeZoneCode();
   }, [latitude, longitude]);
 
-  useEffect(() => {
-    // Convert latitude & longitude to address, when latitude & longitude is changed
-    getAddress();
-  }, [latitude, longitude]);
+ 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-800/30">
-      <TimeControl />
-      <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 overflow-hidden">
-        <div className="grid grid-rows-[auto_1fr] h-full gap-2">
-          <h1 className="text-slate-200 text-sm font-semibold bg-slate-800/50 rounded-lg p-2  transition-colors">
-            Choose A Location From Map
-          </h1>
-          <div className="w-full h-full overflow-hidden rounded-lg">
-            <Maps />
+    <div className='mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg'>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-800/30">
+        <TimeControl />
+        <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 overflow-hidden">
+          <div className="grid grid-rows-[auto_1fr] h-full gap-2">
+            <h1 className="text-slate-200 text-sm font-semibold bg-slate-800/50 rounded-lg p-2  transition-colors">
+              Choose A Location From Map
+            </h1>
+            <div className="w-full h-full overflow-hidden rounded-lg">
+              <Maps />
+            </div>
           </div>
         </div>
       </div>

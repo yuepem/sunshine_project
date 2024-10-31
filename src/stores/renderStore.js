@@ -1,13 +1,11 @@
 import { create } from 'zustand'
 
-
 const useRenderStore = create((set, get) => ({
     sunCoordinates: {
         x: 1,
         y: 0,
         z: 0
     },
-
 
     skyConfig: {
         distance: 1000,
@@ -30,12 +28,9 @@ const useRenderStore = create((set, get) => ({
         // Adjust azimuth to match your radiansToDegreesForAzimuth function
         const adjustedAzimuth = azimuth - Math.PI; // Subtract 180 degrees (in radians)
 
-        const x = clearFloat(Math.cos(altitude) * Math.sin(adjustedAzimuth)) * 15;
-        const y = clearFloat(Math.sin(altitude)) * 15;
-        const z = clearFloat(-Math.cos(altitude) * Math.cos(adjustedAzimuth)) * 15;
-
-
-
+        const x = clearFloat(Math.cos(altitude) * Math.sin(adjustedAzimuth)) * 10;
+        const y = clearFloat(Math.sin(altitude)) * 10;
+        const z = clearFloat(-Math.cos(altitude) * Math.cos(adjustedAzimuth)) * 10;
 
         set({ sunCoordinates: { x, y, z } });
     },
