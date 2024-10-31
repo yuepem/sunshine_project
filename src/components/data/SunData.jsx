@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import useInputStore from "../../../stores/inputStore";
-import useSunCalcStore from "../../../stores/sunSalcStore";
-import useTimeStore from "../../../stores/timeStore";
+import useInputStore from "../../stores/inputStore";
+import useSunCalcStore from "../../stores/sunSalcStore";
+import useTimeStore from "../../stores/timeStore";
 
 const SunData = () => {
   const { date, latitude, longitude, timeZone } = useInputStore();

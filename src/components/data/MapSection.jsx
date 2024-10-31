@@ -1,9 +1,9 @@
 import React from "react";
-import MapLeaflet from "../../MapServices/Maps";
+import MapLeaflet from "../MapServices/Maps";
 import Button from "@mui/material/Button";
 
 // Read {date, latitude, longitude} from inputStore
-import useInputStore from "../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 
 const MapSection = () => {
   // data from Stores

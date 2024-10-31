@@ -1,6 +1,5 @@
-import MapSection from "./components/MapSection";
-import SunData from "./components/SunData";
-
+import MapSection from "./data/MapSection";
+import SunData from "./data/SunData";
 
 const SunCalcComponent = () => {
   return (

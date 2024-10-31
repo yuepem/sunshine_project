@@ -1,10 +1,10 @@
+import { useEffect } from "react";
 import ModelComponent from "./ModelComponent";
 import SimulatorLocation from "./SimulatorLocation";
 import SimulatorSun from "./SimulatorSun";
 
 import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
-import { useEffect } from "react";
 
 // import { useSunCalculations } from "../../stores/hooks/useSunCalculations";
 // import { useSunCoordinates } from "../../stores/hooks/useSunCoordinates";

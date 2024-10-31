@@ -1,7 +1,8 @@
-import useInputStore from "../../../stores/inputStore";
-import useTimeStore from "../../../stores/timeStore";
+import useInputStore from "../../stores/inputStore";
+import useTimeStore from "../../stores/timeStore";
 import { useRef, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Sun, Moon } from "lucide-react";
+
 
 const cityCoordinates = {
   Stockholm: {
@@ -99,7 +100,7 @@ function CityList() {
     useTimeStore();
   const scrollContainerRef = useRef(null);
   
-
+  
   useEffect(() => {
     startUpdateTime();
     return () => stopUpdateTime();
@@ -122,6 +123,7 @@ function CityList() {
     if (coordinates) {
       setLatitude(coordinates.latitude);
       setLongitude(coordinates.longitude);
+      
     }
   };
 

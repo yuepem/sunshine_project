@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 
-import useInputStore from "../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 
 const DayPicker = () => {
   const { date, setDate } = useInputStore();

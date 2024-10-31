@@ -1,6 +1,6 @@
-import useInputStore from "../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 import React, { useState, useEffect, useRef } from "react";
-import moment from 'moment-timezone';
+import moment from "moment-timezone";
 
 const TimeSlider = () => {
   const { date, setDate, timeZone } = useInputStore();
@@ -16,7 +16,7 @@ const TimeSlider = () => {
     return time.hours() * 60 + time.minutes();
   };
 
-  const [currentTime, setCurrentTime] = useState(() => 
+  const [currentTime, setCurrentTime] = useState(() =>
     formatTimeToMinutes(date, timeZone)
   );
 
@@ -43,7 +43,8 @@ const TimeSlider = () => {
   // Update date when currentTime changes during play or drag
   useEffect(() => {
     if (isPlaying || isDragging) {
-      const newDate = moment(date).tz(timeZone)
+      const newDate = moment(date)
+        .tz(timeZone)
         .hours(Math.floor(currentTime / 60))
         .minutes(currentTime % 60);
       setDate(newDate.toDate());
@@ -126,9 +127,10 @@ const TimeSlider = () => {
   const formatDisplayTime = (minutes) => {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+    return `${hours.toString().padStart(2, "0")}:${mins
+      .toString()
+      .padStart(2, "0")}`;
   };
-
 
   return (
     <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
@@ -138,7 +140,7 @@ const TimeSlider = () => {
           {formatDisplayTime(currentTime)}
         </div>
         <div className="text-slate-400 text-sm">
-          {moment(date).tz(timeZone).format('MMM D, YYYY')}
+          {moment(date).tz(timeZone).format("MMM D, YYYY")}
         </div>
       </div>
 
@@ -177,12 +179,10 @@ const TimeSlider = () => {
             <div
               key={i}
               className={`absolute top-0 w-px transition-all duration-200
-                ${i % 3 === 0 
-                  ? "h-3 bg-slate-500" 
-                  : "h-1.5 bg-slate-600"}`}
-              style={{ 
+                ${i % 3 === 0 ? "h-3 bg-slate-500" : "h-1.5 bg-slate-600"}`}
+              style={{
                 left: `${(i / 24) * 100}%`,
-                opacity: Math.abs((progress / 100 * 24) - i) < 4 ? 1 : 0.5
+                opacity: Math.abs((progress / 100) * 24 - i) < 4 ? 1 : 0.5,
               }}
             />
           ))}
@@ -201,11 +201,11 @@ const TimeSlider = () => {
             "21:00",
             "24:00",
           ].map((time, index) => (
-            <span 
-              key={time} 
+            <span
+              key={time}
               className="text-slate-400 transition-all duration-200"
               style={{
-                opacity: Math.abs((progress / 100 * 8) - index) < 2 ? 1 : 0.5
+                opacity: Math.abs((progress / 100) * 8 - index) < 2 ? 1 : 0.5,
               }}
             >
               {time}

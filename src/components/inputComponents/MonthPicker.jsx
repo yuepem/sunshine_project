@@ -1,4 +1,4 @@
-import useInputStore from "../../../../stores/inputStore";
+import useInputStore from "../../stores/inputStore";
 import React, { useState, useRef } from "react";
 
 const MonthPicker = () => {

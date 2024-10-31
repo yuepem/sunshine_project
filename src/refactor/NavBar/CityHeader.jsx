@@ -1,4 +1,4 @@
-import CityList from "../inputComponents/components/CityList";
+import CityList from "./CityList";
 
 function CityHeader() {
   return (
