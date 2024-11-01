@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import ModelComponent from "./ModelComponent";
-import LocationInfo from "./LocationInfo";
-import SimulatorDateTime from "./SimulatorDateTime";
+import ModelComponent from "./Simulator/ModelComponent";
+import LocationInfo from "./Simulator/LocationInfo";
+import SimulatorDateTime from "./Simulator/SimulatorDateTime";
 
-import useInputStore from "../../stores/inputStore";
-import useSunCalcStore from "../../stores/sunSalcStore";
+import useInputStore from "../stores/inputStore";
+import useSunCalcStore from "../stores/sunSalcStore";
 
 const MainCom = () => {
   const { date, latitude, longitude, getAddress } = useInputStore();

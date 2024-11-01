@@ -3,6 +3,7 @@ import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
 
+
 const SunData = () => {
   const { date, latitude, longitude, timeZone } = useInputStore();
   const [toBeHighlighted, setToBeHighlighted] = useState(false);
@@ -54,24 +55,25 @@ const SunData = () => {
   }
 
   return (
-    <div className="container mx-auto px-4">
-      <h1 className="text-xl font-semibold text-green-900 p-4">Sun's Data</h1>
-      {/* Selected sun times */}
-      <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        {Object.entries(sunTimesData).map(([key, value]) => (
-          <li
-            key={key}
-            className="text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex flex-col justify-center items-center"
-          >
-            <span className="font-medium capitalize">{key}: </span>
-            <span>{value}</span>
-          </li>
-        ))}
-      </ul>
+    <div className='mx-auto bg-teal-800 p-4  max-w-7xl rounded-lg'>
+      <div className="container mx-auto px-4">
+        <h1 className="text-xl font-semibold text-green-900 p-4">Sun's Data</h1>
+        {/* Selected sun times */}
+        <ul className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {Object.entries(sunTimesData).map(([key, value]) => (
+            <li
+              key={key}
+              className="text-white rounded-md backdrop-blur-sm bg-slate-800/30 hover:bg-slate-800/60 flex flex-col justify-center items-center"
+            >
+              <span className="font-medium capitalize">{key}: </span>
+              <span>{value}</span>
+            </li>
+          ))}
+        </ul>
 
-      {/* Sun Times Display */}
-      <div className="mt-8">
-        {/* All sun times
+        {/* Sun Times Display */}
+        <div className="mt-8">
+          {/* All sun times
         <ul className="grid grid-cols-2 md:grid-cols-4 gap-4 my-4">
           {Object.entries(sunTimes).map(([key, value]) => (
             <li key={key} className="p-2 bg-slate-50 rounded-lg">
@@ -82,6 +84,7 @@ const SunData = () => {
             </li>
           ))}
         </ul> */}
+        </div>
       </div>
     </div>
   );

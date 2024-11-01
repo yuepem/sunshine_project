@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
 
 import DayPicker from "./DayPicker";
-import TimeSlider from "./TimeSlider";
+import TimeSlider from "../TimeSlider";
 
 import {
   Sun,
@@ -16,7 +16,7 @@ import {
   Clock as ClockIcon,
 } from "lucide-react";
 
-const DateTimePicker = () => {
+const TimeControl = () => {
   const { date, timeZone } = useInputStore();
   const { sunTimes } = useSunCalcStore();
   const { currentTime, formatTime } = useTimeStore();
@@ -106,7 +106,7 @@ const DateTimePicker = () => {
 
   // Main view
   return (
-    <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-2xl shadow-xl p-4 md:p-6 lg:p-8">
+    <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-4">
@@ -201,4 +201,4 @@ const DateTimePicker = () => {
   );
 };
 
-export default DateTimePicker;
+export default TimeControl;

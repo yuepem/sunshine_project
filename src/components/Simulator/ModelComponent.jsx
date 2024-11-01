@@ -3,11 +3,11 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
 // Components
-import SkyScene from "./components/Sky";
-import Ground from "./components/Ground";
-import Coordinates from "./components/Coordinates";
-import Compass from "./components/Compass";
-import Sphere from "./components/Sphere";
+import SkyScene from "./components3D/Sky";
+import Ground from "./components3D/Ground";
+import Coordinates from "./components3D/Coordinates";
+import Compass from "./components3D/Compass";
+import Sphere from "./components3D/Sphere";
 
 // Stores
 import useInputStore from "../../stores/inputStore";

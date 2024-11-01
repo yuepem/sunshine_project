@@ -78,7 +78,7 @@ const useInputStore = create((set, get) => ({
             const data = await response.json();
 
             const { city, town, village, state, country, postcode, road, house_number } = data.address;
-            const locality = city || town || village || '';
+            const locality = city || town || village || state || postcode;
             const simplifiedAddress = [road, house_number, postcode, city,  country]
                 .filter(Boolean)
                 .join(', ');

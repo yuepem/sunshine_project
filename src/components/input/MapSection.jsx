@@ -2,12 +2,8 @@ import React from "react";
 import MapLeaflet from "../../MapServices/Maps";
 import Button from "@mui/material/Button";
 
-// Read {date, latitude, longitude} from inputStore
-import useInputStore from "../../stores/inputStore";
-
 const MapSection = () => {
-  // data from Stores
-  // const { latitude, longitude } = useInputStore();
+  
 
   return (
     <div className="mx-auto max-w-7xl bg-stone-100">

@@ -1,4 +1,4 @@
-import CityList from "./CityList";
+import CityList from "./NavBar/CityList";
 
 function CityHeader() {
   return (

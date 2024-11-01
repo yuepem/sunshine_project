@@ -1,4 +1,4 @@
-import useInputStore from "../../stores/inputStore";
+import useInputStore from "../stores/inputStore";
 import React, { useState, useEffect, useRef } from "react";
 import moment from "moment-timezone";
 
@@ -130,14 +130,6 @@ const TimeSlider = () => {
   // Calculate progress based on currentTime
   const progress = (currentTime / (24 * 60)) * 100;
 
-  const formatDisplayTime = (minutes) => {
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return `${hours.toString().padStart(2, "0")}:${mins
-      .toString()
-      .padStart(2, "0")}`;
-  };
-
   return (
     <div className="mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
       <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
@@ -231,9 +223,11 @@ const TimeSlider = () => {
             </button>
             <button
               onClick={handleReset}
-              className="px-4 py-2 rounded-lg text-xs font-medium
+              // todo Highlight the button when selected time or date don't match the current time
+              className={`px-4 py-2 rounded-lg text-xs font-medium
                      transition-all duration-300 ease-out transform
-                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30 "
+                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30 
+                `}
             >
               Reset
             </button>

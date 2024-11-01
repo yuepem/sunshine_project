@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import useInputStore from "../../stores/inputStore";
-import TimeControl from "./TimeControl";
+import useInputStore from "../stores/inputStore";
+import TimeControl from "./input/TimeControl";
 
-import Maps from "./Maps";
+import Maps from "./input/Maps";
 
 export default function InputComponent() {
   const { getTimeZoneCode, latitude, longitude } = useInputStore();
@@ -15,10 +15,8 @@ export default function InputComponent() {
     getTimeZoneCode();
   }, [latitude, longitude]);
 
- 
-
   return (
-    <div className='mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg'>
+    <div className="mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-800/30">
         <TimeControl />
         <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 overflow-hidden">
