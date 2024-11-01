@@ -1,24 +1,22 @@
-import { useEffect } from 'react';
-import useTimeStore from '../../stores/timeStore';
-import { Clock } from 'lucide-react';
+import { useEffect } from "react";
+import useTimeStore from "../../stores/timeStore";
+import timeProgress from "../../helperFunctions/timeProgress";
+import { Clock, History, Hourglass } from "lucide-react";
 
 const TimeProgress = () => {
- 
-  const { currentTime,  startUpdateTime, stopUpdateTime } =
-  useTimeStore();
+  const { currentTime, startUpdateTime, stopUpdateTime } = useTimeStore();
 
-
-  const localTime = currentTime.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false
+  const localTime = currentTime.toLocaleTimeString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
   });
-  
-  const localDate = currentTime.toLocaleDateString('en-US', {
-    weekday: 'short',
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+
+  const localDate = currentTime.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 
   useEffect(() => {
@@ -26,14 +24,16 @@ const TimeProgress = () => {
     return () => stopUpdateTime();
   }, []);
 
+  const { leftTime, passedPercent } = timeProgress();
+
   // Calculate width for progress
-  const progress = 67;
+
   const containerStyle = {
-    background: `linear-gradient(to right, 
-      rgb(226 232 240) 0%, 
-      rgb(226 232 240) ${progress}%, 
-      rgba(226, 232, 240, 0.3) ${progress}%, 
-      rgba(226, 232, 240, 0.3) 100%)`
+    background: `linear-gradient(to right,
+     rgba(54,133,129,1) 0%,
+     rgba(54,133,129,1) ${passedPercent}%,
+    rgba(31,196,177,1) ${passedPercent}%,
+    rgba(31,196,177,1) 100%)`,
   };
 
   return (
@@ -43,19 +43,20 @@ const TimeProgress = () => {
         <div className="text-2xl font-bold text-slate-100">{localTime}</div>
         <div className="text-slate-400">{localDate}</div>
       </div>
-      
+
       {/* Year Progress */}
-      <div 
+      <div
         style={containerStyle}
         className="rounded-lg transition-all duration-500 text-sm p-1"
       >
         <div className="px-3 py-1  flex items-center justify-between">
-          <div className="text-slate-800">
-            67% of 2024 passed
+          <div className="flex items-center space-x-2 text-white text-sm">
+            <History className="w-4 h-4" />
+            <span>{passedPercent.toFixed(2)} % of 2024 Passed</span>
           </div>
           <div className="flex items-center space-x-2 text-white text-sm">
-            <Clock className="w-4 h-4" />
-            <span>116 D, 16:56 until 2025 </span>
+            <Hourglass className="w-4 h-4" />
+            <span>{leftTime} Until 2025 </span>
           </div>
         </div>
       </div>

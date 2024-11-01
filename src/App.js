@@ -9,7 +9,7 @@ import TimeSlider from './components/TimeSlider';
 
 function App() {
   return (
-    <div className="bg-teal-700">
+    <div className="bg-gradient-to-r from-[#13547a] to-[#80d0c7] bg-teal-700">
       <CityHeader />
       <MainCom />
       <TimeSlider />
