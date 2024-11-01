@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useTimeStore from "../../stores/timeStore";
 import timeProgress from "../../helperFunctions/timeProgress";
-import { Clock, History, Hourglass } from "lucide-react";
+import { History, Hourglass } from "lucide-react";
 
 const TimeProgress = () => {
   const { currentTime, startUpdateTime, stopUpdateTime } = useTimeStore();

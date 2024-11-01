@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useInputStore from "../stores/inputStore";
 import TimeControl from "./input/TimeControl";
 
-import Maps from "./input/Maps";
+import Maps from "./input/locationInput/Maps";
 
 export default function InputComponent() {
   const { getTimeZoneCode, latitude, longitude } = useInputStore();

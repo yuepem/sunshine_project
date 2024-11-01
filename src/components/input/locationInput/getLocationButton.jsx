@@ -1,6 +1,6 @@
 import React from "react";
 import { MapPin } from "lucide-react";
-import useInputStore from "../../stores/inputStore";
+import useInputStore from "../../../stores/inputStore";
 
 function LocationButton() {
   const { setLatitude, setLongitude } = useInputStore();
