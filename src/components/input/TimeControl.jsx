@@ -1,5 +1,4 @@
 import React from "react";
-
 import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
@@ -9,6 +8,7 @@ import {
   Moon,
   Sunrise,
   Sunset,
+  Camera,
   Calendar as CalendarIcon,
   Clock as ClockIcon,
 } from "lucide-react";
@@ -36,7 +36,31 @@ const TimeControl = () => {
     solarNoon: formatTime(sunTimes.solarNoon, timeZone),
     goldenHour: formatTime(sunTimes.goldenHour, timeZone),
     goldenHourEnd: formatTime(sunTimes.goldenHourEnd, timeZone),
+    night: formatTime(sunTimes.night, timeZone),
+    dawn: formatTime(sunTimes.dawn, timeZone),
   };
+
+  const calculateDayLength = (startTime, endTime) => {
+    const [startHours, startMinutes] = startTime.split(":").map(Number);
+    const [endHours, endMinutes] = endTime.split(":").map(Number);
+
+    const startTotalMinutes = startHours * 60 + startMinutes;
+    const endTotalMinutes = endHours * 60 + endMinutes;
+
+    let diffMinutes = endTotalMinutes - startTotalMinutes;
+
+    // Handle cases where end time is earlier than start time (crosses midnight)
+    if (diffMinutes < 0) {
+      diffMinutes += 24 * 60; 
+    }
+
+    const hours = Math.floor(diffMinutes / 60);
+    const minutes = diffMinutes % 60;
+
+    return `${hours} h ${minutes} m`;
+  };
+
+  const dayLength = calculateDayLength(sunTimesData.sunrise, sunTimesData.sunset);
 
   const sunEvents = [
     {
@@ -47,11 +71,32 @@ const TimeControl = () => {
       color: "from-orange-400 to-yellow-400",
     },
     {
+      time: sunTimesData.goldenHourEnd,
+      type: "goldenHourEnd",
+      label: "Golden Hour End",
+      icon: Camera,
+      color: "from-yellow-400 to-yellow-500",
+    },
+    {
       time: sunTimesData.solarNoon,
       type: "noon",
       label: "Solar Noon",
       icon: Sun,
-      color: "from-yellow-400 to-yellow-500",
+      color: "from-yellow-200 to-yellow-200",
+    },
+    {
+      time: dayLength,
+      type: "daylight",
+      label: "Daylight",
+      icon: Sun,
+      color: "from-teal-400 to-teal-400",
+    },
+    {
+      time: sunTimesData.goldenHour,
+      type: "goldenHour",
+      label: "Golden Hour Start",
+      icon: Camera,
+      color: "from-yellow-500 to-orange-500",
     },
     {
       time: sunTimesData.sunset,
@@ -61,17 +106,22 @@ const TimeControl = () => {
       color: "from-orange-400 to-red-500",
     },
     {
-      time: "13:20",
-      type: "daylight",
-      label: "Daylight",
-      icon: Sun,
-      color: "from-teal-400 to-teal-500",
+      time: sunTimesData.night,
+      type: "night",
+      label: "Night",
+      icon: Moon,
+      color: "from-orange-300 to-slate-700",
+    },
+    {
+      time: sunTimesData.dawn,
+      type: "dawn",
+      label: "Dawn",
+      icon: Moon,
+      color: "from-slate-700 to-orange-300",
     },
   ];
 
-  // Calculate sunrise and sunset positions for timeline
-
-  // Main view
+  
   return (
     <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
       {/* Header */}

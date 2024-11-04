@@ -6,7 +6,7 @@ import InputComponent from './components/InputComponent';
 import SunData from './components/sunData/SunData';
 // import TimeSlider from './components/TimeSlider';
 
-import TimeSlider2 from './components/TimeSlider2';
+import TimeSlider from './components/TimeSlider';
 
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       <CityHeader />
       <MainCom />
       {/* <TimeSlider /> */}
-      <TimeSlider2 />
+      <TimeSlider />
       <div className='mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg'>
         <div className='grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl bg-slate-900'>
           <TimeProgress />

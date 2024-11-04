@@ -28,6 +28,14 @@ const TimeProgress = () => {
 
   // Calculate width for progress
 
+  // const containerStyle = {
+  //   background: `linear-gradient(to right,
+  //    rgba(31,196,177,1) 0%,
+  //    rgba(31,196,177,1) ${passedPercent}%,
+  //   rgba(54,133,129,1)) ${passedPercent}%,
+  //   rgba(54,133,129,1) 100%)`,
+  // };
+  
   const containerStyle = {
     background: `linear-gradient(to right,
      rgba(54,133,129,1) 0%,

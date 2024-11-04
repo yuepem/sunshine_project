@@ -150,12 +150,12 @@ function CityList() {
           WebkitOverflowScrolling: "touch",
         }}
       >
-        <div className="flex space-x-2 py-2">
+        <div className="flex space-x-2 ">
           {Cities.map((city) => (
             <button
               key={city}
               onClick={() => handleCityClick(city)}
-              className="flex-none px-4 py-2 rounded-lg backdrop-blur-sm bg-white/30 text-white hover:bg-slate-700 transition-colors duration-200 "
+              className="flex-none px-4 py-1 rounded-lg backdrop-blur-sm bg-white/30 text-white hover:bg-slate-700 transition-colors duration-200 "
             >
               <div className="flex items-center">
                 {city}
@@ -172,7 +172,7 @@ function CityList() {
           ))}
         </div>
       </div>
-      <div className="flex  py-2 ">
+      <div className="flex  py-1 ">
         {/* Left scroll button */}
         <button
           onClick={() => scroll("left")}

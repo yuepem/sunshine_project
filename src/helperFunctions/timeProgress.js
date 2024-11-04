@@ -1,6 +1,6 @@
 import useTimeStore from "../stores/timeStore";
 
-export default function TimeGrogressCalculation() {
+export default function TimeProgressCalculation() {
   const { currentTime } = useTimeStore.getState();
   // new Date(year, month, day, hours, minutes, seconds)
   const year = currentTime.getFullYear();

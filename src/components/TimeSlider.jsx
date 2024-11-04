@@ -1,6 +1,8 @@
 import useInputStore from "../stores/inputStore";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import moment from "moment-timezone";
+import { throttle } from "lodash";
+
 
 const TimeSlider = () => {
   const { date, setDate, timeZone, resetToDefaults } = useInputStore();
@@ -9,6 +11,10 @@ const TimeSlider = () => {
   const [timeSpeed, setTimeSpeed] = useState(1);
   const intervalRef = useRef(null);
   const sliderRef = useRef(null);
+  const dragStartXRef = useRef(null);
+  const initialTimeRef = useRef(null);
+  const lastDateUpdateRef = useRef(null);
+  const isManualChangeRef = useRef(false);
 
   const formatTimeToMinutes = (date, timeZone) => {
     if (!date) return 0;
@@ -18,6 +24,14 @@ const TimeSlider = () => {
 
   const [currentTime, setCurrentTime] = useState(() =>
     formatTimeToMinutes(date, timeZone)
+  );
+
+  // Throttled time update function
+  const updateTimeThrottled = useCallback(
+    throttle((newTime) => {
+      setCurrentTime(newTime);
+    }, 16),
+    []
   );
 
   // Handle play/pause
@@ -46,79 +60,131 @@ const TimeSlider = () => {
     if (isPlaying) {
       clearInterval(intervalRef.current);
       setIsPlaying(false);
-    } 
+    }
     resetToDefaults();
   };
 
-  // Update date when currentTime changes 
+  // Convert mouse position to time with bounds checking
+  const getTimeFromPosition = useCallback((clientX) => {
+    if (!sliderRef.current) return 0;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const position = Math.max(0, Math.min(rect.width, clientX - rect.left));
+    const percentage = position / rect.width;
+    return Math.min(24 * 60 - 1, Math.max(0, Math.round(percentage * 24 * 60)));
+  }, []);
+
+  // Calculate time based on drag delta
+  const getTimeFromDragDelta = useCallback(
+    (clientX) => {
+      if (
+        !sliderRef.current ||
+        dragStartXRef.current === null ||
+        initialTimeRef.current === null
+      )
+        return currentTime;
+
+      const rect = sliderRef.current.getBoundingClientRect();
+      const deltaX = clientX - dragStartXRef.current;
+      const deltaPercentage = deltaX / rect.width;
+      const deltaMinutes = deltaPercentage * 24 * 60;
+
+      return Math.min(
+        24 * 60 - 1,
+        Math.max(0, Math.round(initialTimeRef.current + deltaMinutes))
+      );
+    },
+    [currentTime]
+  );
+
+  const handleMouseDown = useCallback(
+    (e) => {
+      if (isPlaying) {
+        clearInterval(intervalRef.current);
+        setIsPlaying(false);
+      }
+
+      setIsDragging(true);
+      dragStartXRef.current = e.clientX;
+      initialTimeRef.current = currentTime;
+
+      document.body.style.cursor = "grabbing";
+      e.preventDefault();
+    },
+    [isPlaying, currentTime]
+  );
+
+  const handleMouseMove = useCallback(
+    (e) => {
+      if (!isDragging) return;
+
+      const newTime = getTimeFromDragDelta(e.clientX);
+      updateTimeThrottled(newTime);
+    },
+    [isDragging, getTimeFromDragDelta, updateTimeThrottled]
+  );
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false);
+    dragStartXRef.current = null;
+    initialTimeRef.current = null;
+    document.body.style.cursor = "";
+  }, []);
+
+  const handleTimelineClick = useCallback(
+    (e) => {
+      if (isDragging) return;
+      isManualChangeRef.current = true; // Set manual change flag
+      const time = getTimeFromPosition(e.clientX);
+      setCurrentTime(time);
+    },
+    [isDragging, getTimeFromPosition]
+  );
+
+  // Update date when currentTime changes
   useEffect(() => {
-    const newDate = moment(date)
-      .tz(timeZone)
-      .hours(Math.floor(currentTime / 60))
-      .minutes(currentTime % 60);
-    setDate(newDate.toDate());
-  }, [currentTime]);
+    if (isPlaying || isDragging || isManualChangeRef.current) {
+      const newDate = moment(date)
+        .tz(timeZone)
+        .hours(Math.floor(currentTime / 60))
+        .minutes(currentTime % 60)
+        .toDate();
+
+      // Check if the new date is different from the last update
+      if (
+        !lastDateUpdateRef.current ||
+        lastDateUpdateRef.current.getTime() !== newDate.getTime()
+      ) {
+        lastDateUpdateRef.current = newDate;
+        setDate(newDate);
+      }
+      isManualChangeRef.current = false; // Reset manual change flag
+    }
+  }, [currentTime, timeZone]);
 
   // Update currentTime when date changes (but not during play or drag)
   useEffect(() => {
-    if (!isPlaying && !isDragging) {
-      const newTime = formatTimeToMinutes(date, timeZone);
-      if (newTime !== currentTime) {
-        setCurrentTime(newTime);
-      }
+    const newTime = formatTimeToMinutes(date, timeZone);
+    if (newTime !== currentTime) {
+      updateTimeThrottled.cancel();
+      setCurrentTime(newTime);
     }
   }, [date, timeZone]);
 
-  // Convert mouse position to time
-  const getTimeFromPosition = (clientX) => {
-    const rect = sliderRef.current.getBoundingClientRect();
-    const position = clientX - rect.left;
-    const percentage = Math.max(0, Math.min(1, position / rect.width));
-    return Math.round(percentage * 24 * 60);
-  };
-
-  // Handle mouse/touch interactions
-  const handleMouseDown = (e) => {
-    if (isPlaying) {
-      clearInterval(intervalRef.current);
-      setIsPlaying(false);
-    }
-    setIsDragging(true);
-    const time = getTimeFromPosition(e.clientX);
-    setCurrentTime(time);
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const time = getTimeFromPosition(e.clientX);
-      setCurrentTime(time);
-    }
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Handle click on timeline
-  const handleTimelineClick = (e) => {
-    if (!isDragging) {
-      const time = getTimeFromPosition(e.clientX);
-      setCurrentTime(time);
-    }
-  };
-
-  // Add and remove event listeners
+  // Add event listeners
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-    }
+      const options = { passive: true };
+      window.addEventListener("mousemove", handleMouseMove, options);
+      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mouseleave", handleMouseUp);
 
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
-    };
-  }, [isDragging]);
+      return () => {
+        window.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mouseup", handleMouseUp);
+        window.removeEventListener("mouseleave", handleMouseUp);
+      };
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp]);
 
   // Cleanup on unmount
   useEffect(() => {
@@ -129,30 +195,29 @@ const TimeSlider = () => {
     };
   }, []);
 
-  // Calculate progress based on currentTime
   const progress = (currentTime / (24 * 60)) * 100;
 
+  // Rest of the JSX remains the same...
   return (
     <div className="mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
       <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
-        {/* Time Display */}
-
-        <div className="relative w-full h-16 ">
-          {/* Time track with improved styling */}
+        <div className="relative w-full h-16">
           <div
             ref={sliderRef}
             className="absolute w-full h-1.5 bg-slate-700 rounded-full top-4 cursor-pointer
                      transition-all duration-300 ease-out hover:h-2"
             onClick={handleTimelineClick}
           >
-            {/* Gradient progress bar with animation */}
+            {/* Progress bar */}
             <div
-              className="absolute h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full
-                       transition-all duration-300 ease-out"
-              style={{ width: `${progress}%` }}
-            ></div>
+              className="absolute h-full bg-gradient-to-r from-teal-500 to-teal-400 rounded-full"
+              style={{
+                width: `${progress}%`,
+                transition: isDragging ? "none" : "width 0.1s ease-out",
+              }}
+            />
 
-            {/* Enhanced time indicator */}
+            {/* Slider handle */}
             <div
               className={`absolute top-1/2 -translate-y-1/2 -translate-x-1/2 
                        w-5 h-5 bg-white rounded-full flex items-center justify-center 
@@ -161,12 +226,15 @@ const TimeSlider = () => {
                        ${isDragging ? "cursor-grabbing scale-95" : ""}
                        before:content-[''] before:absolute before:w-3 before:h-3 
                        before:bg-teal-500 before:rounded-full`}
-              style={{ left: `${progress}%` }}
+              style={{
+                left: `${progress}%`,
+                transition: isDragging ? "none" : "all 0.1s ease-out",
+              }}
               onMouseDown={handleMouseDown}
-            ></div>
+            />
           </div>
 
-          {/* Improved time marks */}
+          {/* Time marks */}
           <div className="absolute w-full flex justify-between top-4 px-2">
             {[...Array(25)].map((_, i) => (
               <div
@@ -181,7 +249,7 @@ const TimeSlider = () => {
             ))}
           </div>
 
-          {/* Enhanced time labels */}
+          {/* Time labels */}
           <div className="absolute w-full flex justify-between top-8 px-1 text-xs">
             {[
               "00:00",
@@ -207,7 +275,7 @@ const TimeSlider = () => {
           </div>
         </div>
 
-        {/* Enhanced playback controls */}
+        {/* Playback controls */}
         <div className="flex flex-row justify-around items-center">
           <div className="flex space-x-4">
             <button
@@ -225,17 +293,15 @@ const TimeSlider = () => {
             </button>
             <button
               onClick={handleReset}
-              // todo Highlight the button when selected time or date don't match the current time
               className={`px-4 py-2 rounded-lg text-xs font-medium
                      transition-all duration-300 ease-out transform
-                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30 
-                `}
+                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30`}
             >
               Reset
             </button>
           </div>
 
-          <div className="flex bg-slate-700/30 rounded-lg ">
+          <div className="flex bg-slate-700/30 rounded-lg">
             {[1, 5, 10, 20].map((speed) => (
               <button
                 key={speed}
