@@ -9,6 +9,9 @@ import Coordinates from "./components3D/Coordinates";
 import Compass from "./components3D/Compass";
 import Sphere from "./components3D/Sphere";
 
+//House model testing
+import Cylinder from './components3D/House'
+
 // Stores
 import useInputStore from "../../stores/inputStore";
 import useRenderStore from "../../stores/renderStore";
@@ -47,8 +50,13 @@ const ModelComponent = () => {
         <Coordinates position={sunCoordinates} />
         <Compass />
 
+       {/*  House model testing */}
+        <Cylinder  />
+
         <OrbitControls
           enableRotate={true} // Allow rotation
+          autoRotate={true} // Enable auto rotation
+          autoRotateSpeed={0} // Adjust rotation speed as needed
           enablePan={true} // Allow panning
           enableZoom={true} // Allow zooming
           enableDamping={true} // Add smooth damping to camera movements

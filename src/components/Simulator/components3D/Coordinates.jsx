@@ -14,7 +14,7 @@ export default function Coordinates({position}) {
         {/* -Y Axis  */}
         <Segment start={[0, 0, 0]} end={[0, -1, 0]} color="gray" />
         {/* Direction Axis  */}
-        <Segment start={[0, 0, 0]} end={[position.x, position.y, position.z]} color="gray" />
+        <Segment start={[0, 0, 0]} end={[position.x, position.y, position.z]} color="gray"/>
       </Segments>
       ;
     </>

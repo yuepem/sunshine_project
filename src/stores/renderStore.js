@@ -9,7 +9,7 @@ const useRenderStore = create((set, get) => ({
 
     skyConfig: {
         distance: 1000,
-        turbidity: 8,
+        turbidity: 5,
         rayleigh: 6,
         mieCoefficient: 0.005,
         mieDirectionalG: 0.8,
