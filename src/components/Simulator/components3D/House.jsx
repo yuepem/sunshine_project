@@ -1,16 +1,20 @@
 // Cylinder.js
-import React from 'react';
-import * as THREE from 'three';
+import React from "react";
+// import { useFrame } from "@react-three/fiber";
 
-function Cylinder() {
-  const geometry = new THREE.CylinderGeometry( 0.5, 0.5, 1, 5 );
-  const material = new THREE.MeshBasicMaterial( {color: 0x4A628A} );
-  const cylinder = new THREE.Mesh( geometry, material ); 
-
-
+function Cylinder({ position = [0, 0.5, 0] }) {
   return (
-    <mesh position={[0, 0.5, 0]}>
-      <primitive object={cylinder} />
+    <mesh
+      position={position}
+      castShadow // Enable shadow casting
+      receiveShadow // Enable shadow receiving
+    >
+      <cylinderGeometry args={[0.5, 0.5, 1, 5]} />
+      <meshStandardMaterial // Use StandardMaterial instead of BasicMaterial for better lighting
+        color={0xE8DCC4}
+        roughness={0.8}
+        metalness={0.1}
+      />
     </mesh>
   );
 }

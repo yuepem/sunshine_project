@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
+
 // Components
 import SkyScene from "./components3D/Sky";
 import Ground from "./components3D/Ground";
@@ -10,7 +11,10 @@ import Compass from "./components3D/Compass";
 import Sphere from "./components3D/Sphere";
 
 //House model testing
-import Cylinder from './components3D/House'
+import Cylinder from "./components3D/House";
+
+
+
 
 // Stores
 import useInputStore from "../../stores/inputStore";
@@ -34,7 +38,29 @@ const ModelComponent = () => {
 
   return (
     <div className="h-[600px] rounded-xl overflow-hidden">
-      <Canvas camera={{ position: [-5, 0.7, 4] }}>
+      <Canvas shadows camera={{ position: [-5, 0.7, 4] }}>
+
+      
+        {/* Directional Light following sun position */}
+        <directionalLight
+          // position={[x * 10, y * 10, z * 10]}
+          position={[x, y, z]}
+          /* Show the sun direction even during night */
+          intensity={y > 0 ? 1.2 : 0.3}
+          castShadow = {y > 0}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-camera-far={50}
+          shadow-camera-left={-20}
+          shadow-camera-right={20}
+          shadow-camera-top={20}
+          shadow-camera-bottom={-20}
+          shadow-bias={-0.0001}
+        />
+
+        {/* Ambient light for overall scene illumination */}
+        <ambientLight intensity={0.1} />
+
         {/* Sky Component with passed arguments */}
         <SkyScene
           distance={distance}
@@ -50,8 +76,10 @@ const ModelComponent = () => {
         <Coordinates position={sunCoordinates} />
         <Compass />
 
-       {/*  House model testing */}
-        <Cylinder  />
+        {/*  House model testing */}
+        <Cylinder />
+  
+        
 
         <OrbitControls
           enableRotate={true} // Allow rotation

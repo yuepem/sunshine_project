@@ -5,19 +5,19 @@ export default function Compass() {
     <>
       <fog attach="fog" args={["#202025", 0, 80]} />
       <Billboard position={[0, 0, -10]}>
-        <Text fontSize={0.5}>N</Text>
+        <Text fontSize={0.5} color={'#A02334'} >N</Text>
       </Billboard>
 
       <Billboard position={[10, 0, 0]}>
-        <Text fontSize={0.5}>E</Text>
+        <Text fontSize={0.5} color={'#A02334'}>E</Text>
       </Billboard>
 
       <Billboard position={[0, 0, 10]}>
-        <Text fontSize={0.5}>S</Text>
+        <Text fontSize={0.5} color={'#A02334'} >S</Text>
       </Billboard>
 
       <Billboard position={[-10, 0, 0]}>
-        <Text fontSize={0.5}>W</Text>
+        <Text fontSize={0.5} color={'#A02334'} >W</Text>
       </Billboard>
     </>
   );
