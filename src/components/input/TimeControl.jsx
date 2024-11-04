@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
 import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
-
-import DayPicker from "./DayPicker";
-import TimeSlider from "../TimeSlider";
 
 import {
   Sun,
@@ -17,14 +14,11 @@ import {
 } from "lucide-react";
 
 const TimeControl = () => {
-  const { date, timeZone } = useInputStore();
+  const { timeZone } = useInputStore();
   const { sunTimes } = useSunCalcStore();
-  const { currentTime, formatTime } = useTimeStore();
+  const { formatTime } = useTimeStore();
 
   // const [currentTime, setCurrentTime] = useState('16:54');
-
-  const [hiddenDate, setHiddenDate] = useState(true);
-  const [hiddenTime, setHiddenTime] = useState(true);
 
   if (!sunTimes) {
     return (
@@ -34,7 +28,6 @@ const TimeControl = () => {
     );
   }
 
-  const Current_Time = formatTime(currentTime, timeZone);
   const sunTimesData = {
     sunrise: formatTime(sunTimes.sunrise, timeZone),
     sunriseEnd: formatTime(sunTimes.sunriseEnd, timeZone),
@@ -76,39 +69,13 @@ const TimeControl = () => {
     },
   ];
 
-  const getProgress = (timeStr) => {
-    const [hours, minutes] = timeStr.split(":").map(Number);
-    return ((hours * 60 + minutes) / (24 * 60)) * 100;
-  };
-
   // Calculate sunrise and sunset positions for timeline
-  const sunrisePos = getProgress(sunTimesData.sunrise);
-  const sunsetPos = getProgress(sunTimesData.sunset);
-
-  const formatDate = (date) => {
-    return date.toLocaleDateString("en-US", {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-    });
-  };
-
-  const handleTimeClick = () => {
-    setHiddenTime(!hiddenTime);
-    setHiddenDate(true);
-  };
-
-  const handleDateClick = () => {
-    setHiddenDate(!hiddenDate);
-    setHiddenTime(true);
-  };
 
   // Main view
   return (
     <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
+      {/* <div className="flex items-center justify-between mb-4">
         <div className="flex items-center space-x-4">
           <div className="bg-slate-700/50 p-2 rounded-xl">
             {getProgress(Current_Time) > sunrisePos &&
@@ -125,54 +92,7 @@ const TimeControl = () => {
             <p className="text-slate-400 text-sm">Adjust date and time</p>
           </div>
         </div>
-      </div>
-
-      {/* DateTime Selectors */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        <button
-          onClick={handleDateClick}
-          className="group flex items-center space-x-3 p-2 md:p-4 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors"
-        >
-          <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
-            <CalendarIcon className="w-5 h-5 text-teal-400" />
-          </div>
-          <div className="text-left">
-            <div className="text-sm text-slate-400">Date</div>
-            <div className="text-slate-200">{formatDate(date)}</div>
-          </div>
-        </button>
-
-        <button
-          onClick={handleTimeClick}
-          className="group flex items-center space-x-3 p-2 md:p-4 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors"
-        >
-          <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
-            <ClockIcon className="w-5 h-5 text-teal-400" />
-          </div>
-          <div className="text-left">
-            <div className="text-sm text-slate-400">Time</div>
-            <div className="text-slate-200">{formatTime(date, timeZone)}</div>
-          </div>
-        </button>
-      </div>
-
-      {/* Date Selector */}
-      <div
-        className={`w-full bg-gradient-to-b from-slate-800 to-slate-700 rounded-xl ${
-          hiddenDate ? "hidden" : ""
-        }`}
-      >
-        <DayPicker />
-      </div>
-      <div
-        className={`w-full bg-gradient-to-b from-slate-800 to-slate-700 rounded-xl ${
-          hiddenTime ? "hidden" : ""
-        }`}
-      >
-        <TimeSlider />
-      </div>
-
-      {/* Timeline Slider */}
+      </div> */}
 
       {/* Sun Events Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
