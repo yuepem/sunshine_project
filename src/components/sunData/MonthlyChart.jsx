@@ -10,7 +10,6 @@ import {
   ResponsiveContainer,
   Area,
   ReferenceLine,
-  ReferenceArea
 } from "recharts";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useInputStore from "../../stores/inputStore";
@@ -49,6 +48,9 @@ const MonthlyChart = () => {
   const timeAxisTicks = Array.from({ length: 13 }, (_, i) => i * 2 * 60);
   const getMonthName = (date) => {
     return new Date(date).toLocaleString("default", { month: "long" });
+  };
+  const getCurrentYear = (date) => {
+    return new Date(date).getFullYear();
   };
 
   // Current month and day for highlighting
@@ -177,9 +179,15 @@ const MonthlyChart = () => {
   return (
     <div className="flex flex-col gap-8 p-4 mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
       <div className="w-full h-96 bg-gradient-to-b from-slate-900 to-slate-800 px-5 pt-5 pb-12 rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-4 bg-gradient-to-r from-[#3F5EFB] to-[#FC466B] bg-clip-text text-transparent">
-          Yearly Sun Time Overview
-        </h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-bold text-slate-300">
+            Sun Time Overview in
+            <span className="bg-gradient-to-r from-[#3F5EFB] to-[#FC466B] bg-clip-text text-transparent">
+              {" "}
+              {getCurrentYear(date)}
+            </span>
+          </h2>
+        </div>
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={monthlyData} onClick={handleMonthClick}>
             <CartesianGrid
@@ -219,18 +227,18 @@ const MonthlyChart = () => {
                   <ReferenceLine
                     key={`ref-${index}`}
                     x={entry.month}
-                    stroke="#94A3B8"
+                    stroke="#2dd4bf"
                     strokeWidth={2.5}
                     //   strokeOpacity={1}
                     isFront={true}
                   />
                 )
             )}
-            
+
             <Line
               type="monotone"
               dataKey="avgSunrise"
-              stroke="#EB5B00"
+              stroke="#FFB200"
               name="Sunrise"
               dot={{ r: 4 }}
               activeDot={{ r: 6 }}
@@ -238,7 +246,7 @@ const MonthlyChart = () => {
             <Line
               type="monotone"
               dataKey="avgSunset"
-              stroke="#FFB200"
+              stroke="#EB5B00"
               name="Sunset"
               dot={{ r: 4 }}
               activeDot={{ r: 6 }}
@@ -290,24 +298,24 @@ const MonthlyChart = () => {
               fillOpacity={0.1}
             />
             {/* Add reference line for current day */}
-            {dailyData.map((entry, index) => 
-              entry.isCurrentDay && (
-                <ReferenceLine
-                  key={`ref-${index}`}
-                  x={entry.day}
-                  stroke="#94A3B8"
-                  strokeWidth={2.5}
-                //   strokeOpacity={0.2}
-                  isFront={true}
-                />
-              )
+            {dailyData.map(
+              (entry, index) =>
+                entry.isCurrentDay && (
+                  <ReferenceLine
+                    key={`ref-${index}`}
+                    x={entry.day}
+                    stroke="#2dd4bf"
+                    strokeWidth={2.5}
+                    //   strokeOpacity={0.2}
+                    isFront={true}
+                  />
+                )
             )}
 
-            
             <Line
               type="monotone"
               dataKey="sunrise"
-              stroke="#8884d8"
+              stroke="#FFB200"
               name="Sunrise"
               dot={{ r: 4 }}
               activeDot={{ r: 6 }}
@@ -315,7 +323,7 @@ const MonthlyChart = () => {
             <Line
               type="monotone"
               dataKey="sunset"
-              stroke="#82ca9d"
+              stroke="#EB5B00"
               name="Sunset"
               dot={{ r: 4 }}
               activeDot={{ r: 6 }}
