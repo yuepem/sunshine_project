@@ -12,9 +12,10 @@ import {
   Calendar as CalendarIcon,
   Clock as ClockIcon,
 } from "lucide-react";
+import { set } from "date-fns";
 
 const TimeControl = () => {
-  const { timeZone } = useInputStore();
+  const { date, setDate, timeZone } = useInputStore();
   const { sunTimes } = useSunCalcStore();
   const { formatTime } = useTimeStore();
 
@@ -121,28 +122,17 @@ const TimeControl = () => {
     },
   ];
 
+  const handleClick = (timeString, eventType) => {
+    if (eventType === "daylight") return;
+    const [hours, minutes] = timeString.split(':').map(Number);
+    const newDate = new Date(date);
+    newDate.setHours(hours, minutes, 0, 0);
+    setDate(newDate);
+  };
+
   
   return (
     <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
-      {/* Header */}
-      {/* <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center space-x-4">
-          <div className="bg-slate-700/50 p-2 rounded-xl">
-            {getProgress(Current_Time) > sunrisePos &&
-            getProgress(Current_Time) < sunsetPos ? (
-              <Sun className="w-5 h-5 text-yellow-400" />
-            ) : (
-              <Moon className="w-5 h-5 text-slate-300" />
-            )}
-          </div>
-          <div>
-            <h2 className="text-slate-200 text-lg font-medium">
-              Time Controls
-            </h2>
-            <p className="text-slate-400 text-sm">Adjust date and time</p>
-          </div>
-        </div>
-      </div> */}
 
       {/* Sun Events Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
@@ -151,7 +141,10 @@ const TimeControl = () => {
           return (
             <div
               key={event.type}
-              className="relative p-4 bg-slate-800/50 rounded-xl overflow-hidden group cursor-pointer hover:bg-slate-700/50 transition-colors"
+              onClick={() => handleClick(event.time, event.type)}
+              className={`relative p-4 bg-slate-800/50 rounded-xl overflow-hidden group 
+                ${event.type !== 'daylight' ? 'cursor-pointer hover:bg-slate-700/50' : ''} 
+                transition-colors`}
             >
               <div className="relative z-10">
                 <EventIcon className="w-5 h-5 text-white mb-2" />
@@ -164,6 +157,7 @@ const TimeControl = () => {
                 className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${event.color}`}
               />
             </div>
+            
           );
         })}
       </div>
