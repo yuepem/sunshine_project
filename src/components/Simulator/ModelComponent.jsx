@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 
-
 // Components
 import SkyScene from "./components3D/Sky";
 import Ground from "./components3D/Ground";
@@ -10,10 +9,8 @@ import Coordinates from "./components3D/Coordinates";
 import Compass from "./components3D/Compass";
 import Sphere from "./components3D/Sphere";
 
-//House model testing
+//Object model testing
 import Cylinder from "./components3D/House";
-
-
 
 
 // Stores
@@ -24,21 +21,27 @@ import useSunCalcStore from "../../stores/sunSalcStore";
 const ModelComponent = () => {
   const { date } = useInputStore();
   const { sunPosition, calculateSunData } = useSunCalcStore();
-  const { skyConfig, sunCoordinates, convertSunCoordinates } = useRenderStore();
+  const { skyConfig, sunCoordinates, cameraPosition, convertSunCoordinates, calculateCameraPosition } = useRenderStore();
 
   const { distance, turbidity, rayleigh, mieCoefficient, mieDirectionalG } =
     skyConfig;
 
   const { x, y, z } = sunCoordinates;
+  const { x: cameraX, y: cameraY, z: cameraZ } = cameraPosition;
+
 
   useEffect(() => {
     calculateSunData(date, sunPosition);
     convertSunCoordinates(sunPosition);
   }, [date, sunPosition]);
 
+  useEffect(() => {
+    calculateCameraPosition(sunPosition);
+  }, [])
+
   return (
     <div className="h-[600px] rounded-xl overflow-hidden">
-      <Canvas shadows camera={{ position: [-5, 0.7, 4] }}>
+      <Canvas shadows camera={{ position: [cameraX, cameraY, cameraZ]}}>
 
       
         {/* Directional Light following sun position */}

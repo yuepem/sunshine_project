@@ -31,6 +31,7 @@ const useSunCalcStore = create((set, get) => ({
   radiansToDegreesForAzimuth: (rad) => (rad * 180) / Math.PI +180, 
   radiansToDegreesForAltitude: (rad) => (rad * 180) / Math.PI,
 
+  
 }));
 
 
