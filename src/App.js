@@ -1,12 +1,12 @@
 import CityHeader from './components/CityHeader';
 import MainCom from './components/MainCom';
+import TimeSlider from './components/TimeSlider';
 import TimeProgress from './components/TimeProgress/TimeProgress';
 import LocationInput from './components/TimeProgress/LocationInput';
 import InputComponent from './components/InputComponent';
-import SunData from './components/sunData/SunData';
-// import TimeSlider from './components/TimeSlider';
 
-import TimeSlider from './components/TimeSlider';
+import MonthlyChart from './components/sunData/MonthlyChart';
+
 
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
         </div>
       </div>
       <InputComponent />
-      <SunData />
+      <MonthlyChart />  
     </div>
   );
 }

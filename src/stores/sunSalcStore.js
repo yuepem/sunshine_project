@@ -6,16 +6,6 @@ const useSunCalcStore = create((set, get) => ({
   sunPosition: {azimuth: 0.5, altitude: 0.5},
 
   
- /*  sunData: {
-    sunrise: null,
-    sunriseEnd: null,
-    sunsetStart: null,
-    sunset: null,
-    solarNoon: null,
-    goldenHour: null,
-    goldenHourEnd: null,
-  }, */
-  
   calculateSunData: ({date, latitude, longitude }) => {
     
     if (!date || !latitude || !longitude) {
@@ -26,11 +16,21 @@ const useSunCalcStore = create((set, get) => ({
     const sunPosition = SunCalc.getPosition(date, latitude, longitude);
 
     set({ sunTimes, sunPosition });
+    
   },
 
   radiansToDegreesForAzimuth: (rad) => (rad * 180) / Math.PI +180, 
   radiansToDegreesForAltitude: (rad) => (rad * 180) / Math.PI,
 
+  // Calculate only sun times for chart
+  calculateSuntimesOnly: (date, latitude, longitude) => {
+    if (!date || !latitude || !longitude) {
+      return "Missing data: date, latitude, or longitude";
+    }
+    const sunTimes = SunCalc.getTimes(date, latitude, longitude);
+    
+    return sunTimes;
+  }
   
 }));
 
