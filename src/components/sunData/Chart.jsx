@@ -13,10 +13,13 @@ import {
 } from "recharts";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useInputStore from "../../stores/inputStore";
+import moment from "moment-timezone";
 
 // Utility functions
 const timeToMinutes = (date) => {
-  return date.getHours() * 60 + date.getMinutes();
+  const [hours, minutes] = date.split(":").map(Number);
+  return hours * 60 + minutes;
+  // return dateArr.getHours() * 60 + dateArr.getMinutes();
 };
 
 const minutesToTimeString = (minutes) => {
@@ -35,7 +38,7 @@ const calculateAverageTime = (timeArray) => {
 
 // Custom background component for highlighting
 
-const formatTime = (minutes) => {
+const formatTimeToString = (minutes) => {
   return minutesToTimeString(minutes);
 };
 
@@ -43,7 +46,7 @@ const MonthlyChart = () => {
   const [monthlyData, setMonthlyData] = useState([]);
   const [dailyData, setDailyData] = useState([]);
   const { calculateSuntimesOnly } = useSunCalcStore();
-  const { date, latitude, longitude, setDate } = useInputStore();
+  const { date, latitude, longitude, setDate, timeZone } = useInputStore();
 
   const timeAxisTicks = Array.from({ length: 13 }, (_, i) => i * 2 * 60);
   const getMonthName = (date) => {
@@ -79,8 +82,16 @@ const MonthlyChart = () => {
             sunData &&
             sunData !== "Missing data: date, latitude, or longitude"
           ) {
-            sunriseMinutes.push(timeToMinutes(sunData.sunrise));
-            sunsetMinutes.push(timeToMinutes(sunData.sunset));
+            //  convert time to target city time zone
+            const sunriseTime = moment(sunData.sunrise)
+              .tz(timeZone)
+              .format("HH:mm");
+            const sunsetTime = moment(sunData.sunset)
+              .tz(timeZone)
+              .format("HH:mm");
+
+            sunriseMinutes.push(timeToMinutes(sunriseTime));
+            sunsetMinutes.push(timeToMinutes(sunsetTime));
           }
         }
 
@@ -101,7 +112,7 @@ const MonthlyChart = () => {
     };
 
     calculateMonthlySunTimes();
-  }, [calculateSuntimesOnly, latitude, longitude, date, currentMonth]);
+  }, [calculateSuntimesOnly, latitude, longitude, date, currentMonth, timeZone]);
 
   useEffect(() => {
     const calculateDailySunTimes = () => {
@@ -118,8 +129,16 @@ const MonthlyChart = () => {
           sunData &&
           sunData !== "Missing data: date, latitude, or longitude"
         ) {
-          const sunrise = timeToMinutes(sunData.sunrise);
-          const sunset = timeToMinutes(sunData.sunset);
+          //  convert time to local time
+          //  convert time to target city time zone
+          const sunriseTime = moment(sunData.sunrise)
+            .tz(timeZone)
+            .format("HH:mm");
+          const sunsetTime = moment(sunData.sunset)
+            .tz(timeZone)
+            .format("HH:mm");
+          const sunrise = timeToMinutes(sunriseTime);
+          const sunset = timeToMinutes(sunsetTime);
 
           data.push({
             day,
@@ -134,7 +153,7 @@ const MonthlyChart = () => {
     };
 
     calculateDailySunTimes();
-  }, [calculateSuntimesOnly, latitude, longitude, date, currentDay]);
+  }, [calculateSuntimesOnly, latitude, longitude, date, currentDay, timeZone]);
 
   const handleMonthClick = (data) => {
     if (!data || !data.activePayload) return;
@@ -164,11 +183,11 @@ const MonthlyChart = () => {
           } ${label}`}</p>
           {payload.map((entry, index) => (
             <p key={index} style={{ color: entry.stroke }}>
-              {`${entry.name}: ${formatTime(entry.value)}`}
+              {`${entry.name}: ${formatTimeToString(entry.value)}`}
             </p>
           ))}
           <p className="text-gray-600 text-sm mt-1">
-            Daylight: {formatTime(daylight)}
+            Daylight: {formatTimeToString(daylight)}
           </p>
         </div>
       );
@@ -197,7 +216,7 @@ const MonthlyChart = () => {
             />
             <XAxis dataKey="month" />
             <YAxis
-              tickFormatter={formatTime}
+              tickFormatter={formatTimeToString}
               domain={[0, 24 * 60]}
               ticks={timeAxisTicks}
             />
@@ -274,7 +293,7 @@ const MonthlyChart = () => {
             />
             <XAxis dataKey="day" />
             <YAxis
-              tickFormatter={formatTime}
+              tickFormatter={formatTimeToString}
               domain={[0, 24 * 60]}
               ticks={timeAxisTicks}
             />

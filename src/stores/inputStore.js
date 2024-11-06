@@ -31,8 +31,6 @@ const useInputStore = create((set, get) => ({
     resetToDefaults: () => {
         set({
             date: new Date(),
-            // latitude: 59.36769,
-            // longitude: 17.82157,
         });
 
     },

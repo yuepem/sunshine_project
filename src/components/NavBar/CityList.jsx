@@ -95,7 +95,7 @@ const cityCoordinates = {
 const Cities = Object.keys(cityCoordinates);
 
 function CityList() {
-  const { setLatitude, setLongitude } = useInputStore();
+  const { setLatitude, setLongitude, setDate } = useInputStore();
   const { currentTime,  startUpdateTime, stopUpdateTime } =
     useTimeStore();
   const scrollContainerRef = useRef(null);
@@ -123,7 +123,8 @@ function CityList() {
     if (coordinates) {
       setLatitude(coordinates.latitude);
       setLongitude(coordinates.longitude);
-      
+    
+      setDate(new Date());
     }
   };
 

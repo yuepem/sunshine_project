@@ -2,6 +2,7 @@ import React from "react";
 import useInputStore from "../../stores/inputStore";
 import useSunCalcStore from "../../stores/sunSalcStore";
 import useTimeStore from "../../stores/timeStore";
+import moment from 'moment-timezone';
 
 import {
   Sun,
@@ -12,7 +13,6 @@ import {
   Calendar as CalendarIcon,
   Clock as ClockIcon,
 } from "lucide-react";
-import { set } from "date-fns";
 
 const TimeControl = () => {
   const { date, setDate, timeZone } = useInputStore();
@@ -124,9 +124,12 @@ const TimeControl = () => {
 
   const handleClick = (timeString, eventType) => {
     if (eventType === "daylight") return;
+    const targetDate = moment.tz(date, timeZone);
     const [hours, minutes] = timeString.split(':').map(Number);
-    const newDate = new Date(date);
-    newDate.setHours(hours, minutes, 0, 0);
+    targetDate.hours(hours);
+    targetDate.minutes(minutes);
+    const newDate = targetDate.toDate();
+    
     setDate(newDate);
   };
 
