@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useInputStore from "../../stores/inputStore";
 import { Search, MapPin } from "lucide-react";
+import AddressSearchBar from "../input/locationInput/AddressSearch";
 
 const LocationInput = () => {
   const { setLatitude, setLongitude } = useInputStore();
@@ -21,7 +22,7 @@ const LocationInput = () => {
     <div className="p-4 space-y-3 rounded-xl bg-slate-800/50 text-sm">
       {/* Search Bar */}
       <div
-        className={`flex items-center bg-slate-500/30 rounded-xl overflow-hidden transition-all duration-200 ${
+        className={`flex items-between bg-slate-500/30 rounded-xl overflow-hidden transition-all duration-200 ${
           isSearchFocused ? "ring-1 ring-teal-500/50 bg-slate-800/70" : ""
         }`}
       >
@@ -31,10 +32,12 @@ const LocationInput = () => {
           onChange={(e) => setSearchValue(e.target.value)}
           onFocus={() => setIsSearchFocused(true)}
           onBlur={() => setIsSearchFocused(false)}
-          placeholder="Type your address here"
+          placeholder="CAN NOT USED YET FOR NOW"
           className="flex-1 bg-transparent px-4 py-2 outline-none text-slate-200 placeholder-slate-400"
         />
-        <button className="px-4 hover:text-teal-400 transition-colors">
+        
+        {/* <AddressSearchBar className="flex-1"/> */}
+        <button className="px-4 bg-transparent hover:text-teal-400 transition-colors">
           <Search className="w-5 h-5 text-teal-400" />
         </button>
       </div>
@@ -47,10 +50,6 @@ const LocationInput = () => {
         >
           <MapPin className="w-4 h-4" />
           <span>Get Location</span>
-        </button>
-
-        <button className="px-4 py-2 bg-slate-700/50 hover:bg-slate-700 transition-colors rounded-xl text-slate-200">
-          On Map
         </button>
       </div>
     </div>
