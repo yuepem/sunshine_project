@@ -104,6 +104,7 @@ function CityList() {
   useEffect(() => {
     startUpdateTime();
     return () => stopUpdateTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

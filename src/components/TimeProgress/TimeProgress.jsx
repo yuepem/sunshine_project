@@ -25,6 +25,7 @@ const TimeProgress = () => {
   useEffect(() => {
     startUpdateTime();
     return () => stopUpdateTime();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const { leftTime, passedPercent } = timeProgress();

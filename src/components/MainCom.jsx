@@ -12,10 +12,12 @@ const MainCom = () => {
 
   useEffect(() => {
     calculateSunData({ date, latitude, longitude });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, latitude, longitude]);
 
   useEffect(() => {
     getAddress();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latitude, longitude]);
 
   return (

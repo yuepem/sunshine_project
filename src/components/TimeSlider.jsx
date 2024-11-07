@@ -27,12 +27,20 @@ const TimeSlider = () => {
   );
 
   // Throttled time update function
-  const updateTimeThrottled = useCallback(
-    throttle((newTime) => {
+  // const updateTimeThrottled = useCallback(
+  //   throttle((newTime) => {
+  //     setCurrentTime(newTime);
+  //   }, 16),
+  //   []
+  // );
+
+  const updateTimeThrottled = useCallback(() => {
+    const throttledFn = throttle((newTime) => {
       setCurrentTime(newTime);
-    }, 16),
-    []
-  );
+    }, 16);
+    
+    return throttledFn;
+  }, []);
 
   // Handle play/pause
   const togglePlay = () => {
@@ -159,6 +167,7 @@ const TimeSlider = () => {
       }
       isManualChangeRef.current = false; // Reset manual change flag
     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentTime, timeZone]);
 
   // Update currentTime when date changes (but not during play or drag)
@@ -168,6 +177,7 @@ const TimeSlider = () => {
       updateTimeThrottled.cancel();
       setCurrentTime(newTime);
     }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, timeZone]);
 
   // Add event listeners

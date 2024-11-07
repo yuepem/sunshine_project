@@ -33,10 +33,12 @@ const ModelComponent = () => {
   useEffect(() => {
     calculateSunData(date, sunPosition);
     convertSunCoordinates(sunPosition);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [date, sunPosition]);
 
   useEffect(() => {
     calculateCameraPosition(sunPosition);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

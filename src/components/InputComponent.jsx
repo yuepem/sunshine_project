@@ -10,6 +10,7 @@ export default function InputComponent() {
 
   useEffect(() => {
     getTimeZoneCode();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [latitude, longitude]);
 
   return (
