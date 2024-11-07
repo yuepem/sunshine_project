@@ -10,8 +10,6 @@ import {
   Sunrise,
   Sunset,
   Camera,
-  Calendar as CalendarIcon,
-  Clock as ClockIcon,
 } from "lucide-react";
 
 const TimeControl = () => {
@@ -135,7 +133,7 @@ const TimeControl = () => {
 
   
   return (
-    <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
+    <div className=" bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 md:p-6 lg:p-8">
 
       {/* Sun Events Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">

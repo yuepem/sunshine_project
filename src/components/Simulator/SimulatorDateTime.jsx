@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import useInputStore from "../../stores/inputStore";
 import useTimeStore from "../../stores/timeStore";
 import DayPicker from "../input/DayPicker";
+import LocationButton from "../input/locationInput/LocationButton";
 import {
   Calendar as CalendarIcon,
   Clock as ClockIcon,
@@ -57,49 +58,57 @@ const SimulatorDateTime = () => {
   }, []);
 
   return (
-    <div className="relative w-full">
-      <div className="w-full bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-2">
-        {/* DateTime Selectors */}
+    <div className="w-full  ">
+      <div className="w-full  bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-2">
         <div className="grid grid-rows-2 gap-4">
           {/*  City  */}
-          <button className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors">
-            <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
-              <Building2 className="w-5 h-5 text-teal-400" />
-            </div>
-            <div className="text-left">
-              <div className="text-sm text-slate-400">City</div>
-              <div className="text-slate-200 text-base font-semibold">
-                {city}
+          <div className="group flex items-center justify-between bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors">
+            <div className=" flex items-center p-2 space-x-3 ">
+              <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
+                <Building2 className="w-5 h-5 text-teal-400" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm text-slate-400">City</div>
+                <div className="text-slate-200 text-base font-semibold">
+                  {city}
+                </div>
               </div>
             </div>
-          </button>
+            <div className="mr-5 rounded-lg bg-slate-600 ">
+              <LocationButton />
+            </div>
+          </div>
 
           {/* Date  */}
           <button
             ref={buttonRef}
             onClick={handleDateClick}
-            className={`group flex items-center space-x-3 p-2 md:p-2 
+            className={`group flex items-center  justify-between
                       ${!hiddenDate ? "bg-slate-700/70" : "bg-slate-800/50"} 
                       rounded-xl hover:bg-slate-700/50 transition-colors
                       relative`}
           >
-            <div
-              className={`p-2 ${!hiddenDate ? "bg-slate-600" : "bg-slate-700"} 
+            <div className="flex items-center p-2 space-x-3">
+              <div
+                className={`p-2 ${
+                  !hiddenDate ? "bg-slate-600" : "bg-slate-700"
+                } 
                           rounded-lg group-hover:bg-slate-600 transition-colors`}
-            >
-              <CalendarIcon className="w-5 h-5 text-teal-400" />
+              >
+                <CalendarIcon className="w-5 h-5 text-teal-400" />
+              </div>
+              <div className="text-left">
+                <div className="text-sm text-slate-400">Date</div>
+                <div className="text-slate-200">{formatDate(date)}</div>
+              </div>
             </div>
-            <div className="text-left">
-              <div className="text-sm text-slate-400">Date</div>
-              <div className="text-slate-200">{formatDate(date)}</div>
-            </div>
-            <div className="p-2  rounded-lg group-hover:bg-slate-600 transition-colors">
+            <div className=" mr-5 w-12 h-9 flex items-center justify-center rounded-lg bg-slate-600 ">
               <ChevronDown className="w-5 h-5  text-teal-400" />
             </div>
           </button>
 
           {/* Clock  */}
-          <button className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors">
+          <button className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl ">
             <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
               <ClockIcon className="w-5 h-5 text-teal-400" />
             </div>

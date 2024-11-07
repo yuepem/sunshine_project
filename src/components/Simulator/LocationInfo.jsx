@@ -16,8 +16,8 @@ const LocationInfo = () => {
   const lonDMS = toDMS().longitude;
 
   return (
-    <div className="w-full bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-2 ">
-      {/* DateTime Selectors */}
+    <div className="w-full h-full  bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-2 ">
+      
       <div className="grid grid-rows-2 gap-4 mb-4">
         <button className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl hover:bg-slate-700/50 transition-colors">
           <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">

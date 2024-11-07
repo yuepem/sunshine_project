@@ -10,8 +10,9 @@ const Footer = () => {
           <div>
             <h3 className="mb-4 text-lg font-semibold text-slate-100">About</h3>
             <p className="text-sm text-slate-400">
+              <h1> Where is the sun ?</h1>
               This web offers a simple way to understand the sun's position in
-              the sky. the app calculates the sun's direction and altitude and
+              the sky. It calculates the sun's direction and altitude and
               presents it through an interactive 3D visualization, giving you a
               live and precise view. It also provides helpful information like
               sunrise and sunset times, day length, and a yearly overview of

@@ -19,12 +19,12 @@ const MainCom = () => {
   }, [latitude, longitude]);
 
   return (
-    <div className="mx-auto bg-slate-900 mb-2 max-w-7xl rounded-lg">
+    <div className="mx-auto bg-slate-800/30 mb-2 max-w-7xl rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-3 md:  gap-4 p-4 rounded-xl ">
         <div className="col-span-2">
           <ModelComponent />
         </div>
-        <div className="grid grid-cols-1 gap-4 rounded-xl ">
+        <div className="flex flex-col gap-4 rounded-xl ">
           <LocationInfo />
           <SimulatorDateTime />
         </div>

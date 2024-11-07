@@ -199,8 +199,8 @@ const TimeSlider = () => {
 
   // Rest of the JSX remains the same...
   return (
-    <div className="mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
-      <div className="w-full p-6 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl shadow-lg select-none">
+    <div className="mx-auto bg-slate-800/80 mb-2 max-w-7xl rounded-lg">
+      <div className="w-full p-6  rounded-xl shadow-lg select-none">
         <div className="relative w-full h-16">
           <div
             ref={sliderRef}
@@ -240,7 +240,7 @@ const TimeSlider = () => {
               <div
                 key={i}
                 className={`absolute top-0 w-px transition-all duration-200
-                ${i % 3 === 0 ? "h-3 bg-slate-500" : "h-1.5 bg-slate-600"}`}
+                ${i % 3 === 0 ? "h-3 bg-slate-300" : "h-1.5 bg-slate-300"}`}
                 style={{
                   left: `${(i / 24) * 100}%`,
                   opacity: Math.abs((progress / 100) * 24 - i) < 4 ? 1 : 0.5,
@@ -264,7 +264,7 @@ const TimeSlider = () => {
             ].map((time, index) => (
               <span
                 key={time}
-                className="text-slate-400 transition-all duration-200"
+                className="text-slate-100 transition-all duration-200"
                 style={{
                   opacity: Math.abs((progress / 100) * 8 - index) < 2 ? 1 : 0.5,
                 }}

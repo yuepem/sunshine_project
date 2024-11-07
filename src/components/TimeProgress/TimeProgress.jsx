@@ -45,7 +45,7 @@ const TimeProgress = () => {
   };
 
   return (
-    <div className="p-4  space-y-3 rounded-xl bg-slate-800/50 ">
+    <div className="p-4 space-y-3 rounded-xl bg-gradient-to-b from-slate-900 to-slate-800 ">
       {/* Time Display */}
       <div className="flex items-baseline space-x-4">
         <div className="text-2xl font-bold text-slate-100">{localTime}</div>

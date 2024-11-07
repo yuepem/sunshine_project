@@ -196,7 +196,7 @@ const MonthlyChart = () => {
   };
 
   return (
-    <div className="flex flex-col gap-8 p-4 mx-auto bg-teal-800 mb-2 max-w-7xl rounded-lg">
+    <div className="flex flex-col gap-4 p-4 mx-auto  mb-2 max-w-7xl rounded-lg  bg-slate-800/30  ">
       <div className="w-full h-96 bg-gradient-to-b from-slate-900 to-slate-800 px-5 pt-5 pb-12 rounded-lg shadow">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-bold text-slate-300">
