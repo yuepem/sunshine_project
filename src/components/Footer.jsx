@@ -106,7 +106,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 border-t border-slate-800 pt-8 text-center text-sm text-slate-400">
-          <p>© {new Date().getFullYear()} Sun Position Tracker.</p>
+          <p> {new Date().getFullYear()} Sun Position Tracker</p>
         </div>
       </div>
     </footer>

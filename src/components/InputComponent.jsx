@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import useInputStore from "../stores/inputStore";
-import TimeControl from "./input/TimeControl";
+import TimeControl from "./input/SunTimes";
 import TimeProgress from "./TimeProgress/TimeProgress";
 
 import Maps from "./input/locationInput/Maps";

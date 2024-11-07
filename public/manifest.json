@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Sun Position",
+  "name": "Sun Position Calculator",
+  "description": "Calculate precise sun positions, sunrise/sunset times, and day length for any location",
   "icons": [
     {
       "src": "favicon.ico",
@@ -13,7 +14,7 @@
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "src": "sunrise.png",
       "type": "image/png",
       "sizes": "512x512"
     }

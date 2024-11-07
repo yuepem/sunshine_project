@@ -107,7 +107,7 @@ const MapsLeaflet = () => {
   };
 
   return (
-    <div className="w-full h-full min-h-[250px]  rounded-xl overflow-hidden">
+    <div className="w-full h-full min-h-[250px]  rounded-xl overflow-hidden z-[5]">
       <MapContainer center={position} zoom={17} className="h-full w-full">
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

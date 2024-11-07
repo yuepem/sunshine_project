@@ -6,6 +6,9 @@ import { History, Hourglass } from "lucide-react";
 const TimeProgress = () => {
   const { currentTime, startUpdateTime, stopUpdateTime } = useTimeStore();
 
+  const current_year = currentTime.getFullYear();
+  const next_year = current_year + 1;
+
   const localTime = currentTime.toLocaleTimeString("en-US", {
     hour: "2-digit",
     minute: "2-digit",
@@ -60,11 +63,11 @@ const TimeProgress = () => {
         <div className="px-3 py-1  flex items-center justify-between">
           <div className="flex items-center space-x-2 text-white text-sm">
             <History className="w-4 h-4" />
-            <span>{passedPercent.toFixed(2)} % of 2024 Passed</span>
+            <span>{passedPercent.toFixed(2)} % of {current_year} Passed</span>
           </div>
           <div className="flex items-center space-x-2 text-white text-sm">
             <Hourglass className="w-4 h-4" />
-            <span>{leftTime} Until 2025 </span>
+            <span>{leftTime} Until {next_year} </span>
           </div>
         </div>
       </div>
