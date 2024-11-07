@@ -1,70 +1,41 @@
-# Getting Started with Create React App
+# Sun Position Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+An interactive web application for calculating and visualizing precise sun positions, sunrise/sunset times, and day length information for any location worldwide.
 
-## Available Scripts
+🌅 Why This Matters
+In Sweden and other Nordic countries, sunlight shapes our daily lives and annual rhythms. From the long, dark winters to the bright summer nights, understanding the sun's patterns helps us:
 
-In the project directory, you can run:
+- Plan our days better during the precious daylight hours of winter
+- Find hope in knowing exactly when days will lengthen
+- Make the most of the midnight sun during summer
+- Appreciate the dramatic seasonal changes in our relationship with sunlight
 
-### `npm start`
+## 🌟 Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Real-time Sun Position Tracking**
+  - Get accurate sun position data updated in real-time
+  - View azimuth and elevation angles
+  - Track solar movements throughout the day
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Interactive 3D Visualization**
+  - Explore sun paths through an intuitive 3D interface
+  - Interact with the model to understand sun positions better
 
-### `npm test`
+- **Comprehensive Solar Data**
+  - Calculate precise sunrise and sunset times
+  - Get detailed day length information
+  - Access yearly solar last overview
+ 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **Location Services**
+  - Select locations on interactive map 
+  - Choose from a list of popular cities
+  - Automatic current location detection
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Built with ❤️ from a deep appreciation of Nordic sunlight patterns. From the darkest winter days to the brightest summer nights, understanding the sun's journey helps us find joy and hope in its eternal cycle.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+***In the depth of winter, I finally learned that within me there lay an invincible summer.*** - Albert Camus
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

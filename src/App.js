@@ -6,6 +6,7 @@ import MonthlyChart from './components/sunData/Chart';
 import Footer from './components/Footer';
 
 
+
 function App() {
   return (
     <div className="bg-gradient-to-r from-[#13547a] to-[#80d0c7] bg-teal-700">

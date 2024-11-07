@@ -10,13 +10,8 @@ const Footer = () => {
           <div>
             <h3 className="mb-4 text-lg font-semibold text-slate-100">About</h3>
             <p className="text-sm text-slate-400">
-              <span> Where is the sun ?</span>
-              This web offers a simple way to understand the sun's position in
-              the sky. It calculates the sun's direction and altitude and
-              presents it through an interactive 3D visualization, giving you a
-              live and precise view. It also provides helpful information like
-              sunrise and sunset times, day length, and a yearly overview of
-              them.
+              {/* <span> Where is the sun ?</span> */}
+              From the darkest winter days to the brightest summer nights, the tool helps to understand the sun's patterns. Perfect for Nordic countries where sunlight shapes daily life and annual rhythms through dramatic seasonal changes.
             </p>
           </div>
           <div>
@@ -67,7 +62,7 @@ const Footer = () => {
                 yuepem@gmail.com
               </a>
               <a
-                href="https://github.com"
+                href="https://github.com/yuepem/sunshine_project"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-sm text-slate-400 hover:text-slate-100 transition-colors"
@@ -105,8 +100,9 @@ const Footer = () => {
             
           </div>
         </div>
-        <div className="mt-8 border-t border-slate-800 pt-8 text-center text-sm text-slate-400">
-          <p> {new Date().getFullYear()} Sun Position Tracker</p>
+        <div className="mt-8 border-t space-y-3 border-slate-800 pt-8 text-center text-sm text-slate-400">
+          <p className="text-base"> <em>"In the depth of winter, I finally learned that within me there lay an invincible summer." - Albert Camus</em></p>
+          <p> {new Date().getFullYear()} </p>
         </div>
       </div>
     </footer>
