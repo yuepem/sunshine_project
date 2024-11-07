@@ -83,6 +83,7 @@ const SimulatorDateTime = () => {
           <button
             ref={buttonRef}
             onClick={handleDateClick}
+            aria-labelledby="date-picker"
             className={`group flex items-center  justify-between
                       ${!hiddenDate ? "bg-slate-700/70" : "bg-slate-800/50"} 
                       rounded-xl hover:bg-slate-700/50 transition-colors
@@ -108,7 +109,7 @@ const SimulatorDateTime = () => {
           </button>
 
           {/* Clock  */}
-          <button className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl ">
+          <div className="group flex items-center space-x-3 p-2 md:p-2 bg-slate-800/50 rounded-xl ">
             <div className="p-2 bg-slate-700 rounded-lg group-hover:bg-slate-600 transition-colors">
               <ClockIcon className="w-5 h-5 text-teal-400" />
             </div>
@@ -118,7 +119,7 @@ const SimulatorDateTime = () => {
                 {formatTime(date, timeZone)}
               </div>
             </div>
-          </button>
+          </div>
         </div>
       </div>
 

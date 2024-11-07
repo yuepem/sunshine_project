@@ -18,6 +18,7 @@ function LocationButton() {
   return (
     <div >
       <button
+        aria-labelledby="get your location "
         variant="outlined"
         size="small"
         color="white"

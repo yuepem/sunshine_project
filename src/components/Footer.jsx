@@ -1,6 +1,6 @@
 import React from "react";
-import { Info, Mail, MessageSquare, Github } from "lucide-react";
-import Button from "@mui/material/Button";
+import { Info, Mail, Github } from "lucide-react";
+
 
 const Footer = () => {
   return (
@@ -10,7 +10,7 @@ const Footer = () => {
           <div>
             <h3 className="mb-4 text-lg font-semibold text-slate-100">About</h3>
             <p className="text-sm text-slate-400">
-              <h1> Where is the sun ?</h1>
+              <span> Where is the sun ?</span>
               This web offers a simple way to understand the sun's position in
               the sky. It calculates the sun's direction and altitude and
               presents it through an interactive 3D visualization, giving you a

@@ -286,7 +286,7 @@ const TimeSlider = () => {
                      ${
                        isPlaying
                          ? "bg-teal-500/20 text-teal-400 hover:bg-teal-500/30"
-                         : "bg-teal-500 text-white hover:bg-teal-400"
+                         : "bg-teal-500/40 text-white hover:bg-teal-500/60"
                      }`}
             >
               {isPlaying ? "Pause" : "Play"}
@@ -295,7 +295,7 @@ const TimeSlider = () => {
               onClick={handleReset}
               className={`px-4 py-2 rounded-lg text-xs font-medium
                      transition-all duration-300 ease-out transform
-                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/30`}
+                     hover:scale-105 active:scale-95 bg-teal-500/40 text-white hover:bg-teal-500/60`}
             >
               Reset
             </button>
@@ -309,7 +309,7 @@ const TimeSlider = () => {
                 className={`px-4 py-2 text-xs rounded-md transition-all duration-200
                          ${
                            timeSpeed === speed
-                             ? "bg-teal-500 text-white shadow-lg"
+                             ? "bg-teal-500/40 text-white shadow-lg"
                              : "text-slate-400 hover:bg-slate-700/50 hover:text-white"
                          }`}
               >
