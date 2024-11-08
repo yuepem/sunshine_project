@@ -1,10 +1,9 @@
 import CityHeader from './components/CityHeader';
 import MainCom from './components/MainCom';
-import TimeSlider from './components/TimeSlider';
 import InputComponent from './components/InputComponent';
 import MonthlyChart from './components/sunData/Chart';
 import Footer from './components/Footer';
-
+import TestSliderB from './components/TimeSlider-B';
 
 
 function App() {
@@ -12,7 +11,10 @@ function App() {
     <div className="bg-gradient-to-r from-[#13547a] to-[#80d0c7] bg-teal-700">
       <CityHeader />
       <MainCom />
-      <TimeSlider />
+ 
+      <TestSliderB />
+      {/* <TimeSlider /> */}
+
       <InputComponent />
       <MonthlyChart />  
       <Footer />  
