@@ -58,7 +58,7 @@ const SimulatorDateTime = () => {
   }, []);
 
   return (
-    <div className="w-full  ">
+    <div className="relative w-full  ">
       <div className="w-full  bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-2">
         <div className="grid grid-rows-2 gap-4">
           {/*  City  */}

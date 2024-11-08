@@ -3,7 +3,7 @@ import { MapPin } from "lucide-react";
 import useInputStore from "../../../stores/inputStore";
 
 function LocationButton() {
-  const { setLatitude, setLongitude } = useInputStore();
+  const { setLatitude, setLongitude, setDate } = useInputStore();
 
   const handleGetLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -11,6 +11,7 @@ function LocationButton() {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
       },
+      setDate(new Date()),
       (error) => console.error("Error getting location:", error)
     );
   };

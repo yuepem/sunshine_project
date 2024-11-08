@@ -11,10 +11,7 @@ function App() {
     <div className="bg-gradient-to-r from-[#13547a] to-[#80d0c7] bg-teal-700">
       <CityHeader />
       <MainCom />
- 
       <TestSliderB />
-      {/* <TimeSlider /> */}
-
       <InputComponent />
       <MonthlyChart />  
       <Footer />  
