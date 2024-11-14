@@ -1,14 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-MT5DTC325B"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-MT5DTC325B");
+    </script>
     <meta charset="utf-8" />
-    <title>Sun Position Calculator - Track Solar Position, Sunrise & Sunset Times</title>
-    
+    <title>
+      Sun Position Calculator - Track Solar Position, Sunrise & Sunset Times
+    </title>
+
     <!-- Favicon and App Icons -->
     <link rel="icon" href="./sunrise.png" />
     <link rel="apple-touch-icon" href="./sunrise.png" />
     <link rel="manifest" href="./manifest.json" />
-    
+
     <!-- Viewport and Theme Settings -->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
@@ -28,52 +44,73 @@
         base-uri 'self';
       "
     /> -->
-    
+
     <!-- Primary Meta Tags -->
-    <meta name="title" content="Sun Position Calculator - Track Sun Position, Sunrise & Sunset Times" />
-    <meta name="description" content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview." />
-    <meta name="keywords" content="sun position calculator, solar position, sunrise times, sunset times, day length calculator, solar tracking, sun path" />
+    <meta
+      name="title"
+      content="Sun Position Calculator - Track Sun Position, Sunrise & Sunset Times"
+    />
+    <meta
+      name="description"
+      content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview."
+    />
+    <meta
+      name="keywords"
+      content="sun position calculator, solar position, sunrise times, sunset times, day length calculator, solar tracking, sun path"
+    />
     <meta name="author" content="Iem.D" />
-    
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="%PUBLIC_URL%" />
-    <meta property="og:title" content="Sun Position Calculator - Track Solar Position & Daylight Hours" />
-    <meta property="og:description" content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview." />
+    <meta
+      property="og:title"
+      content="Sun Position Calculator - Track Solar Position & Daylight Hours"
+    />
+    <meta
+      property="og:description"
+      content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview."
+    />
     <!-- <meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" /> -->
-    
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <!-- <meta property="twitter:url" content="%PUBLIC_URL%" /> -->
-    <meta property="twitter:title" content="Sun Position Calculator - Solar Position Tracker" />
-    <meta property="twitter:description" content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview." />
+    <meta
+      property="twitter:title"
+      content="Sun Position Calculator - Solar Position Tracker"
+    />
+    <meta
+      property="twitter:description"
+      content="Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview."
+    />
     <!-- <meta property="twitter:image" content="%PUBLIC_URL%/twitter-image.jpg" /> -->
-    
+
     <!-- Structured Data -->
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Sun Position Calculator",
-      "description": "Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview.",
-      "applicationCategory": "UtilityApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "featureList": [
-        "Real-time sun position tracking",
-        "Interactive 3D visualization",
-        "Sunrise and sunset calculations",
-        "Day length information",
-        "Yearly solar overview",
-        "Location selection via map",
-        "Popular cities database",
-        "Current location detection"
-      ]
-    }
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sun Position Calculator",
+        "description": "Calculate precise sun positions, sunrise/sunset times, and day length for any location worldwide. Interactive 3D visualization with real-time updates and yearly overview.",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        },
+        "featureList": [
+          "Real-time sun position tracking",
+          "Interactive 3D visualization",
+          "Sunrise and sunset calculations",
+          "Day length information",
+          "Yearly solar overview",
+          "Location selection via map",
+          "Popular cities database",
+          "Current location detection"
+        ]
+      }
     </script>
   </head>
   <body>
