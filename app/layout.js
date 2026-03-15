@@ -1,5 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import SiteHeader from "@/components/navigation/SiteHeader";
 import siteConfig from "../lib/seo/site";
 import "./globals.css";
 import "leaflet/dist/leaflet.css";
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
       <body>
         <div className="min-h-screen bg-background">
           <div className="mx-auto flex min-h-screen max-w-screen-2xl flex-col">
+            <SiteHeader />
             {children}
           </div>
         </div>

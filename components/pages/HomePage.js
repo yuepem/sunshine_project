@@ -49,20 +49,20 @@ export default function HomePage() {
                   Where is the sun now for a city you care about?
                 </p>
               </div>
-              <div className="info-card">
+              {/* <div className="info-card">
                 <p className="eyebrow">Route coverage</p>
                 <p className="mt-3 text-lg font-medium text-foreground">
                   Homepage, locations, cities, tools, guides, sitemap, robots,
                   and true 404 handling.
                 </p>
-              </div>
-              <div className="info-card">
+              </div> */}
+              {/* <div className="info-card">
                 <p className="eyebrow">Preserved UI</p>
                 <p className="mt-3 text-lg font-medium text-foreground">
                   The current 3D model, map, chart, and controls still drive the
                   product experience.
                 </p>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -70,7 +70,7 @@ export default function HomePage() {
         {/* Popular Cities & About Section */}
         <section className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
           <PopularCityLinks limit={8} />
-          <div className="content-card">
+          {/* <div className="content-card">
             <p className="eyebrow">Why this route exists</p>
             <h2 className="mt-2 text-2xl font-semibold text-foreground md:text-3xl">
               Brand entry and selected interaction
@@ -81,7 +81,7 @@ export default function HomePage() {
               experience without forcing a city-page layout onto the landing
               page.
             </p>
-          </div>
+          </div> */}
         </section>
 
         {/* Tools & Guides Section */}
@@ -139,7 +139,7 @@ export default function HomePage() {
 
         {/* Interactive Experience Section */}
         <section aria-labelledby="interactive-experience" className="space-y-4">
-          <div className="content-card">
+          {/* <div className="content-card">
             <p className="eyebrow">Preserved interaction</p>
             <h2
               id="interactive-experience"
@@ -152,7 +152,7 @@ export default function HomePage() {
               migration adds route structure and metadata around it rather than
               replacing it.
             </p>
-          </div>
+          </div> */}
           <SunExperience mode="homepage" />
         </section>
       </div>
