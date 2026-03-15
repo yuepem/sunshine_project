@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Wrench, MapPin, BookOpen } from "lucide-react";
 import Footer from "@/src/components/Footer";
 import SunExperience from "@/components/client/SunExperience";
 import Breadcrumbs from "@/components/seo/Breadcrumbs";
@@ -8,7 +9,8 @@ export default function ToolPage({ tool, featuredLocation }) {
   return (
     <main>
       <div className="page-shell">
-        <section className="content-card space-y-6">
+        {/* Hero Section */}
+        <section className="content-card space-y-6 lg:rounded-3xl">
           <Breadcrumbs
             items={[
               { href: "/", label: "Home" },
@@ -16,36 +18,41 @@ export default function ToolPage({ tool, featuredLocation }) {
             ]}
           />
           <div className="space-y-4">
-            <p className="eyebrow">Tool route</p>
-            <h1 className="text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            <div className="flex items-center gap-2">
+              <Wrench className="h-5 w-5 text-primary" />
+              <p className="eyebrow">Tool route</p>
+            </div>
+            <h1 className="text-balance text-4xl font-bold tracking-tight text-foreground md:text-5xl">
               {tool.h1}
             </h1>
             <p className="lede">{tool.intro}</p>
           </div>
+
+          {/* Info Grid */}
           <div className="grid gap-4 md:grid-cols-3">
-            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-5">
-              <p className="text-sm uppercase tracking-[0.2em] text-teal-300">
-                Preserved source of truth
-              </p>
-              <p className="mt-3 text-base text-white">
+            <div className="info-card">
+              <p className="eyebrow">Preserved source of truth</p>
+              <p className="mt-3 text-base text-foreground">
                 This route uses the existing calculator components instead of a
                 rewritten tool UI.
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-5">
-              <p className="text-sm uppercase tracking-[0.2em] text-teal-300">
-                Featured city
-              </p>
-              <p className="mt-3 text-base text-white">
+            <div className="info-card">
+              <div className="flex items-center gap-2">
+                <MapPin className="h-4 w-4 text-primary" />
+                <p className="eyebrow">Featured city</p>
+              </div>
+              <p className="mt-3 text-base text-foreground">
                 The interactive view starts with {featuredLocation.name},{" "}
                 {featuredLocation.country} and can be changed from the preserved
                 city controls.
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-5">
-              <p className="text-sm uppercase tracking-[0.2em] text-teal-300">
-                Related guide
-              </p>
+            <div className="info-card">
+              <div className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4 text-primary" />
+                <p className="eyebrow">Related guide</p>
+              </div>
               <Link
                 href={`/guides/${
                   tool.slug === "solar-noon-calculator"
@@ -54,7 +61,7 @@ export default function ToolPage({ tool, featuredLocation }) {
                       ? "why-daylight-hours-change"
                       : "what-is-sun-azimuth"
                 }`}
-                className="mt-3 block text-base text-white underline decoration-teal-400/60 underline-offset-4"
+                className="mt-3 block text-base text-primary underline decoration-primary/30 underline-offset-4 hover:decoration-primary"
               >
                 Read the matching concept guide
               </Link>
@@ -62,20 +69,23 @@ export default function ToolPage({ tool, featuredLocation }) {
           </div>
         </section>
 
+        {/* About Section */}
         <section className="content-card">
           <p className="eyebrow">Task-focused experience</p>
-          <h2 className="mt-2 text-2xl font-semibold text-white">
+          <h2 className="mt-2 text-2xl font-semibold text-foreground md:text-3xl">
             Interactive module selection without redesign
           </h2>
-          <p className="mt-4 text-slate-300">
+          <p className="mt-4 leading-relaxed text-muted-foreground">
             The route narrows focus by reusing only the existing components that
             best fit this tool, while preserving their current visual
             presentation and interaction behavior.
           </p>
         </section>
 
+        {/* Interactive Experience */}
         <SunExperience mode={tool.experienceMode} city={featuredLocation} />
 
+        {/* Popular Cities */}
         <PopularCityLinks limit={6} title="Open this tool with another city route" />
       </div>
       <Footer />
