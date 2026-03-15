@@ -14,6 +14,7 @@ export default function ToolPage({ tool, featuredLocation }) {
           <Breadcrumbs
             items={[
               { href: "/", label: "Home" },
+              { href: "/tools", label: "Tools" },
               { href: `/tools/${tool.slug}`, label: tool.name },
             ]}
           />
@@ -69,7 +70,7 @@ export default function ToolPage({ tool, featuredLocation }) {
           </div>
         </section>
 
-        {/* About Section */}
+        {/* About Section
         <section className="content-card">
           <p className="eyebrow">Task-focused experience</p>
           <h2 className="mt-2 text-2xl font-semibold text-foreground md:text-3xl">
@@ -80,7 +81,7 @@ export default function ToolPage({ tool, featuredLocation }) {
             best fit this tool, while preserving their current visual
             presentation and interaction behavior.
           </p>
-        </section>
+        </section> */}
 
         {/* Interactive Experience */}
         <SunExperience mode={tool.experienceMode} city={featuredLocation} />

@@ -21,11 +21,10 @@ function isActivePath(pathname, href) {
 }
 
 function isSectionActive(pathname, section) {
-  if (section.href) {
-    return isActivePath(pathname, section.href);
-  }
-
-  return section.items?.some((item) => isActivePath(pathname, item.href));
+  return (
+    isActivePath(pathname, section.href) ||
+    section.items?.some((item) => isActivePath(pathname, item.href))
+  );
 }
 
 function NavLink({ href, isActive, children }) {
@@ -79,7 +78,17 @@ function DesktopMenu({ section, pathname, isOpen, onToggle }) {
           ].join(" ")}
         >
           <div className="border-b border-border px-3 pb-3">
-            <p className="eyebrow">{section.label}</p>
+            <div className="flex items-center justify-between gap-3">
+              <p className="eyebrow">{section.label}</p>
+              {section.href ? (
+                <Link
+                  href={section.href}
+                  className="text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-colors hover:text-foreground"
+                >
+                  View all
+                </Link>
+              ) : null}
+            </div>
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
               {section.description}
             </p>
@@ -146,8 +155,11 @@ export default function SiteHeader() {
   }, []);
 
   return (
-    <header ref={headerRef} className="border-b border-border bg-background/95">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-5 md:px-6 lg:px-8">
+    <header
+      ref={headerRef}
+      className="sticky top-0 z-30 border-b border-border/80 bg-background/90 backdrop-blur-xl"
+    >
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-4 px-4 py-4 md:px-6 md:py-5 lg:px-8">
         <Link href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-primary/30 bg-primary/10 text-primary">
             <Sun className="h-5 w-5" />
@@ -205,7 +217,7 @@ export default function SiteHeader() {
 
       {isMobileMenuOpen ? (
         <div className="border-t border-border md:hidden">
-          <div className="mx-auto flex w-full max-w-7xl flex-col gap-3 px-4 py-4">
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-3 px-4 py-4">
             {navigationSections.map((section) =>
               section.type === "link" ? (
                 <NavLink
@@ -221,7 +233,17 @@ export default function SiteHeader() {
                   className="rounded-3xl border border-border bg-card p-4"
                 >
                   <div className="border-b border-border pb-3">
-                    <p className="eyebrow">{section.label}</p>
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="eyebrow">{section.label}</p>
+                      {section.href ? (
+                        <Link
+                          href={section.href}
+                          className="text-xs font-semibold uppercase tracking-[0.18em] text-primary transition-colors hover:text-foreground"
+                        >
+                          View all
+                        </Link>
+                      ) : null}
+                    </div>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">
                       {section.description}
                     </p>

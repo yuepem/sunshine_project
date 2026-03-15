@@ -24,7 +24,7 @@ const MainCom = () => {
   }, [latitude, longitude]);
 
   return (
-    <div className="mx-auto bg-slate-800/30 mb-2 max-w-7xl rounded-lg">
+    <div className="mx-auto bg-slate-800/30 mb-2 max-w-6xl rounded-lg">
       <div className="grid grid-cols-1 md:grid-cols-3 md:  gap-4 p-4 rounded-xl ">
         <div className="col-span-2">
           <ModelComponent />

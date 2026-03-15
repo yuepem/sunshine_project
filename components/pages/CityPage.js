@@ -8,7 +8,7 @@ import Breadcrumbs from "@/components/seo/Breadcrumbs";
 export default function CityPage({ location, snapshot }) {
   return (
     <main>
-      <div className="page-shell">
+      <div className="page-shell gap-4">
         {/* Hero Section */}
         <section className="content-card space-y-6 lg:rounded-3xl">
           <Breadcrumbs

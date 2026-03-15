@@ -51,9 +51,19 @@
 }
 
 @layer components {
+  .leaflet-container {
+    z-index: 0;
+  }
+
+  .leaflet-pane,
+  .leaflet-top,
+  .leaflet-bottom {
+    z-index: 10;
+  }
+
   /* Page Container */
   .page-shell {
-    @apply mx-auto flex w-full max-w-7xl flex-col gap-12 px-4 py-8 md:px-6 lg:px-8;
+    @apply mx-auto flex w-full max-w-6xl flex-col gap-12 px-4 pb-4 pt-4;
   }
 
   /* Content Card */

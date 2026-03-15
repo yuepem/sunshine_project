@@ -132,7 +132,7 @@ export default function MapsLeaflet() {
   }, [address, azimuth, latitude, longitude]);
 
   return (
-    <div className="w-full h-full min-h-[250px] rounded-xl overflow-hidden z-[5]">
+    <div className="relative z-0 h-full w-full min-h-[250px] overflow-hidden rounded-xl">
       <div ref={containerRef} className="h-full w-full" />
     </div>
   );

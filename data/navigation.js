@@ -13,6 +13,7 @@ const navigationSections = [
   {
     type: "menu",
     label: "Tools",
+    href: "/tools",
     description: "Open the preserved calculator experiences.",
     align: "end",
     items: tools.map((tool) => ({
@@ -24,6 +25,7 @@ const navigationSections = [
   {
     type: "menu",
     label: "Guides",
+    href: "/guides",
     description: "Read the core concepts behind the data.",
     align: "end",
     items: guides.map((guide) => ({

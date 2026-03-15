@@ -209,7 +209,7 @@ const TimeSlider = () => {
 
   // Rest of the JSX remains the same...
   return (
-    <div className="mx-auto bg-slate-800/80 mb-2 max-w-7xl rounded-lg">
+    <div className="mx-auto bg-slate-800/80 mb-2 max-w-6xl rounded-lg">
       <div className="w-full p-6  rounded-xl shadow-lg select-none">
         <div className="relative w-full h-16">
           <div

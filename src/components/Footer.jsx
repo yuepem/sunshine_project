@@ -4,7 +4,7 @@ import { Info, Mail, Github } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="border-t border-border bg-card">
-      <div className="mx-auto max-w-7xl px-4 py-12 md:px-6 lg:px-8">
+      <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 lg:px-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <h3 className="mb-4 text-lg font-semibold text-foreground">About</h3>

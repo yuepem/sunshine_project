@@ -16,14 +16,14 @@ export default function InputComponent() {
   }, [latitude, longitude]);
 
   return (
-    <div className="mx-auto bg-slate-800/30 mb-2 max-w-7xl rounded-lg">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-xl ">
-      <div className="space-y-3">
-        <TimeProgress />
-        <TimeControl />
-      </div>
-        <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 overflow-hidden">
-          <div className="grid grid-rows-[auto_1fr] h-full gap-2">
+    <div className="mx-auto mb-2 w-full max-w-6xl rounded-lg bg-slate-800/30">
+      <div className="grid grid-cols-1 gap-4 rounded-xl p-4 md:grid-cols-2">
+        <div className="space-y-3">
+          <TimeProgress />
+          <TimeControl />
+        </div>
+        <div className="w-full overflow-hidden rounded-xl bg-gradient-to-b from-slate-900 to-slate-800 p-4 shadow-xl">
+          <div className="grid h-full min-h-[24rem] grid-rows-[auto_1fr] gap-2">
             <h2 className="text-slate-200 text-sm font-semibold bg-slate-800/50 rounded-lg p-2  transition-colors">
               Choose A Location From Map
             </h2>

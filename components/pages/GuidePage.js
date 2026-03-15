@@ -13,6 +13,7 @@ export default function GuidePage({ guide }) {
           <Breadcrumbs
             items={[
               { href: "/", label: "Home" },
+              { href: "/guides", label: "Guides" },
               { href: `/guides/${guide.slug}`, label: guide.h1 },
             ]}
           />

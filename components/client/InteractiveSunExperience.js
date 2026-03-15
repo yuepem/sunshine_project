@@ -10,7 +10,7 @@ import useInputStore from "@/src/stores/inputStore";
 
 const experienceModes = {
   homepage: {
-    header: true,
+    header: false,
     main: true,
     slider: true,
     inputs: true,
@@ -50,7 +50,7 @@ export default function InteractiveSunExperience({
   mode = "homepage",
   city,
 }) {
-  const contentWidthClass = "mx-auto w-full max-w-7xl px-4";
+  const contentWidthClass = "mx-auto w-full max-w-6xl px-4";
   const setLatitude = useInputStore((state) => state.setLatitude);
   const setLongitude = useInputStore((state) => state.setLongitude);
   const setCity = useInputStore((state) => state.setCity);
@@ -94,7 +94,11 @@ export default function InteractiveSunExperience({
           <TimeSliderB />
         </div>
       ) : null}
-      {selectedMode.inputs ? <InputComponent /> : null}
+      {selectedMode.inputs ? (
+        <div className={contentWidthClass}>
+          <InputComponent />
+        </div>
+      ) : null}
       {selectedMode.chart ? (
         <div className={contentWidthClass}>
           <Chart />
