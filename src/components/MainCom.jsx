@@ -7,8 +7,11 @@ import useInputStore from "../stores/inputStore";
 import useSunCalcStore from "../stores/sunSalcStore";
 
 const MainCom = () => {
-  const { date, latitude, longitude, getAddress } = useInputStore();
-  const { calculateSunData } = useSunCalcStore();
+  const date = useInputStore((state) => state.date);
+  const latitude = useInputStore((state) => state.latitude);
+  const longitude = useInputStore((state) => state.longitude);
+  const getAddress = useInputStore((state) => state.getAddress);
+  const calculateSunData = useSunCalcStore((state) => state.calculateSunData);
 
   useEffect(() => {
     calculateSunData({ date, latitude, longitude });

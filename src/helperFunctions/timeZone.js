@@ -1,33 +1,34 @@
-// require('dotenv').config({ path: '../../.env.local' });
-// dotenv is required in node environment. For React app, use use it as below instead. So, the below code works well in Browser but not in Node.
+const GOOGLE_MAPS_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAP_KEY;
 
-//Get timezone from lat & long
-export default async function getTimeZone(latitude, longitude) {
-    const apiKey = process.env.REACT_APP_GOOGLE_MAP_KEY;
-
-    if (!apiKey) {
-        throw new Error('Google Maps API key is not set');
+// Get timezone from lat & long. If the Google key is unavailable, keep the
+// existing timezone instead of throwing inside the UI render cycle.
+export default async function getTimeZone(latitude, longitude, fallbackTimeZone) {
+    if (!GOOGLE_MAPS_KEY) {
+        return fallbackTimeZone ?? null;
     }
 
     const timestamp = Math.floor(Date.now() / 1000);
-    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${latitude},${longitude}&timestamp=${timestamp}&key=${apiKey}`;
-
+    const url = `https://maps.googleapis.com/maps/api/timezone/json?location=${latitude},${longitude}&timestamp=${timestamp}&key=${GOOGLE_MAPS_KEY}`;
 
     try {
         const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error(`Timezone request failed with status ${response.status}`);
+        }
+
         const data = await response.json();
 
-        // Log full response for debugging
-        // console.log('Full API response:', JSON.stringify(data, null, 2));
-
-        if (data.status === 'OK') {
+        if (data.status === 'OK' && data.timeZoneId) {
             return data.timeZoneId;
-        } else {
-            throw new Error(`API returned status: ${data.status}, error message: ${data.errorMessage || 'No error message provided'}`);
         }
+
+        throw new Error(
+            `API returned status: ${data.status}, error message: ${data.errorMessage || 'No error message provided'}`
+        );
     } catch (error) {
-        console.error('Full error:', error);
-        throw new Error(`Failed to fetch time zone: ${error.message}`);
+        console.warn('Failed to fetch time zone, falling back to current value.', error);
+        return fallbackTimeZone ?? null;
     }
 }
 

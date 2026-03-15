@@ -6,7 +6,9 @@ import TimeProgress from "./TimeProgress/TimeProgress";
 import Maps from "./input/locationInput/Maps";
 
 export default function InputComponent() {
-  const { getTimeZoneCode, latitude, longitude } = useInputStore();
+  const getTimeZoneCode = useInputStore((state) => state.getTimeZoneCode);
+  const latitude = useInputStore((state) => state.latitude);
+  const longitude = useInputStore((state) => state.longitude);
 
   useEffect(() => {
     getTimeZoneCode();
@@ -22,9 +24,9 @@ export default function InputComponent() {
       </div>
         <div className="w-full max-w-2xl bg-gradient-to-b from-slate-900 to-slate-800 rounded-xl shadow-xl p-4 overflow-hidden">
           <div className="grid grid-rows-[auto_1fr] h-full gap-2">
-            <h1 className="text-slate-200 text-sm font-semibold bg-slate-800/50 rounded-lg p-2  transition-colors">
+            <h2 className="text-slate-200 text-sm font-semibold bg-slate-800/50 rounded-lg p-2  transition-colors">
               Choose A Location From Map
-            </h1>
+            </h2>
             <div className="w-full h-full overflow-hidden rounded-lg">
               <Maps />
             </div>
@@ -34,5 +36,3 @@ export default function InputComponent() {
     </div>
   );
 }
-
-

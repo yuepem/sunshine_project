@@ -11,7 +11,7 @@ const Footer = () => {
             <h3 className="mb-4 text-lg font-semibold text-slate-100">About</h3>
             <p className="text-sm text-slate-400">
               {/* <span> Where is the sun ?</span> */}
-              From the darkest winter days to the brightest summer nights, the tool helps to understand the sun's patterns. Perfect for Nordic countries where sunlight shapes daily life and annual rhythms through dramatic seasonal changes.
+              From the darkest winter days to the brightest summer nights, the tool helps to understand the sun&apos;s patterns. Perfect for Nordic countries where sunlight shapes daily life and annual rhythms through dramatic seasonal changes.
             </p>
           </div>
           <div>
@@ -101,7 +101,11 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8 border-t space-y-3 border-slate-800 pt-8 text-center text-sm text-slate-400">
-          <p className="text-base"> <em>"In the depth of winter, I finally learned that within me there lay an invincible summer." - Albert Camus</em></p>
+          <p className="text-base">
+            <em>
+              &quot;In the depth of winter, I finally learned that within me there lay an invincible summer.&quot; - Albert Camus
+            </em>
+          </p>
           <p> {new Date().getFullYear()} </p>
         </div>
       </div>

@@ -1,139 +1,139 @@
-import React, { useEffect } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  useMap,
-  useMapEvents,
-  CircleMarker,
-  Polyline,
-} from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import { Icon } from "leaflet";
+"use client";
 
+import React, { useEffect, useRef } from "react";
+import L, { Icon } from "leaflet";
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 import useInputStore from "../../../stores/inputStore";
 import useSunCalcStore from "../../../stores/sunSalcStore";
 
-// Fix for default marker icon
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+  iconRetinaUrl: markerIcon2x.src,
+  iconUrl: markerIcon.src,
+  shadowUrl: markerShadow.src,
 });
 
-// Component to handle map clicks and updates
-const MapController = ({ setLatitude, setLongitude }) => {
-  const map = useMap();
+function getEndPoint([startLat, startLng], azimuth, radius) {
+  const adjustedAzimuth = azimuth + Math.PI;
+  const distance = radius / 111000;
 
-  // Handle map clicks
-  useMapEvents({
-    click(e) {
-      setLatitude(e.latlng.lat);
-      setLongitude(e.latlng.lng);
-      map.setView(e.latlng, map.getZoom());
-    },
-  });
+  return [
+    startLat + distance * Math.cos(adjustedAzimuth),
+    startLng + distance * Math.sin(adjustedAzimuth),
+  ];
+}
 
-  return null;
-};
+export default function MapsLeaflet() {
+  const latitude = useInputStore((state) => state.latitude);
+  const longitude = useInputStore((state) => state.longitude);
+  const address = useInputStore((state) => state.address);
+  const setLatitude = useInputStore((state) => state.setLatitude);
+  const setLongitude = useInputStore((state) => state.setLongitude);
+  const azimuth = useSunCalcStore((state) => state.sunPosition.azimuth);
 
-const SunDirectionWithCircle = ({ position, azimuth, radius = 100 }) => {
-  // Calculate end point for the line within the circle
-  const getEndPoint = (startLat, startLng, azimuthRad, radius) => {
-    const adjustedAzimuth = azimuthRad + Math.PI;
-    const distance = radius / 111000;
+  const containerRef = useRef(null);
+  const mapRef = useRef(null);
+  const markerRef = useRef(null);
+  const ringRef = useRef(null);
+  const centerRef = useRef(null);
+  const lineRef = useRef(null);
 
-    const latOffset = distance * Math.cos(adjustedAzimuth);
-    const lngOffset = distance * Math.sin(adjustedAzimuth);
+  useEffect(() => {
+    const container = containerRef.current;
 
-    return [startLat + latOffset, startLng + lngOffset];
-  };
+    if (!container || mapRef.current) {
+      return;
+    }
 
-  const endPoint = getEndPoint(position[0], position[1], azimuth, radius);
+    if (container._leaflet_id) {
+      delete container._leaflet_id;
+    }
+
+    const map = L.map(container, {
+      center: [latitude, longitude],
+      zoom: 17,
+    });
+
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
+
+    const marker = L.marker([latitude, longitude]).addTo(map);
+    marker.bindPopup(address || "");
+
+    const ring = L.circle([latitude, longitude], {
+      radius: 1000,
+      color: "teal",
+      weight: 2,
+      fillColor: "teal",
+      fillOpacity: 0.2,
+    }).addTo(map);
+
+    const center = L.circleMarker([latitude, longitude], {
+      radius: 4,
+      color: "yellow",
+      fillColor: "#ffd700",
+      fillOpacity: 1,
+    }).addTo(map);
+
+    const line = L.polyline(
+      [[latitude, longitude], getEndPoint([latitude, longitude], azimuth, 1000)],
+      {
+        color: "teal",
+        weight: 2,
+        opacity: 1,
+      }
+    ).addTo(map);
+
+    map.on("click", (event) => {
+      setLatitude(event.latlng.lat);
+      setLongitude(event.latlng.lng);
+      map.setView(event.latlng, map.getZoom());
+    });
+
+    mapRef.current = map;
+    markerRef.current = marker;
+    ringRef.current = ring;
+    centerRef.current = center;
+    lineRef.current = line;
+
+    return () => {
+      lineRef.current = null;
+      centerRef.current = null;
+      ringRef.current = null;
+      markerRef.current = null;
+      mapRef.current?.remove();
+      mapRef.current = null;
+    };
+  }, [address, azimuth, latitude, longitude, setLatitude, setLongitude]);
+
+  useEffect(() => {
+    const map = mapRef.current;
+
+    if (!map) {
+      return;
+    }
+
+    const position = [latitude, longitude];
+    const endPoint = getEndPoint(position, azimuth, 1000);
+
+    markerRef.current?.setLatLng(position);
+    markerRef.current?.getPopup()?.setContent(address || "");
+
+    ringRef.current?.setLatLng(position);
+    centerRef.current?.setLatLng(position);
+    lineRef.current?.setLatLngs([position, endPoint]);
+
+    map.setView(position, map.getZoom());
+  }, [address, azimuth, latitude, longitude]);
 
   return (
-    <>
-      {/* Circle with radius */}
-      <CircleMarker
-        center={position}
-        radius={radius / 10} // Convert meters to pixels for CircleMarker
-        color="teal"
-        weight={2}
-        fillOpacity={0.2}
-      >
-        <Popup>
-           Azimuth:{" "}
-          {((azimuth * 180) / Math.PI + 180).toFixed(2)}°
-        </Popup>
-
-        {/* Direction line within the circle */}
-        <Polyline
-          positions={[position, endPoint]}
-          color="teal"
-          weight={2}
-          opacity={1}
-        />
-      </CircleMarker>
-
-      {/* Center point */}
-      <CircleMarker
-        center={position}
-        radius={4}
-        color="yellow"
-        fillColor="#ffd700"
-        fillOpacity={1}
-      />
-    </>
-  );
-};
-
-const MapsLeaflet = () => {
-  const { latitude, longitude, address, setLatitude, setLongitude } =
-    useInputStore();
-  const { sunPosition } = useSunCalcStore();
-  const { azimuth } = sunPosition;
-  const position = [latitude, longitude];
-
-  // handle map updates
-  const MapUpdater = ({ center }) => {
-    const map = useMap();
-    useEffect(() => {
-      map.setView(center, map.getZoom());
-    }, [map, center]);
-    return null;
-  };
-
-  return (
-    <div className="w-full h-full min-h-[250px]  rounded-xl overflow-hidden z-[5]">
-      <MapContainer center={position} zoom={17} className="h-full w-full">
-        <TileLayer
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        />
-
-   
-        <Marker position={position}>
-          <Popup>{address}</Popup>
-        </Marker>
-        <MapUpdater center={position} />
-
-        {/* <CircleMarker center={position} radius={100} color="teal">
-          <Popup>{address}</Popup>
-        </CircleMarker> */}
-
-        <SunDirectionWithCircle
-          position={position}
-          azimuth={azimuth}
-          radius={1000}
-        />
-
-        <MapController setLatitude={setLatitude} setLongitude={setLongitude} />
-      </MapContainer>
+    <div className="w-full h-full min-h-[250px] rounded-xl overflow-hidden z-[5]">
+      <div ref={containerRef} className="h-full w-full" />
     </div>
   );
-};
-
-export default MapsLeaflet;
+}

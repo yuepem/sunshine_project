@@ -36,13 +36,16 @@ const useInputStore = create((set, get) => ({
     },
 
     timeZoneCode: async () => {
-        const { latitude, longitude, setTimeZone, setIsLoading, setError } = get();
+        const { latitude, longitude, timeZone, setTimeZone, setIsLoading, setError } = get();
         setIsLoading(true);
         setError(null);
 
         try {
-            const timeZone = await getTimeZone(latitude, longitude);
-            setTimeZone(timeZone);
+            const nextTimeZone = await getTimeZone(latitude, longitude, timeZone);
+
+            if (nextTimeZone) {
+                setTimeZone(nextTimeZone);
+            }
             /* Full API response: {
                 "dstOffset": 3600,
                 "rawOffset": 3600,
