@@ -42,6 +42,9 @@
     "tailwindcss": "3.4.13"
   },
   "scripts": {
+    "clean:next": "node scripts/clean-next.js",
+    "predev": "npm run clean:next",
+    "prebuild": "npm run clean:next",
     "dev": "next dev",
     "prestart": "node scripts/ensure-next-build.js",
     "start": "next start",
