@@ -2,9 +2,11 @@ import { notFound } from "next/navigation";
 import GuidePage from "@/components/pages/GuidePage";
 import guidesData from "@/data/guides";
 import metadataUtils from "@/lib/seo/metadata";
+import schemaUtils from "@/lib/seo/schema";
 
 const { guides, getGuideBySlug } = guidesData;
 const { buildMetadata } = metadataUtils;
+const { buildArticleSchema, serializeJsonLd } = schemaUtils;
 
 export function generateStaticParams() {
   return guides.map((guide) => ({
@@ -19,13 +21,15 @@ export function generateMetadata({ params }) {
     return buildMetadata({
       title: "Guide Not Found",
       description: "The requested guide page does not exist.",
-      pathname: `/guides/${params.slug}`,
+      pathname: null,
+      index: false,
+      includeCanonical: false,
     });
   }
 
   return buildMetadata({
-    title: guide.metadata?.title || guide.title,
-    description: guide.metadata?.description || guide.description,
+    title: `${guide.h1} - Explained Simply | Where Is The Sun`,
+    description: `${guide.description} Learn how it works and explore it with our interactive tools.`,
     pathname: `/guides/${guide.slug}`,
     type: "article",
   });
@@ -38,5 +42,23 @@ export default function GuideRoutePage({ params }) {
     notFound();
   }
 
-  return <GuidePage guide={guide} />;
+  const schema = buildArticleSchema({
+    headline: guide.h1,
+    description: `${guide.description} Learn how it works and explore it with our interactive tools.`,
+    pathname: `/guides/${guide.slug}`,
+    publishedDate: guide.publishedDate,
+    modifiedDate: guide.modifiedDate,
+  });
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd(schema),
+        }}
+      />
+      <GuidePage guide={guide} />
+    </>
+  );
 }

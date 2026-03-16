@@ -2,11 +2,14 @@ const assert = require("assert");
 const locationsData = require("../../data/locations");
 const toolsData = require("../../data/tools");
 const guidesData = require("../../data/guides");
+const redirectUtils = require("../../lib/seo/redirects");
+const nextConfig = require("../../next.config.js");
 
 async function run() {
   const { locations } = locationsData;
   const { tools } = toolsData;
   const { guides } = guidesData;
+  const { legacyRedirects } = redirectUtils;
 
   const locationSlugs = locations.map((location) => location.slug);
   const toolSlugs = tools.map((tool) => tool.slug);
@@ -55,6 +58,29 @@ async function run() {
   assert.ok(routes.includes("/guides/what-is-solar-noon"));
   assert.ok(routes.includes("/sitemap.xml"));
   assert.ok(routes.includes("/robots.txt"));
+
+  for (const location of locations) {
+    assert.ok(location.relatedToolSlugs.length >= 3);
+    assert.ok(location.relatedGuideSlugs.length >= 2);
+  }
+
+  assert.ok(legacyRedirects.length > 0);
+  for (const redirect of legacyRedirects) {
+    assert.ok(redirect.source.startsWith("/"));
+    assert.ok(redirect.destination.startsWith("/"));
+    assert.notStrictEqual(redirect.source, redirect.destination);
+  }
+
+  const redirectRules = await nextConfig.redirects();
+  assert.strictEqual(redirectRules.length, legacyRedirects.length);
+  assert.ok(redirectRules.every((redirect) => redirect.permanent === true));
+  assert.ok(
+    redirectRules.some(
+      (redirect) =>
+        redirect.source === "/guides/solar-noon" &&
+        redirect.destination === "/guides/what-is-solar-noon"
+    )
+  );
 }
 
 module.exports = { run };

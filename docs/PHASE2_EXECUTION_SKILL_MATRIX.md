@@ -117,6 +117,41 @@ Every execution pass for this redesign must do the following before file edits b
 - `DEP-009` status: `Not complete`
 - Shared-file impact in this pass: `None. The pass is limited to guide content, guide-route rendering, non-blocked data models, navigation data, and matching tests.`
 
+### Pass 5
+
+- Date: `2026-03-16`
+- Phase scope: `Implementation Phase 5 (TASK-019 through TASK-021)`
+- Skills used: `executing-plans`, `seo-audit`, `building-components`
+- References read before edits:
+  - `plan/design-phase2-skill-governed-redesign-1.md`
+  - `docs/PHASE2_EXECUTION_SKILL_MATRIX.md`
+  - `docs/PHASE2_REDESIGN_SPECIFICATION.md`
+  - `.agents/skills/seo-audit/SKILL.md`
+  - `.agents/skills/building-components/SKILL.md`
+  - `lib/seo/site.js`
+  - `lib/seo/metadata.js`
+  - `components/seo/Breadcrumbs.js`
+  - `app/page.js`
+  - `app/locations/page.js`
+  - `app/locations/[slug]/page.js`
+  - `app/tools/page.js`
+  - `app/tools/[slug]/page.js`
+  - `app/guides/page.js`
+  - `app/guides/[slug]/page.js`
+  - `app/sitemap.js`
+  - `app/robots.js`
+  - `app/not-found.js`
+  - `next.config.js`
+  - `lib/sun/calculateSunSnapshot.js`
+  - `tests/seo/metadata.test.js`
+  - `tests/seo/routes.test.js`
+- `DEP-009` status: `Not complete`
+- Shared-file impact in this pass: `None. The pass stayed within metadata, SEO helpers, route files, non-blocked schema UI, redirect config, and test coverage.`
+- Notes:
+  - `SearchAction` was intentionally omitted from the `WebSite` schema because the project does not expose a truthful tolerant search-results route for arbitrary terms.
+  - The unified share asset was implemented at `public/og/share-default-1200x630.svg` as the project-approved 1200x630 Open Graph image path.
+  - `pages/_document.js` was added as a minimal compatibility file because `next build` was failing on a missing legacy document module during page-data collection.
+
 ## Skill Matrix
 
 | Task category | Required skill(s) | Mandatory references | Target files | Output expectations | DEP-009 coordination |

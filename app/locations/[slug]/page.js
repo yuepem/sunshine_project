@@ -23,13 +23,17 @@ export function generateMetadata({ params }) {
     return buildMetadata({
       title: "Location Not Found",
       description: "The requested city page does not exist.",
-      pathname: `/locations/${params.slug}`,
+      pathname: null,
+      index: false,
+      includeCanonical: false,
     });
   }
 
+  const snapshot = calculateSunSnapshot(location);
+
   return buildMetadata({
-    title: `Sunrise & Sunset Times in ${location.name} Today`,
-    description: `Check sunrise, sunset, daylight hours, solar noon, and current sun position for ${location.name}, ${location.country}.`,
+    title: `Sunrise & Sunset Times in ${location.name} Today | Where Is The Sun`,
+    description: `See today's sunrise at ${snapshot.sunrise}, sunset at ${snapshot.sunset}, and ${snapshot.daylightDuration} of daylight in ${location.name}, ${location.country}. Explore sun position, solar noon, and seasonal changes.`,
     pathname: `/locations/${location.slug}`,
   });
 }

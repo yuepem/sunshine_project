@@ -7,6 +7,7 @@ const { locations } = locationsData;
 const { tools } = toolsData;
 const { guides } = guidesData;
 const { siteUrl } = siteConfig;
+const lastModified = new Date("2026-03-16T00:00:00.000Z");
 
 export default function sitemap() {
   const routes = [
@@ -19,6 +20,6 @@ export default function sitemap() {
 
   return routes.map((route) => ({
     url: `${siteUrl}${route || "/"}`,
-    lastModified: new Date(),
+    lastModified,
   }));
 }

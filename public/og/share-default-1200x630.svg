@@ -1,0 +1,20 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F6EFE4"/>
+  <rect width="1200" height="630" fill="url(#paint0_linear)"/>
+  <circle cx="942" cy="142" r="86" fill="#F4B740"/>
+  <circle cx="942" cy="142" r="120" fill="#F4B740" fill-opacity="0.18"/>
+  <path d="M0 502C110 450 226 424 348 424C522 424 628 498 802 498C933 498 1068 451 1200 374V630H0V502Z" fill="#2A6F97" fill-opacity="0.16"/>
+  <path d="M0 548C125 492 238 464 338 464C496 464 649 550 828 550C953 550 1077 513 1200 462V630H0V548Z" fill="#1D4E6F" fill-opacity="0.18"/>
+  <text x="84" y="144" fill="#A75D00" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" letter-spacing="4">WHERE IS THE SUN</text>
+  <text x="84" y="262" fill="#1F1A14" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">Sun Position, Sunrise</text>
+  <text x="84" y="340" fill="#1F1A14" font-family="Arial, Helvetica, sans-serif" font-size="72" font-weight="700">&amp; Daylight Data</text>
+  <text x="84" y="418" fill="#5C5249" font-family="Arial, Helvetica, sans-serif" font-size="30">Track the sun, compare cities, and explore live solar tools.</text>
+  <rect x="84" y="476" width="264" height="64" rx="32" fill="#1D4E6F"/>
+  <text x="124" y="518" fill="#F6EFE4" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">whereisthesun.org</text>
+  <defs>
+    <linearGradient id="paint0_linear" x1="126" y1="64" x2="1058" y2="596" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF4D9"/>
+      <stop offset="1" stop-color="#F3E2CF"/>
+    </linearGradient>
+  </defs>
+</svg>
