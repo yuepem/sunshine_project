@@ -82,15 +82,6 @@ export default function GuidesPage() {
                 (tool) => tool.slug === guide.relatedTool,
               );
 
-              const guideSummaryBySlug = {
-                "what-is-solar-noon":
-                  "Understand why midday sun is not always the same as 12:00, and why it shifts across places and seasons.",
-                "what-is-sun-azimuth":
-                  "Learn how azimuth describes direction so you can read where sunlight arrives from during the day.",
-                "why-daylight-hours-change":
-                  "See why the year stretches and compresses daylight differently depending on latitude.",
-              };
-
               return (
                 <li key={guide.slug} className="h-full">
                   <Link href={`/guides/${guide.slug}`} className="link-card h-full">
@@ -99,7 +90,10 @@ export default function GuidesPage() {
                       {guide.h1}
                     </h3>
                     <p className="mt-4 text-sm leading-6 text-muted-foreground">
-                      {guideSummaryBySlug[guide.slug]}
+                      {guide.description}
+                    </p>
+                    <p className="mt-4 text-sm font-medium text-foreground">
+                      {guide.readingTime}
                     </p>
                     {relatedTool ? (
                       <p className="mt-5 text-sm text-muted-foreground">

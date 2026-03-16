@@ -51,13 +51,14 @@ async function run() {
       metadata.alternates.canonical,
       `https://whereisthesun.org/tools/${tool.slug}`
     );
-    assert.ok(metadata.description.includes("preserved"));
+    assert.ok(metadata.description.length > 20);
+    assert.ok(!metadata.description.includes("preserved"));
   }
 
   for (const guide of guides) {
     const metadata = buildMetadata({
-      title: guide.title,
-      description: guide.description,
+      title: guide.metadata?.title || guide.title,
+      description: guide.metadata?.description || guide.description,
       pathname: `/guides/${guide.slug}`,
       type: "article",
     });
@@ -67,6 +68,7 @@ async function run() {
       metadata.alternates.canonical,
       `https://whereisthesun.org/guides/${guide.slug}`
     );
+    assert.ok(metadata.description.length > 20);
   }
 }
 

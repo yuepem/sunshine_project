@@ -24,10 +24,21 @@ async function run() {
     "sun-position-calculator",
   ]);
   assert.deepStrictEqual(guideSlugs.sort(), [
+    "best-times-outdoor-activities",
+    "daylight-hours-by-latitude",
+    "how-sunrise-sunset-calculated",
+    "solar-noon-vs-clock-noon",
+    "sun-angle-photography-golden-hour",
     "what-is-solar-noon",
     "what-is-sun-azimuth",
     "why-daylight-hours-change",
   ]);
+
+  for (const guide of guides) {
+    assert.ok(toolSlugs.includes(guide.relatedTool));
+    assert.ok(guide.relatedCities.length >= 2);
+    assert.ok(guide.relatedGuides.length >= 1);
+  }
 
   const routes = [
     "/",

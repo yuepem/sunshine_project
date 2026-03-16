@@ -24,8 +24,8 @@ export function generateMetadata({ params }) {
   }
 
   return buildMetadata({
-    title: guide.title,
-    description: guide.description,
+    title: guide.metadata?.title || guide.title,
+    description: guide.metadata?.description || guide.description,
     pathname: `/guides/${guide.slug}`,
     type: "article",
   });

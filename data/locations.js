@@ -26,7 +26,7 @@ function buildSunFacts({
   ];
 }
 
-const locations = [
+const baseLocations = [
   {
     slug: "stockholm",
     name: "Stockholm",
@@ -341,6 +341,170 @@ const locations = [
     }),
   },
 ];
+
+const locationRelationships = {
+  stockholm: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "why-daylight-hours-change",
+      "solar-noon-vs-clock-noon",
+      "daylight-hours-by-latitude",
+    ],
+    homepageFeatured: true,
+  },
+  paris: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "what-is-solar-noon",
+      "solar-noon-vs-clock-noon",
+      "how-sunrise-sunset-calculated",
+    ],
+    homepageFeatured: false,
+  },
+  london: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "how-sunrise-sunset-calculated",
+      "why-daylight-hours-change",
+      "what-is-sun-azimuth",
+    ],
+    homepageFeatured: false,
+  },
+  "new-york": {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "best-times-outdoor-activities",
+      "what-is-sun-azimuth",
+      "why-daylight-hours-change",
+    ],
+    homepageFeatured: true,
+  },
+  tokyo: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "what-is-sun-azimuth",
+      "how-sunrise-sunset-calculated",
+      "best-times-outdoor-activities",
+    ],
+    homepageFeatured: true,
+  },
+  sydney: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "daylight-hours-by-latitude",
+      "best-times-outdoor-activities",
+      "why-daylight-hours-change",
+    ],
+    homepageFeatured: true,
+  },
+  "cape-town": {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "daylight-hours-by-latitude",
+      "sun-angle-photography-golden-hour",
+      "best-times-outdoor-activities",
+    ],
+    homepageFeatured: false,
+  },
+  "los-angeles": {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "sun-angle-photography-golden-hour",
+      "what-is-sun-azimuth",
+      "best-times-outdoor-activities",
+    ],
+    homepageFeatured: true,
+  },
+  singapore: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "daylight-hours-by-latitude",
+      "what-is-solar-noon",
+      "why-daylight-hours-change",
+    ],
+    homepageFeatured: false,
+  },
+  reykjavik: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "what-is-solar-noon",
+      "why-daylight-hours-change",
+      "daylight-hours-by-latitude",
+    ],
+    homepageFeatured: true,
+  },
+  dubai: {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "sun-angle-photography-golden-hour",
+      "what-is-sun-azimuth",
+      "best-times-outdoor-activities",
+    ],
+    homepageFeatured: true,
+  },
+  "mexico-city": {
+    relatedToolSlugs: [
+      "sun-position-calculator",
+      "daylight-hours-calculator",
+      "solar-noon-calculator",
+    ],
+    relatedGuideSlugs: [
+      "solar-noon-vs-clock-noon",
+      "how-sunrise-sunset-calculated",
+      "daylight-hours-by-latitude",
+    ],
+    homepageFeatured: false,
+  },
+};
+
+const locations = baseLocations.map((location) => ({
+  ...location,
+  ...locationRelationships[location.slug],
+}));
 
 function getLocationBySlug(slug) {
   return locations.find((location) => location.slug === slug);

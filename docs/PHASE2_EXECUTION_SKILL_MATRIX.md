@@ -85,6 +85,38 @@ Every execution pass for this redesign must do the following before file edits b
 - `DEP-009` status: `Not complete`
 - Shared-file impact in this pass: `None. Only TASK-013 was executed because TASK-012, TASK-014, and TASK-015 remain gated by DEP-009.`
 
+### Pass 4
+
+- Date: `2026-03-16`
+- Phase scope: `Implementation Phase 4 (TASK-016 through TASK-018)`
+- Skills used: `executing-plans`, `content-creator`, `copywriting`, `seo-audit`, `ui-ux-pro-max`
+- References read before edits:
+  - `plan/design-phase2-skill-governed-redesign-1.md`
+  - `docs/PHASE2_EXECUTION_SKILL_MATRIX.md`
+  - `docs/PHASE2_REDESIGN_SPECIFICATION.md`
+  - `design-system/where-is-the-sun/pages/guide-detail.md`
+  - `data/guides.js`
+  - `data/tools.js`
+  - `data/locations.js`
+  - `data/navigation.js`
+  - `components/pages/GuidePage.js`
+  - `components/pages/GuidesPage.js`
+  - `app/guides/[slug]/page.js`
+  - `app/guides/page.js`
+  - `lib/seo/metadata.js`
+  - `components/navigation/SiteHeader.js`
+  - `components/navigation/PopularCityLinks.js`
+  - `components/search/QuickCitySelector.js`
+  - `/Users/iemdev/.codex/skills/executing-plans/SKILL.md`
+  - `/Users/iemdev/.agents/skills/content-creator/SKILL.md`
+  - `/Users/iemdev/.agents/skills/copywriting/SKILL.md`
+  - `.agents/skills/seo-audit/SKILL.md`
+  - `.agents/skills/ui-ux-pro-max/SKILL.md`
+  - `tests/seo/metadata.test.js`
+  - `tests/seo/routes.test.js`
+- `DEP-009` status: `Not complete`
+- Shared-file impact in this pass: `None. The pass is limited to guide content, guide-route rendering, non-blocked data models, navigation data, and matching tests.`
+
 ## Skill Matrix
 
 | Task category | Required skill(s) | Mandatory references | Target files | Output expectations | DEP-009 coordination |
