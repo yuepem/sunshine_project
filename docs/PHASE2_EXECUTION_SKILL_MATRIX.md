@@ -11,7 +11,9 @@ Every execution pass for this redesign must do the following before file edits b
 3. State whether `DEP-009` from `plan/refactor-react-next-performance-1.md` is already complete when the task touches shared files.
 4. Stop shared-file redesign work if `DEP-009` is incomplete, unless the changes are being delivered in one coordinated branch that preserves both plans.
 
-## Current Execution Pass
+## Execution Passes
+
+### Pass 1
 
 - Date: `2026-03-16`
 - Phase scope: `Implementation Phase 1`
@@ -26,6 +28,43 @@ Every execution pass for this redesign must do the following before file edits b
   - `.agents/skills/ui-ux-pro-max/SKILL.md`
 - `DEP-009` status: `Not complete`
 - Shared-file impact in this pass: `None. Phase 1 changes are limited to repository docs and design-system assets.`
+
+### Pass 2
+
+- Date: `2026-03-16`
+- Phase scope: `Implementation Phase 2 (non-blocked tasks only)`
+- Skills used: `ui-ux-pro-max`, `building-components`, `copywriting`, `seo-audit`
+- References read before edits:
+  - `plan/design-phase2-skill-governed-redesign-1.md`
+  - `docs/PHASE2_REDESIGN_SPECIFICATION.md`
+  - `docs/PHASE2_EXECUTION_SKILL_MATRIX.md`
+  - `design-system/where-is-the-sun/MASTER.md`
+  - `design-system/where-is-the-sun/pages/locations.md`
+  - `design-system/where-is-the-sun/pages/tools.md`
+  - `design-system/where-is-the-sun/pages/guides.md`
+  - `plan/refactor-react-next-performance-1.md`
+  - `app/globals.css`
+  - `app/locations/page.js`
+  - `app/tools/page.js`
+  - `app/guides/page.js`
+  - `components/pages/HomePage.js`
+  - `components/pages/ToolsPage.js`
+  - `components/pages/GuidesPage.js`
+  - `components/seo/Breadcrumbs.js`
+  - `components/navigation/PopularCityLinks.js`
+  - `data/locations.js`
+  - `data/tools.js`
+  - `data/guides.js`
+  - `data/navigation.js`
+  - `lib/seo/metadata.js`
+  - `tailwind.config.js`
+  - `package.json`
+  - `.agents/skills/ui-ux-pro-max/SKILL.md`
+  - `.agents/skills/building-components/SKILL.md`
+  - `/Users/iemdev/.agents/skills/copywriting/SKILL.md`
+  - `.agents/skills/seo-audit/SKILL.md`
+- `DEP-009` status: `Not complete`
+- Shared-file impact in this pass: `TASK-005`, `TASK-006`, `TASK-008`, and `TASK-009` only. `TASK-007` and `TASK-010` remained deferred because they touch files gated by CON-007.`
 
 ## Skill Matrix
 

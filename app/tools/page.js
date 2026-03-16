@@ -4,9 +4,9 @@ import metadataUtils from "@/lib/seo/metadata";
 const { buildMetadata } = metadataUtils;
 
 export const metadata = buildMetadata({
-  title: "Solar Tools for Sun Position, Daylight, and Solar Noon",
+  title: "Free Sun Calculators - Position, Daylight & Solar Noon | Where Is The Sun",
   description:
-    "Browse the preserved solar tools for sun position, daylight hours, and solar noon across supported city routes.",
+    "Three focused calculators for sun position, daylight hours, and solar noon. Interactive, visual, free.",
   pathname: "/tools",
 });
 

@@ -4,9 +4,9 @@ import metadataUtils from "@/lib/seo/metadata";
 const { buildMetadata } = metadataUtils;
 
 export const metadata = buildMetadata({
-  title: "Solar Guides for Azimuth, Daylight, and Solar Noon",
+  title: "Sun & Daylight Guides | Where Is The Sun",
   description:
-    "Browse the guide library for solar noon, daylight hours, sun azimuth, and related live tool routes.",
+    "Understand solar noon, sun azimuth, and seasonal daylight changes with clear explanations and linked interactive tools.",
   pathname: "/guides",
 });
 
