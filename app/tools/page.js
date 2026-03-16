@@ -1,18 +1,13 @@
 import ToolsPage from "@/components/pages/ToolsPage";
 import toolsData from "@/data/tools";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 import schemaUtils from "@/lib/seo/schema";
 
 const { tools } = toolsData;
-const { buildMetadata } = metadataUtils;
+const { buildToolsPageMetadata } = pageMetadataUtils;
 const { buildCollectionPageSchema, serializeJsonLd } = schemaUtils;
 
-export const metadata = buildMetadata({
-  title: "Free Sun Calculators - Position, Daylight & Solar Noon | Where Is The Sun",
-  description:
-    "Three focused calculators for sun position, daylight hours, and solar noon. Interactive, visual, free.",
-  pathname: "/tools",
-});
+export const metadata = buildToolsPageMetadata();
 
 export default function Page() {
   const schema = buildCollectionPageSchema({

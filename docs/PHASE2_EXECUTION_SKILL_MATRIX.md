@@ -152,6 +152,64 @@ Every execution pass for this redesign must do the following before file edits b
   - The unified share asset was implemented at `public/og/share-default-1200x630.svg` as the project-approved 1200x630 Open Graph image path.
   - `pages/_document.js` was added as a minimal compatibility file because `next build` was failing on a missing legacy document module during page-data collection.
 
+### Pass 6
+
+- Date: `2026-03-16`
+- Phase scope: `Implementation Phase 6 (TASK-022 through TASK-026)`
+- Skills used: `executing-plans`, `seo-audit`, `web-design-guidelines`, `ui-ux-pro-max`
+- References read before edits:
+  - `plan/design-phase2-skill-governed-redesign-1.md`
+  - `docs/PHASE2_EXECUTION_SKILL_MATRIX.md`
+  - `docs/PHASE2_REDESIGN_SPECIFICATION.md`
+  - `design-system/where-is-the-sun/MASTER.md`
+  - `design-system/where-is-the-sun/pages/home.md`
+  - `design-system/where-is-the-sun/pages/location-detail.md`
+  - `design-system/where-is-the-sun/pages/tool-detail.md`
+  - `plan/refactor-react-next-performance-1.md`
+  - `.agents/skills/seo-audit/SKILL.md`
+  - `.agents/skills/web-design-guidelines/SKILL.md`
+  - `/Users/iemdev/.codex/skills/executing-plans/SKILL.md`
+  - `scripts/verify-seo-pages.js`
+  - `tests/seo/metadata.test.js`
+  - `tests/seo/routes.test.js`
+  - `app/sitemap.js`
+  - `app/layout.js`
+  - `components/pages/HomePage.js`
+  - `components/pages/CityPage.js`
+  - `components/pages/ToolPage.js`
+- `DEP-009` status: `Not complete`
+- Shared-file impact in this pass: `None. The pass stayed within verification, tests, reporting, and a non-blocked sitemap correction in app/sitemap.js.`
+- Notes:
+  - Fresh review guidance for `web-design-guidelines` was fetched from `https://raw.githubusercontent.com/vercel-labs/web-interface-guidelines/main/command.md`.
+  - `scripts/verify-seo-pages.js` now verifies title, meta description, canonical, single `h1`, crawlable internal links, sitemap inclusion, and route-appropriate structured-data types, including `CollectionPage` and nested `ItemList` coverage on hub pages.
+  - `tests/seo/metadata.test.js` and `tests/seo/routes.test.js` now cover metadata templates, canonical generation, schema helper expectations, legacy redirects, and invalid-slug lookups.
+  - The stronger verifier exposed a real sitemap omission. `app/sitemap.js` was corrected to include `/tools` and `/guides`, after which `npm run verify:seo` passed.
+
+## Execution Summary
+
+- Completed tasks in this pass: `TASK-022`, `TASK-023`, `TASK-024`, `TASK-025`, `TASK-026`
+- Skills invoked in this pass: `executing-plans`, `seo-audit`, `web-design-guidelines`, `ui-ux-pro-max`
+- Command results:
+  - `npm run lint` passed
+  - `npm test` passed
+  - `npm run build` passed
+  - `npm run verify:seo` passed after correcting `app/sitemap.js`
+- Build snapshot from this pass:
+  - `/`: `635 kB` first-load JS
+  - `/locations/[slug]`: `635 kB` first-load JS
+  - `/tools/[slug]`: `635 kB` first-load JS
+- UI review findings recorded in `TASK-024`:
+  - `app/layout.js` is still missing the required skip link and does not guarantee a `#main-content` target wrapper.
+  - `components/pages/HomePage.js` still uses forbidden technical copy and does not match the required homepage hero hierarchy, quick-city-selector placement, or pre-interactive "Today's snapshot" block.
+  - `components/pages/CityPage.js` is still missing the required "On this page" navigation, user-facing lead-in structure before the interactive section, and the post-interactive long-form daylight content block.
+  - `components/pages/ToolPage.js` is still missing the required "On this page" navigation, "How to use this tool" section, and the expected representative-city and guide-CTA structure.
+  - `components/pages/CityPage.js` and `components/pages/ToolPage.js` still contain forbidden technical framing, and neither page shows the required loading-skeleton wiring described in section `8.4`.
+- Unresolved gaps after this pass:
+  - `TASK-007`, `TASK-010`, `TASK-011`, `TASK-012`, `TASK-014`, and `TASK-015` remain open in the redesign plan.
+  - `DEP-009` is still not complete, so blocked shared-file redesign work remains deferred unless it is delivered in one coordinated branch with the performance plan.
+- Redirect mappings added in this pass: `None`
+- Follow-up page-level override files still needed: `None. The expected override files already exist under design-system/where-is-the-sun/pages.`
+
 ## Skill Matrix
 
 | Task category | Required skill(s) | Mandatory references | Target files | Output expectations | DEP-009 coordination |

@@ -1,18 +1,13 @@
 import LocationsPage from "@/components/pages/LocationsPage";
 import locationsData from "@/data/locations";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 import schemaUtils from "@/lib/seo/schema";
 
 const { locations } = locationsData;
-const { buildMetadata } = metadataUtils;
+const { buildLocationsPageMetadata } = pageMetadataUtils;
 const { buildCollectionPageSchema, serializeJsonLd } = schemaUtils;
 
-export const metadata = buildMetadata({
-  title: "Sunrise & Sunset Times by City | Where Is The Sun",
-  description:
-    "Browse sunrise, sunset, and daylight data for 12 cities across 6 continents - from Reykjavik to Singapore.",
-  pathname: "/locations",
-});
+export const metadata = buildLocationsPageMetadata();
 
 export default function Page() {
   const schema = buildCollectionPageSchema({

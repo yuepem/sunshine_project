@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import GuidePage from "@/components/pages/GuidePage";
 import guidesData from "@/data/guides";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 import schemaUtils from "@/lib/seo/schema";
 
 const { guides, getGuideBySlug } = guidesData;
-const { buildMetadata } = metadataUtils;
+const { buildGuidePageMetadata } = pageMetadataUtils;
 const { buildArticleSchema, serializeJsonLd } = schemaUtils;
 
 export function generateStaticParams() {
@@ -17,22 +17,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const guide = getGuideBySlug(params.slug);
 
-  if (!guide) {
-    return buildMetadata({
-      title: "Guide Not Found",
-      description: "The requested guide page does not exist.",
-      pathname: null,
-      index: false,
-      includeCanonical: false,
-    });
-  }
-
-  return buildMetadata({
-    title: `${guide.h1} - Explained Simply | Where Is The Sun`,
-    description: `${guide.description} Learn how it works and explore it with our interactive tools.`,
-    pathname: `/guides/${guide.slug}`,
-    type: "article",
-  });
+  return buildGuidePageMetadata(guide);
 }
 
 export default function GuideRoutePage({ params }) {

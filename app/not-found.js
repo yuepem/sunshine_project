@@ -1,16 +1,10 @@
 import Link from "next/link";
 import Footer from "@/src/components/Footer";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 
-const { buildMetadata } = metadataUtils;
+const { buildNotFoundPageMetadata } = pageMetadataUtils;
 
-export const metadata = buildMetadata({
-  title: "Page Not Found | Where Is The Sun",
-  description: "The page you requested does not exist. Browse locations, tools, or guides instead.",
-  pathname: null,
-  index: false,
-  includeCanonical: false,
-});
+export const metadata = buildNotFoundPageMetadata();
 
 export default function NotFound() {
   return (

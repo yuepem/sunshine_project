@@ -3,6 +3,7 @@ const locationsData = require("../../data/locations");
 const toolsData = require("../../data/tools");
 const guidesData = require("../../data/guides");
 const metadataUtils = require("../../lib/seo/metadata");
+const pageMetadataUtils = require("../../lib/seo/pageMetadata");
 const schemaUtils = require("../../lib/seo/schema");
 const siteConfig = require("../../lib/seo/site");
 
@@ -12,18 +13,26 @@ async function run() {
   const { guides } = guidesData;
   const { buildMetadata } = metadataUtils;
   const {
+    buildHomePageMetadata,
+    buildLocationsPageMetadata,
+    buildLocationPageMetadata,
+    buildToolsPageMetadata,
+    buildToolPageMetadata,
+    buildGuidesPageMetadata,
+    buildGuidePageMetadata,
+    buildMissingPageMetadata,
+    buildNotFoundPageMetadata,
+  } = pageMetadataUtils;
+  const {
     buildBreadcrumbSchema,
+    buildWebsiteSchema,
     buildCollectionPageSchema,
     buildWebApplicationSchema,
     buildArticleSchema,
   } = schemaUtils;
-  const { defaultOgImage } = siteConfig;
+  const { defaultOgImage, defaultOgImagePath, siteUrl } = siteConfig;
 
-  const homepage = buildMetadata({
-    title: "Sun Position Calculator & Sunrise Sunset Times | Where Is The Sun",
-    description: "Homepage metadata",
-    pathname: "/",
-  });
+  const homepage = buildHomePageMetadata();
 
   assert.strictEqual(
     homepage.alternates.canonical,
@@ -36,13 +45,30 @@ async function run() {
   assert.strictEqual(homepage.openGraph.images[0].url, defaultOgImage.url);
   assert.strictEqual(homepage.twitter.images[0], defaultOgImage.url);
   assert.strictEqual(homepage.robots.index, true);
+  assert.strictEqual(defaultOgImage.url, `${siteUrl}${defaultOgImagePath}`);
+  assert.strictEqual(defaultOgImage.width, 1200);
+  assert.strictEqual(defaultOgImage.height, 630);
+
+  const locationsHubMetadata = buildLocationsPageMetadata();
+  assert.strictEqual(
+    locationsHubMetadata.alternates.canonical,
+    "https://whereisthesun.org/locations"
+  );
+
+  const toolsHubMetadata = buildToolsPageMetadata();
+  assert.strictEqual(
+    toolsHubMetadata.alternates.canonical,
+    "https://whereisthesun.org/tools"
+  );
+
+  const guidesHubMetadata = buildGuidesPageMetadata();
+  assert.strictEqual(
+    guidesHubMetadata.alternates.canonical,
+    "https://whereisthesun.org/guides"
+  );
 
   for (const location of locations) {
-    const metadata = buildMetadata({
-      title: `Sunrise & Sunset Times in ${location.name} Today`,
-      description: `Check sunrise and sunset in ${location.name}.`,
-      pathname: `/locations/${location.slug}`,
-    });
+    const metadata = buildLocationPageMetadata(location);
 
     assert.ok(metadata.title.includes(location.name));
     assert.strictEqual(
@@ -54,11 +80,7 @@ async function run() {
   }
 
   for (const tool of tools) {
-    const metadata = buildMetadata({
-      title: tool.title,
-      description: tool.description,
-      pathname: `/tools/${tool.slug}`,
-    });
+    const metadata = buildToolPageMetadata(tool);
 
     assert.strictEqual(
       metadata.alternates.canonical,
@@ -66,15 +88,11 @@ async function run() {
     );
     assert.ok(metadata.description.length > 20);
     assert.ok(!metadata.description.includes("preserved"));
+    assert.strictEqual(metadata.openGraph.type, "website");
   }
 
   for (const guide of guides) {
-    const metadata = buildMetadata({
-      title: guide.metadata?.title || guide.title,
-      description: guide.metadata?.description || guide.description,
-      pathname: `/guides/${guide.slug}`,
-      type: "article",
-    });
+    const metadata = buildGuidePageMetadata(guide);
 
     assert.strictEqual(metadata.openGraph.type, "article");
     assert.strictEqual(
@@ -82,7 +100,15 @@ async function run() {
       `https://whereisthesun.org/guides/${guide.slug}`
     );
     assert.ok(metadata.description.length > 20);
+    assert.ok(metadata.title.includes(guide.h1));
   }
+
+  const websiteSchema = buildWebsiteSchema({
+    description: homepage.description,
+  });
+  assert.strictEqual(websiteSchema["@type"], "WebSite");
+  assert.strictEqual(websiteSchema.url, "https://whereisthesun.org");
+  assert.strictEqual(websiteSchema.publisher.name, "Where Is The Sun");
 
   const noindexMetadata = buildMetadata({
     title: "Missing",
@@ -94,6 +120,27 @@ async function run() {
 
   assert.strictEqual(noindexMetadata.alternates, undefined);
   assert.strictEqual(noindexMetadata.robots.index, false);
+  assert.strictEqual(noindexMetadata.openGraph.url, undefined);
+
+  const missingLocationMetadata = buildMissingPageMetadata("Location");
+  assert.strictEqual(missingLocationMetadata.title, "Location Not Found");
+  assert.strictEqual(missingLocationMetadata.alternates, undefined);
+  assert.strictEqual(missingLocationMetadata.robots.index, false);
+
+  const missingToolMetadata = buildMissingPageMetadata("Tool");
+  assert.strictEqual(missingToolMetadata.title, "Tool Not Found");
+  assert.strictEqual(missingToolMetadata.alternates, undefined);
+  assert.strictEqual(missingToolMetadata.robots.index, false);
+
+  const missingGuideMetadata = buildMissingPageMetadata("Guide");
+  assert.strictEqual(missingGuideMetadata.title, "Guide Not Found");
+  assert.strictEqual(missingGuideMetadata.alternates, undefined);
+  assert.strictEqual(missingGuideMetadata.robots.index, false);
+
+  const notFoundMetadata = buildNotFoundPageMetadata();
+  assert.strictEqual(notFoundMetadata.title, "Page Not Found | Where Is The Sun");
+  assert.strictEqual(notFoundMetadata.alternates, undefined);
+  assert.strictEqual(notFoundMetadata.robots.index, false);
 
   const breadcrumbSchema = buildBreadcrumbSchema([
     { href: "/", label: "Home" },
@@ -118,6 +165,38 @@ async function run() {
   });
   assert.strictEqual(collectionSchema["@type"], "CollectionPage");
   assert.strictEqual(collectionSchema.mainEntity["@type"], "ItemList");
+  assert.strictEqual(
+    collectionSchema.mainEntity.itemListElement.length,
+    2,
+  );
+
+  const locationCollectionSchema = buildCollectionPageSchema({
+    name: "Sunrise & Sunset Times by City",
+    description: locationsHubMetadata.description,
+    pathname: "/locations",
+    items: locations.map((location) => ({
+      name: `${location.name}, ${location.country}`,
+      pathname: `/locations/${location.slug}`,
+    })),
+  });
+  assert.strictEqual(
+    locationCollectionSchema.mainEntity.itemListElement.length,
+    locations.length,
+  );
+
+  const toolCollectionSchema = buildCollectionPageSchema({
+    name: "Free Sun Calculators",
+    description: toolsHubMetadata.description,
+    pathname: "/tools",
+    items: tools.map((tool) => ({
+      name: tool.name,
+      pathname: `/tools/${tool.slug}`,
+    })),
+  });
+  assert.strictEqual(
+    toolCollectionSchema.mainEntity.itemListElement.length,
+    tools.length,
+  );
 
   const toolSchema = buildWebApplicationSchema({
     name: tools[0].name,
@@ -126,6 +205,8 @@ async function run() {
   });
   assert.strictEqual(toolSchema["@type"], "WebApplication");
   assert.strictEqual(toolSchema.offers.price, "0");
+  assert.strictEqual(toolSchema.isAccessibleForFree, true);
+  assert.strictEqual(toolSchema.url, `https://whereisthesun.org/tools/${tools[0].slug}`);
 
   const articleSchema = buildArticleSchema({
     headline: guides[0].h1,
@@ -136,6 +217,10 @@ async function run() {
   });
   assert.strictEqual(articleSchema["@type"], "Article");
   assert.strictEqual(articleSchema.dateModified, guides[0].modifiedDate);
+  assert.strictEqual(
+    articleSchema.mainEntityOfPage,
+    `https://whereisthesun.org/guides/${guides[0].slug}`,
+  );
 }
 
 module.exports = { run };

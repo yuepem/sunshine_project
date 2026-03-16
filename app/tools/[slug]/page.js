@@ -2,12 +2,12 @@ import { notFound } from "next/navigation";
 import ToolPage from "@/components/pages/ToolPage";
 import toolsData from "@/data/tools";
 import locationsData from "@/data/locations";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 import schemaUtils from "@/lib/seo/schema";
 
 const { tools, getToolBySlug } = toolsData;
 const { locations } = locationsData;
-const { buildMetadata } = metadataUtils;
+const { buildToolPageMetadata } = pageMetadataUtils;
 const { buildWebApplicationSchema, serializeJsonLd } = schemaUtils;
 
 export function generateStaticParams() {
@@ -19,21 +19,7 @@ export function generateStaticParams() {
 export function generateMetadata({ params }) {
   const tool = getToolBySlug(params.slug);
 
-  if (!tool) {
-    return buildMetadata({
-      title: "Tool Not Found",
-      description: "The requested tool page does not exist.",
-      pathname: null,
-      index: false,
-      includeCanonical: false,
-    });
-  }
-
-  return buildMetadata({
-    title: `${tool.name} - Free Online Tool | Where Is The Sun`,
-    description: `${tool.description} Works for any location with real-time data and interactive visualization.`,
-    pathname: `/tools/${tool.slug}`,
-  });
+  return buildToolPageMetadata(tool);
 }
 
 export default function ToolRoutePage({ params }) {

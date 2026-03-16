@@ -1,18 +1,13 @@
 import GuidesPage from "@/components/pages/GuidesPage";
 import guidesData from "@/data/guides";
-import metadataUtils from "@/lib/seo/metadata";
+import pageMetadataUtils from "@/lib/seo/pageMetadata";
 import schemaUtils from "@/lib/seo/schema";
 
 const { guides } = guidesData;
-const { buildMetadata } = metadataUtils;
+const { buildGuidesPageMetadata } = pageMetadataUtils;
 const { buildCollectionPageSchema, serializeJsonLd } = schemaUtils;
 
-export const metadata = buildMetadata({
-  title: "Sun & Daylight Guides | Where Is The Sun",
-  description:
-    "Understand solar noon, sun azimuth, and seasonal daylight changes with clear explanations and linked interactive tools.",
-  pathname: "/guides",
-});
+export const metadata = buildGuidesPageMetadata();
 
 export default function Page() {
   const schema = buildCollectionPageSchema({
