@@ -1,112 +1,87 @@
 import React from "react";
 import { Info, Mail, Github } from "lucide-react";
 
-
 const Footer = () => {
   return (
-    <footer className="border-t border-slate-700 bg-slate-900/50 backdrop-blur">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid gap-8 lg:grid-cols-4 md:grid-cols-2">
+    <footer className="border-t border-border bg-card">
+      <div className="mx-auto max-w-6xl px-4 py-12 md:px-6 lg:px-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-slate-100">About</h3>
-            <p className="text-sm text-slate-400">
-              {/* <span> Where is the sun ?</span> */}
-              From the darkest winter days to the brightest summer nights, the tool helps to understand the sun&apos;s patterns. Perfect for Nordic countries where sunlight shapes daily life and annual rhythms through dramatic seasonal changes.
+            <h3 className="mb-4 text-lg font-semibold text-foreground">About</h3>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              From the darkest winter days to the brightest summer nights, the
+              tool helps to understand the sun&apos;s patterns. Perfect for Nordic
+              countries where sunlight shapes daily life and annual rhythms
+              through dramatic seasonal changes.
             </p>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-slate-100">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">
               Information Sources
             </h3>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li className="flex items-center hover:text-slate-100 transition-colors">
-                <Info className="mr-2 h-4 w-4" />
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-center transition-colors hover:text-foreground">
+                <Info className="mr-2 h-4 w-4 text-primary" />
                 <a href="https://github.com/mourner/suncalc?tab=readme-ov-file">
-                  {" "}
-                  <span className="text-slate-100 font-semibold">suncalc</span>:
-                  Provides sun position calculations.{" "}
+                  <span className="font-semibold text-foreground">suncalc</span>:
+                  Provides sun position calculations.
                 </a>
               </li>
-              <li className="flex items-center hover:text-slate-100 transition-colors">
-                <Info className="mr-2 h-4 w-4" />
+              <li className="flex items-center transition-colors hover:text-foreground">
+                <Info className="mr-2 h-4 w-4 text-primary" />
                 <a href="https://leafletjs.com/">
-                  {" "}
-                  <span className="text-slate-100 font-semibold">
+                  <span className="font-semibold text-foreground">
                     react-leaflet
                   </span>
-                  : Provides maps services{" "}
+                  : Provides maps services
                 </a>
               </li>
-              <li className="flex items-center hover:text-slate-100 transition-colors">
-                <Info className="mr-2 h-4 w-4" />
+              <li className="flex items-center transition-colors hover:text-foreground">
+                <Info className="mr-2 h-4 w-4 text-primary" />
                 <a href="https://www.suncalc.org/">
-                  {" "}
-                  <span className="text-slate-100 font-semibold">
+                  <span className="font-semibold text-foreground">
                     suncalc.org
                   </span>
-                  : A good website you should try{" "}
+                  : A good website you should try
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-slate-100">
-              Contact
-            </h3>
+            <h3 className="mb-4 text-lg font-semibold text-foreground">Contact</h3>
             <div className="space-y-2">
               <a
-                href="mailto:hello@gmail.com"
-                className="flex items-center text-sm text-slate-400 hover:text-slate-100 transition-colors"
+                href="mailto:yuepem@gmail.com"
+                className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Mail className="mr-2 h-4 w-4" />
+                <Mail className="mr-2 h-4 w-4 text-primary" />
                 yuepem@gmail.com
               </a>
               <a
                 href="https://github.com/yuepem/sunshine_project"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-sm text-slate-400 hover:text-slate-100 transition-colors"
+                className="flex items-center text-sm text-muted-foreground transition-colors hover:text-foreground"
               >
-                <Github className="mr-2 h-4 w-4" />
+                <Github className="mr-2 h-4 w-4 text-primary" />
                 GitHub Repository
               </a>
             </div>
           </div>
           <div>
-            <h3 className="mb-4 text-lg font-semibold text-slate-100">
-              Feedback
-            </h3>
-            <p className="mb-4 text-sm text-slate-400">
+            <h3 className="mb-4 text-lg font-semibold text-foreground">Feedback</h3>
+            <p className="text-sm leading-relaxed text-muted-foreground">
               Your feedback helps it improve. Share your thoughts about the
               application, or just let me know you like it.
             </p>
-            
-              {/* <Button
-                variant="contained"
-                fullWidth
-                sx={{
-                  backgroundColor: "rgb(38, 115, 121)",
-                  "&:hover": {
-                    backgroundColor: "rgb(44, 135, 142)",
-                  },
-                  textTransform: "none",
-                  borderRadius: "8px",
-                  padding: "10px",
-                }}
-              >
-                <Mail className="mr-2 h-4 w-4" />
-                Send By Email
-              </Button> */}
-            
           </div>
         </div>
-        <div className="mt-8 border-t space-y-3 border-slate-800 pt-8 text-center text-sm text-slate-400">
-          <p className="text-base">
-            <em>
-              &quot;In the depth of winter, I finally learned that within me there lay an invincible summer.&quot; - Albert Camus
-            </em>
+        <div className="mt-8 space-y-3 border-t border-border pt-8 text-center text-sm text-muted-foreground">
+          <p className="text-base italic">
+            &quot;In the depth of winter, I finally learned that within me there
+            lay an invincible summer.&quot; - Albert Camus
           </p>
-          <p> {new Date().getFullYear()} </p>
+          <p>{new Date().getFullYear()}</p>
         </div>
       </div>
     </footer>
